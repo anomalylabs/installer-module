@@ -32,7 +32,7 @@ class InstallerController extends PublicController
      */
     public function complete()
     {
-        return view('anomaly.module.streams::complete');
+        return view('anomaly.module.installer::complete');
     }
 }
  

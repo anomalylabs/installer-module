@@ -1,7 +1,5 @@
 <?php namespace Anomaly\InstallerModule\Form;
 
-use Anomaly\Streams\Platform\Addon\Module\ModuleCollection;
-
 /**
  * Class InstallerFormFields
  *
@@ -26,14 +24,16 @@ class InstallerFormFields
                  * License Fields
                  */
                 'license'               => [
-                    'label'        => 'anomaly.module.streams::field.license.label',
-                    'instructions' => 'anomaly.module.streams::field.license.instructions',
-                    'type'         => 'Anomaly\InstallerModule\FieldType\LicenseCheckboxesFieldType',
+                    'label'        => 'anomaly.module.installer::field.license.label',
+                    'instructions' => 'anomaly.module.installer::field.license.instructions',
+                    'type'         => 'anomaly.field_type.boolean',
+                    'wrapper_view' => 'anomaly.module.installer::field_type/license/wrapper',
                     'rules'        => [
                         'required',
                     ],
                     'config'       => [
-                        'agree'   => 'anomaly.module.streams::field.license.agree',
+                        'label'   => 'anomaly.module.installer::field.license.agree',
+                        'type'    => 'checkbox',
                         'license' => function () {
                             return (new \Michelf\Markdown())->transform(
                                 file_get_contents(app('streams.path') . '/LICENSE.md')
@@ -45,8 +45,8 @@ class InstallerFormFields
                  * Database Fields
                  */
                 'database_driver'       => [
-                    'label'        => 'anomaly.module.streams::field.database_driver.label',
-                    'instructions' => 'anomaly.module.streams::field.database_driver.instructions',
+                    'label'        => 'anomaly.module.installer::field.database_driver.label',
+                    'instructions' => 'anomaly.module.installer::field.database_driver.instructions',
                     'type'         => 'anomaly.field_type.select',
                     'value'        => 'mysql',
                     'rules'        => [
@@ -56,7 +56,7 @@ class InstallerFormFields
                     'validators'   => [
                         'valid_database' => [
                             'handler' => 'Anomaly\InstallerModule\Form\Validation\ValidDatabase@validate',
-                            'message' => 'anomaly.module.streams::message.database_error'
+                            'message' => 'anomaly.module.installer::message.database_error'
                         ]
                     ],
                     'config'       => [
@@ -69,9 +69,9 @@ class InstallerFormFields
                     ],
                 ],
                 'database_host'         => [
-                    'label'        => 'anomaly.module.streams::field.database_host.label',
-                    'placeholder'  => 'anomaly.module.streams::field.database_host.placeholder',
-                    'instructions' => 'anomaly.module.streams::field.database_host.instructions',
+                    'label'        => 'anomaly.module.installer::field.database_host.label',
+                    'placeholder'  => 'anomaly.module.installer::field.database_host.placeholder',
+                    'instructions' => 'anomaly.module.installer::field.database_host.instructions',
                     'type'         => 'anomaly.field_type.text',
                     'value'        => 'localhost',
                     'rules'        => [
@@ -79,21 +79,18 @@ class InstallerFormFields
                     ],
                 ],
                 'database_name'         => [
-                    'label'        => 'anomaly.module.streams::field.database_name.label',
-                    'placeholder'  => 'anomaly.module.streams::field.database_name.placeholder',
-                    'instructions' => 'anomaly.module.streams::field.database_name.instructions',
+                    'label'        => 'anomaly.module.installer::field.database_name.label',
+                    'placeholder'  => 'anomaly.module.installer::field.database_name.placeholder',
+                    'instructions' => 'anomaly.module.installer::field.database_name.instructions',
                     'type'         => 'anomaly.field_type.text',
-                    'value'        => function (ModuleCollection $modules) {
-                        return $modules->active()->getSlug();
-                    },
                     'rules'        => [
                         'required',
                     ],
                 ],
                 'database_username'     => [
-                    'label'        => 'anomaly.module.streams::field.database_username.label',
-                    'placeholder'  => 'anomaly.module.streams::field.database_username.placeholder',
-                    'instructions' => 'anomaly.module.streams::field.database_username.instructions',
+                    'label'        => 'anomaly.module.installer::field.database_username.label',
+                    'placeholder'  => 'anomaly.module.installer::field.database_username.placeholder',
+                    'instructions' => 'anomaly.module.installer::field.database_username.instructions',
                     'type'         => 'anomaly.field_type.text',
                     'value'        => 'root',
                     'rules'        => [
@@ -101,9 +98,9 @@ class InstallerFormFields
                     ],
                 ],
                 'database_password'     => [
-                    'label'        => 'anomaly.module.streams::field.database_password.label',
-                    'placeholder'  => 'anomaly.module.streams::field.database_password.placeholder',
-                    'instructions' => 'anomaly.module.streams::field.database_password.instructions',
+                    'label'        => 'anomaly.module.installer::field.database_password.label',
+                    'placeholder'  => 'anomaly.module.installer::field.database_password.placeholder',
+                    'instructions' => 'anomaly.module.installer::field.database_password.instructions',
                     'type'         => 'anomaly.field_type.text',
                     'config'       => [
                         'type' => 'password',
@@ -113,9 +110,9 @@ class InstallerFormFields
                  * Administrator Fields
                  */
                 'admin_username'        => [
-                    'label'        => 'anomaly.module.streams::field.admin_username.label',
-                    'placeholder'  => 'anomaly.module.streams::field.admin_username.placeholder',
-                    'instructions' => 'anomaly.module.streams::field.admin_username.instructions',
+                    'label'        => 'anomaly.module.installer::field.admin_username.label',
+                    'placeholder'  => 'anomaly.module.installer::field.admin_username.placeholder',
+                    'instructions' => 'anomaly.module.installer::field.admin_username.instructions',
                     'type'         => 'anomaly.field_type.text',
                     'value'        => 'admin',
                     'rules'        => [
@@ -123,18 +120,18 @@ class InstallerFormFields
                     ],
                 ],
                 'admin_email'           => [
-                    'label'        => 'anomaly.module.streams::field.admin_email.label',
-                    'placeholder'  => 'anomaly.module.streams::field.admin_email.placeholder',
-                    'instructions' => 'anomaly.module.streams::field.admin_email.instructions',
+                    'label'        => 'anomaly.module.installer::field.admin_email.label',
+                    'placeholder'  => 'anomaly.module.installer::field.admin_email.placeholder',
+                    'instructions' => 'anomaly.module.installer::field.admin_email.instructions',
                     'type'         => 'anomaly.field_type.email',
                     'rules'        => [
                         'required',
                     ],
                 ],
                 'admin_password'        => [
-                    'label'        => 'anomaly.module.streams::field.admin_password.label',
-                    'placeholder'  => 'anomaly.module.streams::field.admin_password.placeholder',
-                    'instructions' => 'anomaly.module.streams::field.admin_password.instructions',
+                    'label'        => 'anomaly.module.installer::field.admin_password.label',
+                    'placeholder'  => 'anomaly.module.installer::field.admin_password.placeholder',
+                    'instructions' => 'anomaly.module.installer::field.admin_password.instructions',
                     'type'         => 'anomaly.field_type.text',
                     'rules'        => [
                         'required',
@@ -147,9 +144,9 @@ class InstallerFormFields
                  * Application Fields
                  */
                 'application_name'      => [
-                    'label'        => 'anomaly.module.streams::field.application_name.label',
-                    'placeholder'  => 'anomaly.module.streams::field.application_name.placeholder',
-                    'instructions' => 'anomaly.module.streams::field.application_name.instructions',
+                    'label'        => 'anomaly.module.installer::field.application_name.label',
+                    'placeholder'  => 'anomaly.module.installer::field.application_name.placeholder',
+                    'instructions' => 'anomaly.module.installer::field.application_name.instructions',
                     'type'         => 'anomaly.field_type.text',
                     'value'        => 'Default',
                     'rules'        => [
@@ -157,9 +154,9 @@ class InstallerFormFields
                     ],
                 ],
                 'application_reference' => [
-                    'label'        => 'anomaly.module.streams::field.application_reference.label',
-                    'placeholder'  => 'anomaly.module.streams::field.application_reference.placeholder',
-                    'instructions' => 'anomaly.module.streams::field.application_reference.instructions',
+                    'label'        => 'anomaly.module.installer::field.application_reference.label',
+                    'placeholder'  => 'anomaly.module.installer::field.application_reference.placeholder',
+                    'instructions' => 'anomaly.module.installer::field.application_reference.instructions',
                     'type'         => 'anomaly.field_type.slug',
                     'value'        => 'default',
                     'rules'        => [
@@ -167,9 +164,9 @@ class InstallerFormFields
                     ],
                 ],
                 'application_domain'    => [
-                    'label'        => 'anomaly.module.streams::field.application_domain.label',
-                    'placeholder'  => 'anomaly.module.streams::field.application_domain.placeholder',
-                    'instructions' => 'anomaly.module.streams::field.application_domain.instructions',
+                    'label'        => 'anomaly.module.installer::field.application_domain.label',
+                    'placeholder'  => 'anomaly.module.installer::field.application_domain.placeholder',
+                    'instructions' => 'anomaly.module.installer::field.application_domain.instructions',
                     'type'         => 'anomaly.field_type.text',
                     'value'        => str_replace(['http://', 'https://'], '', app('request')->root()),
                     'rules'        => [
@@ -177,8 +174,8 @@ class InstallerFormFields
                     ],
                 ],
                 'application_locale'    => [
-                    'label'        => 'anomaly.module.streams::field.application_locale.label',
-                    'instructions' => 'anomaly.module.streams::field.application_locale.instructions',
+                    'label'        => 'anomaly.module.installer::field.application_locale.label',
+                    'instructions' => 'anomaly.module.installer::field.application_locale.instructions',
                     'type'         => 'anomaly.field_type.select',
                     'value'        => 'en',
                     'rules'        => [
@@ -191,8 +188,8 @@ class InstallerFormFields
                     ],
                 ],
                 'application_timezone'  => [
-                    'label'        => 'anomaly.module.streams::field.application_timezone.label',
-                    'instructions' => 'anomaly.module.streams::field.application_timezone.instructions',
+                    'label'        => 'anomaly.module.installer::field.application_timezone.label',
+                    'instructions' => 'anomaly.module.installer::field.application_timezone.instructions',
                     'type'         => 'anomaly.field_type.select',
                     'value'        => 'UTC',
                     'rules'        => [

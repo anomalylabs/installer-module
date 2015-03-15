@@ -22,7 +22,7 @@ class SetFormOptionsHandler
     {
         $options = $command->getOptions();
 
-        $options->put('wrapper_view', 'anomaly.module.streams::blank');
+        $options->put('wrapper_view', 'anomaly.module.installer::blank');
         $options->put('handler', 'Anomaly\InstallerModule\Form\InstallerFormHandler@handle');
 
         $options->put(
@@ -34,7 +34,7 @@ class SetFormOptionsHandler
                     ]
                 ],
                 [
-                    'title'  => 'anomaly.module.streams::installer.database',
+                    'title'  => 'anomaly.module.installer::installer.database',
                     'fields' => [
                         'database_driver',
                         'database_host',
@@ -44,7 +44,7 @@ class SetFormOptionsHandler
                     ]
                 ],
                 [
-                    'title'  => 'anomaly.module.streams::installer.administrator',
+                    'title'  => 'anomaly.module.installer::installer.administrator',
                     'fields' => [
                         'admin_username',
                         'admin_email',
@@ -52,7 +52,7 @@ class SetFormOptionsHandler
                     ]
                 ],
                 [
-                    'title'  => 'anomaly.module.streams::installer.application',
+                    'title'  => 'anomaly.module.installer::installer.application',
                     'fields' => [
                         'application_name',
                         'application_reference',

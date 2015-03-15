@@ -18,13 +18,13 @@ class LicenseCheckboxesFieldType extends CheckboxesFieldType
      *
      * @var string
      */
-    protected $inputView = 'anomaly.module.streams::addon/field_type/license/input';
+    protected $inputView = 'anomaly.module.installer::addon/field_type/license/input';
 
     /**
      * The wrapper view.
      *
      * @var string
      */
-    protected $wrapperView = 'anomaly.module.streams::addon/field_type/license/wrapper';
+    protected $wrapperView = 'anomaly.module.installer::addon/field_type/license/wrapper';
 
 }

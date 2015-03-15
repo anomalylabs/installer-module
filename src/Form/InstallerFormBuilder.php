@@ -23,7 +23,7 @@ class InstallerFormBuilder extends FormBuilder
     protected $actions = [
         'save' => [
             'type'       => 'green',
-            'text'       => 'anomaly.module.streams::button.install',
+            'text'       => 'anomaly.module.installer::button.install',
             'attributes' => [
                 'data-toggle' => 'dimmer',
                 'data-target' => '.installer.dimmer'

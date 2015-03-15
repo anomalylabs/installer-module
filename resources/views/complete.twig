@@ -11,10 +11,10 @@
         <h1 class="ui header logo center aligned">
             {{ image("theme::img/icon-dark.png").width(64)|raw }}
             <br>
-            {{ trans(module().getName()) }} is ready.
+            Ready
         </h1>
 
-        {{ html_link('admin/login', trans('anomaly.module.streams::button.login'), {'class': 'ui button green'}) }}
+        {{ html_link('admin/login', trans('anomaly.module.installer::button.login'), {'class': 'ui button green'}) }}
     </div>
 </div>
 
