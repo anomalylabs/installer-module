@@ -2,16 +2,15 @@
 
 use Anomaly\Streams\Platform\Database\Migration\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Schema\Builder;
 
 /**
- * Class AnomalyModuleStreamsCreateAssignmentsTables
+ * Class AnomalyModuleInstallerCreateStreamsTables
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
  */
-class AnomalyModuleStreamsCreateAssignmentsTables extends Migration
+class AnomalyModuleInstallerCreateStreamsTables extends Migration
 {
 
     /**
@@ -24,34 +23,35 @@ class AnomalyModuleStreamsCreateAssignmentsTables extends Migration
         /* @var Builder $schema */
         $schema = app('db')->connection()->getSchemaBuilder();
 
-        if (!$schema->hasTable('streams_assignments')) {
+        if (!$schema->hasTable('streams_streams')) {
             $schema->create(
-                'streams_assignments',
+                'streams_streams',
                 function (Blueprint $table) {
 
                     $table->increments('id');
-                    $table->integer('sort_order');
-                    $table->integer('stream_id');
-                    $table->integer('field_id');
-                    $table->boolean('unique')->default(0);
-                    $table->boolean('required')->default(0);
-                    $table->boolean('translatable')->default(0);
+                    $table->string('namespace');
+                    $table->string('slug');
+                    $table->string('prefix')->nullable();
+                    $table->text('view_options');
+                    $table->string('title_column');
+                    $table->string('order_by');
+                    $table->string('locked')->default(0);
+                    $table->string('translatable')->default(0);
                 }
             );
         }
 
-        if (!$schema->hasTable('streams_assignments_translations')) {
+        if (!$schema->hasTable('streams_streams_translations')) {
             $schema->create(
-                'streams_assignments_translations',
+                'streams_streams_translations',
                 function (Blueprint $table) {
 
                     $table->increments('id');
-                    $table->integer('assignment_id');
+                    $table->integer('stream_id');
                     $table->string('locale')->index();
 
-                    $table->string('label')->nullable();
-                    $table->string('placeholder')->nullable();
-                    $table->text('instructions')->nullable();
+                    $table->string('name');
+                    $table->string('description')->nullable();
                 }
             );
         }
@@ -67,7 +67,7 @@ class AnomalyModuleStreamsCreateAssignmentsTables extends Migration
         /* @var Builder $schema */
         $schema = app('db')->connection()->getSchemaBuilder();
 
-        $schema->dropIfExists('streams_assignments');
-        $schema->dropIfExists('streams_assignments_translations');
+        $schema->dropIfExists('streams_streams');
+        $schema->dropIfExists('streams_streams_translations');
     }
 }

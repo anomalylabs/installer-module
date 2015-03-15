@@ -36,7 +36,6 @@ class RunMigrationsHandler
     public function handle()
     {
         $this->command->call('migrate', ['--force' => true, '--addon' => 'anomaly.module.installer']);
-        $this->command->call('migrate', ['--force' => true, '--addon' => 'anomaly.module.addons']);
         $this->command->call('migrate', ['--force' => true, '--no-addons' => true]);
     }
 }

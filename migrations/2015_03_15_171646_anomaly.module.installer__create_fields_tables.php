@@ -2,16 +2,15 @@
 
 use Anomaly\Streams\Platform\Database\Migration\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Schema\Builder;
 
 /**
- * Class AnomalyModuleStreamsCreateStreamsTables
+ * Class AnomalyModuleInstallerCreateFieldsTables
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
  */
-class AnomalyModuleStreamsCreateStreamsTables extends Migration
+class AnomalyModuleInstallerCreateFieldsTables extends Migration
 {
 
     /**
@@ -24,35 +23,32 @@ class AnomalyModuleStreamsCreateStreamsTables extends Migration
         /* @var Builder $schema */
         $schema = app('db')->connection()->getSchemaBuilder();
 
-        if (!$schema->hasTable('streams_streams')) {
+        if (!$schema->hasTable('streams_fields')) {
             $schema->create(
-                'streams_streams',
+                'streams_fields',
                 function (Blueprint $table) {
 
                     $table->increments('id');
                     $table->string('namespace');
                     $table->string('slug');
-                    $table->string('prefix')->nullable();
-                    $table->text('view_options');
-                    $table->string('title_column');
-                    $table->string('order_by');
-                    $table->string('locked')->default(0);
-                    $table->string('translatable')->default(0);
+                    $table->string('type');
+                    $table->text('config');
+                    $table->text('rules');
+                    $table->boolean('locked')->default(0);
                 }
             );
         }
 
-        if (!$schema->hasTable('streams_streams_translations')) {
+        if (!$schema->hasTable('streams_fields_translations')) {
             $schema->create(
-                'streams_streams_translations',
+                'streams_fields_translations',
                 function (Blueprint $table) {
 
                     $table->increments('id');
-                    $table->integer('stream_id');
+                    $table->integer('field_id');
                     $table->string('locale')->index();
 
                     $table->string('name');
-                    $table->string('description')->nullable();
                 }
             );
         }
@@ -68,7 +64,7 @@ class AnomalyModuleStreamsCreateStreamsTables extends Migration
         /* @var Builder $schema */
         $schema = app('db')->connection()->getSchemaBuilder();
 
-        $schema->dropIfExists('streams_streams');
-        $schema->dropIfExists('streams_streams_translations');
+        $schema->dropIfExists('streams_fields');
+        $schema->dropIfExists('streams_fields_translations');
     }
 }

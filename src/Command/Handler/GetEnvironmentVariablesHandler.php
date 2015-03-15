@@ -29,8 +29,6 @@ class GetEnvironmentVariablesHandler
     {
         $parameters = $command->getParameters();
 
-        $module = $this->modules->active();
-
         $variables = [
             'INSTALLED'         => 'true',
             'APP_DEBUG'         => 'false',
@@ -42,8 +40,8 @@ class GetEnvironmentVariablesHandler
             'DB_PASSWORD'       => $parameters['database_password'],
             'CACHE_DRIVER'      => 'file', // @todo - add fields for this?
             'SESSION_DRIVER'    => 'file', // @todo - add fields for this?
-            'ADMIN_THEME'       => $module->getAdminTheme(),
-            'STANDARD_THEME'    => $module->getStandardTheme(),
+            'ADMIN_THEME'       => config('streams.admin_theme'),
+            'STANDARD_THEME'    => config('streams.standard_theme'),
             'LOCALE'            => $parameters['application_locale'],
             'TIMEZONE'          => $parameters['application_timezone'],
             'MAIL_DRIVER'       => 'smtp',
