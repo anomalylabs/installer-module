@@ -1,2 +1,3 @@
-# installer-module
+#Streams Installer
+
 The Streams Platform installer.
