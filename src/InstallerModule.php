@@ -13,18 +13,4 @@ use Anomaly\Streams\Platform\Addon\Module\Module;
 class InstallerModule extends Module
 {
 
-    /**
-     * The default standard theme.
-     *
-     * @var string
-     */
-    protected $standardTheme = 'anomaly.theme.streams';
-
-    /**
-     * The default admin theme.
-     *
-     * @var string
-     */
-    protected $adminTheme = 'anomaly.theme.streams';
-
 }
