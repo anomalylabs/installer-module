@@ -38,6 +38,7 @@ class GetEnvironmentVariablesHandler
             'DB_DATABASE'       => $parameters['database_name'],
             'DB_USERNAME'       => $parameters['database_username'],
             'DB_PASSWORD'       => $parameters['database_password'],
+            'DEFAULT_REFERENCE' => $parameters['application_reference'],
             'CACHE_DRIVER'      => 'file', // @todo - add fields for this?
             'SESSION_DRIVER'    => 'file', // @todo - add fields for this?
             'ADMIN_THEME'       => config('streams.admin_theme'),
