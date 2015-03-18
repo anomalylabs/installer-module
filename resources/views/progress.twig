@@ -1,0 +1,54 @@
+<!doctype html>
+
+<!--[if lt IE 7]>
+<html class="nojs ms lt_ie7" lang="en"><![endif]-->
+<!--[if IE 7]>
+<html class="nojs ms ie7" lang="en"><![endif]-->
+<!--[if IE 8]>
+<html class="nojs ms ie8" lang="en"><![endif]-->
+<!--[if gt IE 8]>
+<html class="nojs ms" lang="en"><![endif]-->
+
+<html>
+
+<head>
+    {{ asset_add('scripts.js', 'anomaly.module.installer::js/install.js') }}
+
+    {% include "theme::partials/metadata" %}
+</head>
+
+<body style="background-color: #181818; padding-top: 10%;">
+
+<div class="ui page grid">
+    <div class="column">
+
+        <h1 class="ui header logo center aligned">
+            {{ image("theme::img/icon-white.png").width(64)|raw }}
+        </h1>
+
+        <br>
+
+        <div id="progress" class="ui inverted progress" data-percent="0"
+             data-precision="{{ (100/(steps|length))|round(0, 'floor') }}">
+            <div class="bar">
+                <div class="progress"></div>
+            </div>
+            <div class="label" style="text-align: left;">
+                {{ trans('anomaly.module.installer::install.installing') }}...
+            </div>
+        </div>
+
+        <div id="button" class="ui center aligned basic segment hidden">
+            <a href="{{ url_to('admin/login') }}" class="ui button inverted white">Login</a>
+            <a href="{{ url_to('/') }}" class="ui button inverted white">View Site</a>
+        </div>
+
+        {% for action, label in steps %}
+            <div data-step data-action="{{ action }}" data-label="{{ label }}"></div>
+        {% endfor %}
+
+    </div>
+</div>
+
+</body>
+</html>
