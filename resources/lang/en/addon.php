@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'name'        => 'Streams',
-    'description' => 'The official Streams base module.',
+    'name'        => 'Installer',
+    'description' => 'The official Streams installer module.',
 ];
