@@ -32,7 +32,7 @@ class InstallerFormFields
                         'required',
                     ],
                     'config'       => [
-                        'label'   => 'anomaly.module.installer::field.license.agree',
+                        'text'    => 'anomaly.module.installer::field.license.agree',
                         'type'    => 'checkbox',
                         'license' => function () {
                             return (new \Michelf\Markdown())->transform(
