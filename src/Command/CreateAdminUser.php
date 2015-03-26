@@ -29,12 +29,13 @@ class CreateAdminUser implements SelfHandling
         ];
 
         if ($user = $users->findUserByUsername(env('ADMIN_USERNAME'))) {
+
             $user->email    = env('ADMIN_EMAIL');
             $user->password = env('ADMIN_PASSWORD');
 
             $user->save();
         } else {
-            $user = $manager->create($credentials, true);
+            $manager->create($credentials, true);
         }
     }
 }

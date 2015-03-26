@@ -21,6 +21,10 @@ class CreateApplication implements SelfHandling
      */
     public function handle(ApplicationRepository $applications)
     {
+        if ($applications->findByDomain(env('APPLICATION_DOMAIN'))) {
+            return;
+        }
+
         $applications->create(
             [
                 'name'      => env('APPLICATION_NAME'),
