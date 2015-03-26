@@ -23,9 +23,9 @@ class CreateApplication implements SelfHandling
     {
         $applications->create(
             [
-                'name'      => 'Test',
-                'reference' => env('DEFAULT_REFERENCE'),
-                'domain'    => app('request')->root(),
+                'name'      => env('APPLICATION_NAME'),
+                'reference' => env('APPLICATION_REFERENCE'),
+                'domain'    => env('APPLICATION_DOMAIN'),
                 'enabled'   => true
             ]
         );

@@ -67,32 +67,34 @@ class InstallerModuleInstaller
         $this->dispatch(
             new GenerateEnvironmentFile(
                 [
-                    'INSTALLED'         => 'false',
-                    'APP_DEBUG'         => 'false',
-                    'APP_KEY'           => str_random(32),
-                    'DB_DRIVER'         => $parameters['database_driver'],
-                    'DB_HOST'           => $parameters['database_host'],
-                    'DB_DATABASE'       => $parameters['database_name'],
-                    'DB_USERNAME'       => $parameters['database_username'],
-                    'DB_PASSWORD'       => $parameters['database_password'],
-                    'DEFAULT_REFERENCE' => $parameters['application_reference'],
-                    'CACHE_DRIVER'      => 'file', // @todo - add fields for this?
-                    'SESSION_DRIVER'    => 'file', // @todo - add fields for this?
-                    'ADMIN_THEME'       => config('streams.admin_theme'),
-                    'STANDARD_THEME'    => config('streams.standard_theme'),
-                    'LOCALE'            => $parameters['application_locale'],
-                    'TIMEZONE'          => $parameters['application_timezone'],
-                    'MAIL_DRIVER'       => 'smtp',
-                    'SMTP_HOST'         => 'smtp.mailgun.org',
-                    'SMTP_PORT'         => 587,
-                    'MAIL_FROM_ADDRESS' => null,
-                    'MAIL_FROM_NAME'    => null,
-                    'SMTP_USERNAME'     => null,
-                    'SMTP_PASSWORD'     => null,
-                    'MAIL_DEBUG'        => false,
-                    'ADMIN_USERNAME'    => $parameters['admin_username'],
-                    'ADMIN_EMAIL'       => $parameters['admin_email'],
-                    'ADMIN_PASSWORD'    => $parameters['admin_password']
+                    'INSTALLED'             => 'false',
+                    'APP_DEBUG'             => 'false',
+                    'APP_KEY'               => str_random(32),
+                    'DB_DRIVER'             => $parameters['database_driver'],
+                    'DB_HOST'               => $parameters['database_host'],
+                    'DB_DATABASE'           => $parameters['database_name'],
+                    'DB_USERNAME'           => $parameters['database_username'],
+                    'DB_PASSWORD'           => $parameters['database_password'],
+                    'APPLICATION_NAME'      => $parameters['application_name'],
+                    'APPLICATION_DOMAIN'    => $parameters['application_domain'],
+                    'APPLICATION_REFERENCE' => $parameters['application_reference'],
+                    'CACHE_DRIVER'          => 'file', // @todo - add fields for this?
+                    'SESSION_DRIVER'        => 'file', // @todo - add fields for this?
+                    'ADMIN_THEME'           => config('streams.admin_theme'),
+                    'STANDARD_THEME'        => config('streams.standard_theme'),
+                    'LOCALE'                => $parameters['application_locale'],
+                    'TIMEZONE'              => $parameters['application_timezone'],
+                    'MAIL_DRIVER'           => 'smtp',
+                    'SMTP_HOST'             => 'smtp.mailgun.org',
+                    'SMTP_PORT'             => 587,
+                    'MAIL_FROM_ADDRESS'     => null,
+                    'MAIL_FROM_NAME'        => null,
+                    'SMTP_USERNAME'         => null,
+                    'SMTP_PASSWORD'         => null,
+                    'MAIL_DEBUG'            => false,
+                    'ADMIN_USERNAME'        => $parameters['admin_username'],
+                    'ADMIN_EMAIL'           => $parameters['admin_email'],
+                    'ADMIN_PASSWORD'        => $parameters['admin_password']
                 ]
             )
         );
