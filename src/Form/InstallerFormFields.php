@@ -73,7 +73,7 @@ class InstallerFormFields
                     'placeholder'  => 'anomaly.module.installer::field.database_host.placeholder',
                     'instructions' => 'anomaly.module.installer::field.database_host.instructions',
                     'type'         => 'anomaly.field_type.text',
-                    'value'        => '127.0.0.1',
+                    'value'        => 'localhost',
                     'rules'        => [
                         'required',
                     ],

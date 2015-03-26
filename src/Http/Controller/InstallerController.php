@@ -43,7 +43,8 @@ class InstallerController extends PublicController
     public function progress(ModuleCollection $modules, ExtensionCollection $extensions)
     {
         $steps = [
-            url('installer/command/InstallBaseTables') => trans('anomaly.module.installer::install.base_tables')
+            url('installer/command/InstallBaseTables') => trans('anomaly.module.installer::install.base_tables'),
+            url('installer/command/CreateApplication') => trans('anomaly.module.installer::install.application')
         ];
 
         $modules->forget('anomaly.module.installer');
