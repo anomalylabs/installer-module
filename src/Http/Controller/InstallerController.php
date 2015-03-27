@@ -8,6 +8,7 @@ use Anomaly\Streams\Platform\Addon\Module\Module;
 use Anomaly\Streams\Platform\Addon\Module\ModuleCollection;
 use Anomaly\Streams\Platform\Addon\Module\ModuleManager;
 use Anomaly\Streams\Platform\Http\Controller\PublicController;
+use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Bus\DispatchesCommands;
 
 /**
@@ -52,6 +53,13 @@ class InstallerController extends PublicController
         foreach ($modules as $module) {
             $steps[url('installer/module/' . $module->getNamespace())] = trans(
                 'anomaly.module.installer::install.module',
+                ['name' => strtolower(trans($module->getName()))]
+            );
+        }
+
+        foreach ($modules as $module) {
+            $steps[url('installer/seed/' . $module->getNamespace())] = trans(
+                'anomaly.module.installer::install.seed',
                 ['name' => strtolower(trans($module->getName()))]
             );
         }
@@ -110,6 +118,22 @@ class InstallerController extends PublicController
     public function module(ModuleCollection $modules, ModuleManager $manager, $module)
     {
         $manager->install($modules->get($module));
+
+        return response()->json(true);
+    }
+
+    /**
+     * Seed a module.
+     *
+     * @param ModuleCollection $modules
+     * @param ModuleManager    $manager
+     * @param                  $module
+     */
+    public function seed(ModuleCollection $modules, Kernel $console, $module)
+    {
+        $module = $modules->get($module);
+
+        $console->call('db:seed', ['--force' => true, '--addon' => $module->getNamespace()]);
 
         return response()->json(true);
     }
