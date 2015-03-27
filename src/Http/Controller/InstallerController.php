@@ -36,11 +36,11 @@ class InstallerController extends PublicController
     }
 
     /**
-     * Show the installation progress.
+     * Run installation.
      *
      * @return \Illuminate\View\View
      */
-    public function progress(ModuleCollection $modules, ExtensionCollection $extensions)
+    public function install(ModuleCollection $modules, ExtensionCollection $extensions)
     {
         $steps = [
             url('installer/command/InstallBaseTables') => trans('anomaly.module.installer::install.base_tables'),

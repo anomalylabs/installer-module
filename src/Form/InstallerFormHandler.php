@@ -24,7 +24,7 @@ class InstallerFormHandler
     {
         $moduleInstaller->install($_POST);
 
-        $form->setResponse(redirect('installer/progress'));
+        $form->setResponse(redirect('installer/install'));
     }
 }
  
