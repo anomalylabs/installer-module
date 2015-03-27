@@ -25,7 +25,7 @@ class CreateAdminRole implements SelfHandling
      */
     public function handle(RoleRepositoryInterface $roles, UserRepositoryInterface $users, UserManager $manager)
     {
-        $user = $users->find(1);
+        $user = $users->findUserByUsername('admin');
 
         if (!$role = $roles->findBySlug('admin')) {
             $role = $roles->create(['en' => ['name' => 'Admin'], 'slug' => 'admin']);
