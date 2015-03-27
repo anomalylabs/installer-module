@@ -34,7 +34,7 @@ class SetFormOptionsHandler
                     ]
                 ],
                 [
-                    'title'  => 'anomaly.module.installer::installer.database',
+                    'title'  => 'anomaly.module.installer::form.database',
                     'fields' => [
                         'database_driver',
                         'database_host',
@@ -44,7 +44,7 @@ class SetFormOptionsHandler
                     ]
                 ],
                 [
-                    'title'  => 'anomaly.module.installer::installer.administrator',
+                    'title'  => 'anomaly.module.installer::form.administrator',
                     'fields' => [
                         'admin_username',
                         'admin_email',
@@ -52,7 +52,7 @@ class SetFormOptionsHandler
                     ]
                 ],
                 [
-                    'title'  => 'anomaly.module.installer::installer.application',
+                    'title'  => 'anomaly.module.installer::form.application',
                     'fields' => [
                         'application_name',
                         'application_reference',

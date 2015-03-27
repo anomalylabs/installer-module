@@ -75,6 +75,9 @@ class InstallerController extends PublicController
                 ),
                 url('installer/command/CreateAdminRole')       => trans(
                     'anomaly.module.installer::install.create_admin_role'
+                ),
+                url('installer/command/CreateUserRole')        => trans(
+                    'anomaly.module.installer::install.create_user_role'
                 )
             ]
         );
