@@ -9,7 +9,6 @@ use Anomaly\Streams\Platform\Addon\Module\ModuleCollection;
 use Anomaly\Streams\Platform\Addon\Module\ModuleManager;
 use Anomaly\Streams\Platform\Http\Controller\PublicController;
 use Illuminate\Foundation\Bus\DispatchesCommands;
-use Illuminate\Http\Request;
 
 /**
  * Class InstallerController
@@ -73,6 +72,9 @@ class InstallerController extends PublicController
                 ),
                 url('installer/command/CreateAdminUser')       => trans(
                     'anomaly.module.installer::install.create_admin_user'
+                ),
+                url('installer/command/CreateAdminRole')       => trans(
+                    'anomaly.module.installer::install.create_admin_role'
                 )
             ]
         );
