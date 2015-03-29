@@ -2,6 +2,7 @@
 
 use Anomaly\Streams\Platform\Database\Migration\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Schema\Builder;
 
 /**
  * Class AnomalyModuleInstallerCreateAssignmentsTables

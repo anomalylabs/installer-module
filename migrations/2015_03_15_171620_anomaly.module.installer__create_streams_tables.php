@@ -2,6 +2,7 @@
 
 use Anomaly\Streams\Platform\Database\Migration\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Schema\Builder;
 
 /**
  * Class AnomalyModuleInstallerCreateStreamsTables
@@ -37,6 +38,7 @@ class AnomalyModuleInstallerCreateStreamsTables extends Migration
                     $table->string('order_by');
                     $table->string('locked')->default(0);
                     $table->string('translatable')->default(0);
+                    $table->string('trashable')->default(0);
                 }
             );
         }
