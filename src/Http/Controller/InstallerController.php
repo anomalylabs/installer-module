@@ -43,6 +43,7 @@ class InstallerController extends PublicController
     public function install(ModuleCollection $modules, ExtensionCollection $extensions)
     {
         $steps = [
+            url('installer/command/ClearCache')        => trans('anomaly.module.installer::install.clear_cache'),
             url('installer/command/InstallBaseTables') => trans('anomaly.module.installer::install.base_tables'),
             url('installer/command/CreateApplication') => trans('anomaly.module.installer::install.application')
         ];

@@ -2,6 +2,7 @@
 
 return [
     'installing'              => 'Installing',
+    'clear_cache'             => 'Clearing cache',
     'base_tables'             => 'Installing base tables',
     'application'             => 'Creating application',
     'module'                  => 'Installing :name module',
