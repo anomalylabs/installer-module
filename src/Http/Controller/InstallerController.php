@@ -76,6 +76,9 @@ class InstallerController extends PublicController
         $steps = array_merge(
             $steps,
             [
+                url('installer/command/UpdateEnvironmentFile') => trans(
+                    'anomaly.module.installer::install.update_environment_file'
+                ),
                 url('installer/command/CreateAdminUser')       => trans(
                     'anomaly.module.installer::install.create_admin_user'
                 ),
@@ -84,10 +87,7 @@ class InstallerController extends PublicController
                 ),
                 url('installer/command/CreateUserRole')        => trans(
                     'anomaly.module.installer::install.create_user_role'
-                ),
-                url('installer/command/UpdateEnvironmentFile') => trans(
-                    'anomaly.module.installer::install.update_environment_file'
-                ),
+                )
             ]
         );
 
