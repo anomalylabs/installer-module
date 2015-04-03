@@ -25,7 +25,7 @@
 
 <div id="content" class="container">
     {% include "theme::partials/messages" %}
-    {{ block('content') }}
+    {% block content %}{% endblock %}
 </div>
 
 </body>
