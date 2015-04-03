@@ -22,7 +22,7 @@ class SetFormOptionsHandler
     {
         $options = $command->getOptions();
 
-        $options->put('wrapper_view', 'anomaly.module.installer::blank');
+        $options->put('layout_view', 'anomaly.module.installer::layouts/installer');
         $options->put('handler', 'Anomaly\InstallerModule\Form\InstallerFormHandler@handle');
 
         $options->put(

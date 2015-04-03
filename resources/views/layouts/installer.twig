@@ -12,27 +12,20 @@
 <html>
 
 <head>
+    {{ asset_add('scripts.js', 'anomaly.module.installer::js/install.js', ['debug']) }}
+
     {% include "theme::partials/metadata" %}
 </head>
 
 <body id="installer">
 
+<header id="header">
+    {{ image('theme::img/icon-white.png') }} {{ config_get('streams.name') }}
+</header>
 
-<div class="ui installer dimmer">
-    <div class="ui text loader">Generating .env file...</div>
-</div>
-
-<div class="ui page grid">
-    <div class="column">
-
-        <h1 class="ui header logo center aligned">
-            {{ image("theme::img/icon-dark.png").width(64)|raw }}
-        </h1>
-
-        {% include "theme::partials/messages" %}
-        {% block content %}{% endblock %}
-
-    </div>
+<div id="content" class="container">
+    {% include "theme::partials/messages" %}
+    {{ block('content') }}
 </div>
 
 </body>

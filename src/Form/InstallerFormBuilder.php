@@ -21,14 +21,7 @@ class InstallerFormBuilder extends FormBuilder
      * @var array
      */
     protected $actions = [
-        'save' => [
-            'type'       => 'green',
-            'text'       => 'anomaly.module.installer::button.install',
-            'attributes' => [
-                'data-toggle' => 'dimmer',
-                'data-target' => '.installer.dimmer'
-            ]
-        ]
+        'save'
     ];
 
     /**

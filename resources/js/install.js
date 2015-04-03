@@ -1,9 +1,9 @@
-var process = function () {
+var install = function () {
 
     var step = $('body').find('[data-step]').first();
-    var progress = $('#progress');
+    var progress = $('.progress-bar');
 
-    progress.find('.label').text(step.data('label') + '...');
+    $('#label').text(step.data('step') + '...');
 
     $.ajax({
         url: step.data('action'),
@@ -13,18 +13,17 @@ var process = function () {
 
             if ($('body').find('[data-step]').length) {
 
-                progress.progress('increment', progress.data('precision'));
+                progress.width(step.data('progress') + '%');
 
-                process();
+                install();
             } else {
 
-                progress.progress({
-                    percent: 100
-                }).find('.label').text('Ready.');
+                progress.width('100%');
+
+                $('#label').text('Ready.');
 
                 setTimeout(function () {
-                    progress.fadeOut(200);
-                    $('#button').removeClass('hidden').addClass('animated-slow fadeInUpBig');
+                    $('#finished').removeClass('hidden');
                 }, 1000);
             }
         },
@@ -33,7 +32,3 @@ var process = function () {
         }
     });
 };
-
-$(document).ready(function () {
-    process();
-});
