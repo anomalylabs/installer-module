@@ -1,7 +1,6 @@
 <?php namespace Anomaly\InstallerModule\Form;
 
 use Anomaly\InstallerModule\Form\Command\SetFormOptions;
-use Anomaly\Streams\Platform\Ui\Form\Form;
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 
 /**
@@ -24,16 +23,5 @@ class InstallerFormBuilder extends FormBuilder
         'save'
     ];
 
-    /**
-     * Create a new InstallerFormBuilder instance.
-     *
-     * @param Form $form
-     */
-    public function __construct(Form $form)
-    {
-        $this->dispatch(new SetFormOptions($form->getOptions()));
-
-        parent::__construct($form);
-    }
 }
  

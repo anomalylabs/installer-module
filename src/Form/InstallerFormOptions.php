@@ -1,31 +1,29 @@
-<?php namespace Anomaly\InstallerModule\Form\Command\Handler;
-
-use Anomaly\InstallerModule\Form\Command\SetFormOptions;
+<?php namespace Anomaly\InstallerModule\Form;
 
 /**
- * Class SetFormOptionsHandler
+ * Class InstallerFormOptions
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
- * @package       Anomaly\InstallerModule\Form\Command
+ * @package       Anomaly\InstallerModule\Form
  */
-class SetFormOptionsHandler
+class InstallerFormOptions
 {
 
     /**
-     * Handle the command.
+     * Handle the form options.
      *
-     * @param SetFormOptions $command
+     * @param InstallerFormBuilder $builder
      */
-    public function handle(SetFormOptions $command)
+    public function handle(InstallerFormBuilder $builder)
     {
-        $options = $command->getOptions();
+        $form = $builder->getForm();
 
-        $options->put('layout_view', 'anomaly.module.installer::layouts/installer');
-        $options->put('handler', 'Anomaly\InstallerModule\Form\InstallerFormHandler@handle');
+        $form->setOption('layout_view', 'anomaly.module.installer::layouts/installer');
+        $form->setOption('handler', 'Anomaly\InstallerModule\Form\InstallerFormHandler@handle');
 
-        $options->put(
+        $form->setOption(
             'sections',
             [
                 [
