@@ -1,6 +1,5 @@
 <?php namespace Anomaly\InstallerModule\Form;
 
-use Anomaly\InstallerModule\Form\Command\SetFormOptions;
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 
 /**
