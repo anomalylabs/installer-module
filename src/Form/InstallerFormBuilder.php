@@ -21,6 +21,5 @@ class InstallerFormBuilder extends FormBuilder
     protected $actions = [
         'save'
     ];
-
 }
  

@@ -1,7 +1,6 @@
 <?php namespace Anomaly\InstallerModule\Form;
 
 use Anomaly\InstallerModule\InstallerModuleInstaller;
-use Anomaly\Streams\Platform\Ui\Form\Form;
 
 /**
  * Class InstallerFormHandler
@@ -17,14 +16,14 @@ class InstallerFormHandler
     /**
      * Handle the installer form.
      *
-     * @param Form                     $form
+     * @param InstallerFormBuilder     $builder
      * @param InstallerModuleInstaller $moduleInstaller
      */
-    public function handle(Form $form, InstallerModuleInstaller $moduleInstaller)
+    public function handle(InstallerFormBuilder $builder, InstallerModuleInstaller $moduleInstaller)
     {
         $moduleInstaller->install($_POST);
 
-        $form->setResponse(redirect('installer/install'));
+        $builder->setFormResponse(redirect('installer/install'));
     }
 }
  
