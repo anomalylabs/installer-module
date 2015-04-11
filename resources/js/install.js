@@ -32,3 +32,7 @@ var install = function () {
         }
     });
 };
+
+$(document).ready(function () {
+    install();
+});

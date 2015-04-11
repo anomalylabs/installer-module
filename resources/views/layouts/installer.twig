@@ -12,8 +12,6 @@
 <html>
 
 <head>
-    {{ asset_add('scripts.js', 'anomaly.module.installer::js/install.js') }}
-
     {% include "theme::partials/metadata" %}
 </head>
 
@@ -27,6 +25,8 @@
     {% include "theme::partials/messages" %}
     {% block content %}{% endblock %}
 </div>
+
+{% include "theme::partials/js" %}
 
 </body>
 </html>

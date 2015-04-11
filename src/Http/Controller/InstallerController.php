@@ -91,7 +91,7 @@ class InstallerController extends PublicController
             ]
         );
 
-        return view('anomaly.module.installer::progress', compact('steps'));
+        return view('anomaly.module.installer::install', compact('steps'));
     }
 
     /**

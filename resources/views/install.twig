@@ -2,6 +2,8 @@
 
 {% block content %}
 
+    {{ asset_add('scripts.js', 'anomaly.module.installer::js/install.js') }}
+
     <div id="progress" class="row">
         <div class="col-lg-12 col-lg-offset-6">
 
@@ -26,11 +28,5 @@
                 data-progress="{{ ((loop.index-1)/(steps|length)*100)|round(0, 'floor') }}"
                 ></div>
     {% endfor %}
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            install();
-        });
-    </script>
 
 {% endblock %}
