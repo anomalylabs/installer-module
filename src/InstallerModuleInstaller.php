@@ -69,6 +69,7 @@ class InstallerModuleInstaller
                 [
                     'INSTALLED'             => 'false',
                     'APP_DEBUG'             => 'false',
+                    'APP_ENV'               => 'local',
                     'APP_KEY'               => str_random(32),
                     'DB_DRIVER'             => $parameters['database_driver'],
                     'DB_HOST'               => $parameters['database_host'],
