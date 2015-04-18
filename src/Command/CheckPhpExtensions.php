@@ -20,11 +20,18 @@ class CheckPhpExtensions implements SelfHandling
     {
         $extensions = [
             'gd',
+            'dom',
             'zip',
             'pdo',
             'curl',
+            'json',
             'mcrypt',
-            'fileinfo'
+            'filter',
+            'mcrypt',
+            'openssl',
+            'mbstring',
+            'fileinfo',
+            'tokenizer'
         ];
 
         foreach ($extensions as $extension) {
