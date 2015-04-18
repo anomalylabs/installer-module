@@ -1,5 +1,7 @@
 <?php namespace Anomaly\InstallerModule;
 
+use Anomaly\InstallerModule\Command\CheckDirectoryPermissions;
+use Anomaly\InstallerModule\Command\CheckPhpExtensions;
 use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
 
 /**
@@ -28,4 +30,14 @@ class InstallerModuleServiceProvider extends AddonServiceProvider
         'installer/extension/{extension}' => 'Anomaly\InstallerModule\Http\Controller\InstallerController@extension'
     ];
 
+    /**
+     * Register the service provider.
+     */
+    public function register()
+    {
+        $this->dispatch(new CheckPhpExtensions());
+        $this->dispatch(new CheckDirectoryPermissions());
+
+        parent::register();
+    }
 }
