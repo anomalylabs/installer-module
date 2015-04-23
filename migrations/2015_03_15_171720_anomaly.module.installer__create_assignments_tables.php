@@ -33,6 +33,7 @@ class AnomalyModuleInstallerCreateAssignmentsTables extends Migration
                     $table->integer('sort_order');
                     $table->integer('stream_id');
                     $table->integer('field_id');
+                    $table->text('config');
                     $table->boolean('unique')->default(0);
                     $table->boolean('required')->default(0);
                     $table->boolean('translatable')->default(0);
