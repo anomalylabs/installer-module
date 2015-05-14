@@ -36,6 +36,8 @@ class AnomalyModuleInstallerCreateFieldsTables extends Migration
                     $table->text('config');
                     $table->text('rules');
                     $table->boolean('locked')->default(0);
+
+                    $table->unique(['namespace', 'slug']);
                 }
             );
         }

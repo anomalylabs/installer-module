@@ -30,6 +30,9 @@ class AnomalyModuleInstallerCreateApplicationsTable extends Migration
                     $table->string('reference');
                     $table->string('domain');
                     $table->boolean('enabled');
+
+                    $table->unique('reference');
+                    $table->unique('domain');
                 }
             );
         }

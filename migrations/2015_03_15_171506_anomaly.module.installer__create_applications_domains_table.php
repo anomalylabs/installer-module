@@ -29,6 +29,8 @@ class AnomalyModuleInstallerCreateApplicationsDomainsTable extends Migration
                     $table->integer('application_id');
                     $table->string('domain');
                     $table->string('locale');
+
+                    $table->unique('domain');
                 }
             );
         }

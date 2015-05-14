@@ -33,6 +33,8 @@ class AnomalyModuleInstallerCreateExtensionsTable extends Migration
                     $table->string('namespace');
                     $table->boolean('installed')->default(0);
                     $table->boolean('enabled')->default(0);
+
+                    $table->unique('namespace');
                 }
             );
         }

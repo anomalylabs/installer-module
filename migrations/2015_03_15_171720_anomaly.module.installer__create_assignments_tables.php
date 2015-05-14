@@ -38,6 +38,8 @@ class AnomalyModuleInstallerCreateAssignmentsTables extends Migration
                     $table->boolean('unique')->default(0);
                     $table->boolean('required')->default(0);
                     $table->boolean('translatable')->default(0);
+
+                    $table->unique(['stream_id', 'field_id']);
                 }
             );
         }

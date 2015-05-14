@@ -39,6 +39,8 @@ class AnomalyModuleInstallerCreateStreamsTables extends Migration
                     $table->string('locked')->default(0);
                     $table->string('translatable')->default(0);
                     $table->string('trashable')->default(0);
+
+                    $table->unique(['namespace', 'slug']);
                 }
             );
         }
