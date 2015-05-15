@@ -26,13 +26,13 @@ class InstallerFormFields
                 'license'               => [
                     'label'        => 'anomaly.module.installer::field.license.label',
                     'instructions' => 'anomaly.module.installer::field.license.instructions',
-                    'type'         => 'anomaly.field_type.boolean',
                     'wrapper_view' => 'anomaly.module.installer::field_type/license/wrapper',
+                    'type'         => 'anomaly.field_type.boolean',
                     'rules'        => [
                         'required',
                     ],
                     'config'       => [
-                        'text'    => 'anomaly.module.installer::field.license.agree',
+                        'label'   => 'anomaly.module.installer::field.license.agree',
                         'type'    => 'checkbox',
                         'license' => function () {
                             return (new \Michelf\Markdown())->transform(

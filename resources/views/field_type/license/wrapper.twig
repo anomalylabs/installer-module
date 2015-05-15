@@ -1,9 +1,34 @@
-<div>
+<div
+        {{ field_type.locale ? 'lang=' ~ field_type.locale }}
+        class="form-group {{ field_type.slug }}-field-type {{ field_type.hidden ? 'hidden' }}"
+        data-field="{{ field_type.field }}">
 
     <p>
         {{ field_type.config.license|raw }}
     </p>
 
+    <br>
+
+    <label class="control-label">
+        {{ trans(field_type.label)|raw }}
+
+        {% if field_type.required %}
+            <span class="required">*</span>
+        {% endif %}
+
+        {% if field_type.locale %}
+            <span class="label label-mini label-default">
+                {{ config_get('streams.enabled_locales.' ~ field_type.locale) }}
+            </span>
+        {% endif %}
+    </label>
+
+    {% if field_type.instructions %}
+        <p class="help-block">{{ trans(field_type.instructions)|raw }}</p>
+    {% endif %}
+
     {{ field_type.renderInput()|raw }}
+
+    <br>
 
 </div>

@@ -2,9 +2,8 @@
 
 return [
     'license'               => [
-        'label'        => 'License',
-        'instructions' => 'Please note addons may be licensed separately.',
-        'agree'        => 'I agree to the terms of this license and the terms of the licenses of contained add-ons.',
+        'label'        => 'Do you agree to the terms of this license and the licenses of all contained add-ons?',
+        'instructions' => 'Please note all addons are be licensed separately.'
     ],
     'database_driver'       => [
         'label'            => 'Driver',
