@@ -21,5 +21,14 @@ class InstallerFormBuilder extends FormBuilder
     protected $actions = [
         'save'
     ];
+
+    /**
+     * The form options.
+     *
+     * @var array
+     */
+    protected $options = [
+        'breadcrumb' => 'anomaly.module.installer::breadcrumb.installer'
+    ];
+
 }
- 
