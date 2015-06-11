@@ -81,8 +81,8 @@ class InstallerModuleInstaller
                     'APPLICATION_REFERENCE' => $parameters['application_reference'],
                     'CACHE_DRIVER'          => 'file', // @todo - add fields for this?
                     'SESSION_DRIVER'        => 'file', // @todo - add fields for this?
-                    'ADMIN_THEME'           => config('streams.admin_theme'),
-                    'STANDARD_THEME'        => config('streams.standard_theme'),
+                    'ADMIN_THEME'           => config('streams::themes.active.admin'),
+                    'STANDARD_THEME'        => config('streams::themes.active.standard'),
                     'LOCALE'                => $parameters['application_locale'],
                     'TIMEZONE'              => $parameters['application_timezone'],
                     'MAIL_DRIVER'           => 'mail',
