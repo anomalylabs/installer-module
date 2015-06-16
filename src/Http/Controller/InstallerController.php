@@ -102,6 +102,8 @@ class InstallerController extends PublicController
      */
     public function command($command)
     {
+        set_time_limit(500);
+
         $command = '\Anomaly\InstallerModule\Command\\' . $command;
 
         $this->dispatch(new $command);
@@ -118,6 +120,8 @@ class InstallerController extends PublicController
      */
     public function module(ModuleCollection $modules, ModuleManager $manager, $module)
     {
+        set_time_limit(500);
+
         $manager->install($modules->get($module));
 
         return response()->json(true);
@@ -132,6 +136,8 @@ class InstallerController extends PublicController
      */
     public function seed(ModuleCollection $modules, Kernel $console, $module)
     {
+        set_time_limit(500);
+
         $module = $modules->get($module);
 
         $console->call('db:seed', ['--force' => true, '--addon' => $module->getNamespace()]);
@@ -148,6 +154,8 @@ class InstallerController extends PublicController
      */
     public function extension(ExtensionCollection $extensions, ExtensionManager $manager, $extension)
     {
+        set_time_limit(500);
+        
         $manager->install($extensions->get($extension));
 
         return response()->json(true);
