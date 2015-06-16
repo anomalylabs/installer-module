@@ -102,7 +102,7 @@ class InstallerController extends PublicController
      */
     public function command($command)
     {
-        set_time_limit(500);
+        set_time_limit(5000);
 
         $command = '\Anomaly\InstallerModule\Command\\' . $command;
 
@@ -120,7 +120,7 @@ class InstallerController extends PublicController
      */
     public function module(ModuleCollection $modules, ModuleManager $manager, $module)
     {
-        set_time_limit(500);
+        set_time_limit(5000);
 
         $manager->install($modules->get($module));
 
@@ -136,7 +136,7 @@ class InstallerController extends PublicController
      */
     public function seed(ModuleCollection $modules, Kernel $console, $module)
     {
-        set_time_limit(500);
+        set_time_limit(5000);
 
         $module = $modules->get($module);
 
@@ -154,7 +154,7 @@ class InstallerController extends PublicController
      */
     public function extension(ExtensionCollection $extensions, ExtensionManager $manager, $extension)
     {
-        set_time_limit(500);
+        set_time_limit(5000);
         
         $manager->install($extensions->get($extension));
 
