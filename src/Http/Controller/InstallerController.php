@@ -58,11 +58,13 @@ class InstallerController extends PublicController
             );
         }
 
-        foreach ($modules as $module) {
-            $steps[url('installer/seed/' . $module->getNamespace())] = trans(
-                'anomaly.module.installer::install.seed',
-                ['name' => strtolower(trans($module->getName()))]
-            );
+        if (env('INSTALL_SEEDS', false)) {
+            foreach ($modules as $module) {
+                $steps[url('installer/seed/' . $module->getNamespace())] = trans(
+                    'anomaly.module.installer::install.seed',
+                    ['name' => strtolower(trans($module->getName()))]
+                );
+            }
         }
 
         /* @var Extension $extension */
