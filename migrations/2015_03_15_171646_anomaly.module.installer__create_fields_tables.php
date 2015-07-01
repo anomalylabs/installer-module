@@ -50,8 +50,7 @@ class AnomalyModuleInstallerCreateFieldsTables extends Migration
                     $table->increments('id');
                     $table->integer('field_id');
                     $table->string('locale')->index();
-
-                    $table->string('name');
+                    $table->string('name')->nullable();
                 }
             );
         }

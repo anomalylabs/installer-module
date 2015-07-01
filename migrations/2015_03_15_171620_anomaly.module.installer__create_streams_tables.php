@@ -53,8 +53,7 @@ class AnomalyModuleInstallerCreateStreamsTables extends Migration
                     $table->increments('id');
                     $table->integer('stream_id');
                     $table->string('locale')->index();
-
-                    $table->string('name');
+                    $table->string('name')->nullable();
                     $table->string('description')->nullable();
                 }
             );
