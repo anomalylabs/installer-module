@@ -95,7 +95,10 @@ class InstallerModuleInstaller
                     'MAIL_DEBUG'            => false,
                     'ADMIN_USERNAME'        => $parameters['admin_username'],
                     'ADMIN_EMAIL'           => $parameters['admin_email'],
-                    'ADMIN_PASSWORD'        => $parameters['admin_password']
+                    'ADMIN_PASSWORD'        => $parameters['admin_password'],
+                    'SITE_ENABLED'          => true,
+                    'IP_WHITELIST'          => null,
+                    'FORCE_HTTPS'           => 'none'
                 ]
             )
         );
