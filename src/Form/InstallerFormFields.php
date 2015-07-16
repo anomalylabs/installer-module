@@ -176,15 +176,13 @@ class InstallerFormFields
                 'application_locale'    => [
                     'label'        => 'anomaly.module.installer::field.application_locale.label',
                     'instructions' => 'anomaly.module.installer::field.application_locale.instructions',
-                    'type'         => 'anomaly.field_type.select',
+                    'type'         => 'anomaly.field_type.language',
                     'value'        => 'en',
                     'rules'        => [
                         'required',
                     ],
                     'config'       => [
-                        'options' => function () {
-                            return config('streams::locales.supported');
-                        }
+                        'supported_locales' => true
                     ],
                 ],
                 'application_timezone'  => [
