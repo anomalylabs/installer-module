@@ -183,7 +183,7 @@ class InstallerFormFields
                     ],
                     'config'       => [
                         'options' => function () {
-                            return config('streams.available_locales');
+                            return config('streams::locales.supported');
                         }
                     ],
                 ],
