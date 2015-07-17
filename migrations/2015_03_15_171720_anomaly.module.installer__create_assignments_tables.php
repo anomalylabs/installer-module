@@ -35,6 +35,7 @@ class AnomalyModuleInstallerCreateAssignmentsTables extends Migration
                     $table->integer('field_id');
                     $table->text('config');
                     $table->text('rules');
+                    $table->text('validators');
                     $table->boolean('unique')->default(0);
                     $table->boolean('required')->default(0);
                     $table->boolean('translatable')->default(0);
