@@ -28,7 +28,7 @@ class CreateAdminUser implements SelfHandling
             'password' => env('ADMIN_PASSWORD')
         ];
 
-        if ($user = $users->findUserByUsername(env('ADMIN_USERNAME'))) {
+        if ($user = $users->findByUsername(env('ADMIN_USERNAME'))) {
 
             $user->email    = env('ADMIN_EMAIL');
             $user->password = env('ADMIN_PASSWORD');
