@@ -23,9 +23,10 @@ class CreateAdminUser implements SelfHandling
     public function handle(UserManager $manager, UserRepositoryInterface $users)
     {
         $credentials = [
-            'email'    => env('ADMIN_EMAIL'),
-            'username' => env('ADMIN_USERNAME'),
-            'password' => env('ADMIN_PASSWORD')
+            'display_name' => 'Administrator',
+            'email'        => env('ADMIN_EMAIL'),
+            'username'     => env('ADMIN_USERNAME'),
+            'password'     => env('ADMIN_PASSWORD')
         ];
 
         if ($user = $users->findByUsername(env('ADMIN_USERNAME'))) {
@@ -35,7 +36,7 @@ class CreateAdminUser implements SelfHandling
 
             $user->save();
         } else {
-            $manager->create($credentials, true);
+            $users->create($credentials, true);
         }
     }
 }
