@@ -21,9 +21,8 @@ class CreateAdminRole implements SelfHandling
      *
      * @param RoleRepositoryInterface $roles
      * @param UserRepositoryInterface $users
-     * @param UserManager             $manager
      */
-    public function handle(RoleRepositoryInterface $roles, UserRepositoryInterface $users, UserManager $manager)
+    public function handle(RoleRepositoryInterface $roles, UserRepositoryInterface $users)
     {
         $user = $users->findByUsername(env('ADMIN_USERNAME'));
 
@@ -31,6 +30,6 @@ class CreateAdminRole implements SelfHandling
             $role = $roles->create(['en' => ['name' => 'Admin'], 'slug' => 'admin']);
         }
 
-        $manager->attachRole($user, $role);
+        $user->roles()->attach($role);
     }
 }
