@@ -2,7 +2,7 @@
 
 use Anomaly\Streams\Platform\Application\Command\GenerateEnvironmentFile;
 use Illuminate\Contracts\Bus\SelfHandling;
-use Illuminate\Foundation\Bus\DispatchesCommands;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class UpdateEnvironmentFile
@@ -15,7 +15,7 @@ use Illuminate\Foundation\Bus\DispatchesCommands;
 class UpdateEnvironmentFile implements SelfHandling
 {
 
-    use DispatchesCommands;
+    use DispatchesJobs;
 
     /**
      * Handle the command.

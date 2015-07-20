@@ -1,12 +1,7 @@
 <?php namespace Anomaly\InstallerModule;
 
-use Anomaly\InstallerModule\Command\SetupApplication;
-use Anomaly\Streams\Platform\Application\ApplicationModel;
 use Anomaly\Streams\Platform\Application\Command\GenerateEnvironmentFile;
-use Anomaly\Streams\Platform\Stream\Command\CreateStreamsTables;
-use Anomaly\UsersModule\Role\RoleManager;
-use Anomaly\UsersModule\User\UserManager;
-use Illuminate\Foundation\Bus\DispatchesCommands;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class InstallerModuleInstaller
@@ -19,42 +14,7 @@ use Illuminate\Foundation\Bus\DispatchesCommands;
 class InstallerModuleInstaller
 {
 
-    use DispatchesCommands;
-
-    /**
-     * The role manager.
-     *
-     * @var RoleManager
-     */
-    protected $roles;
-
-    /**
-     * The user manager.
-     *
-     * @var UserManager
-     */
-    protected $users;
-
-    /**
-     * The application model.
-     *
-     * @var ApplicationModel
-     */
-    protected $applications;
-
-    /**
-     * Create a new InstallerModuleInstaller instance.
-     *
-     * @param RoleManager      $roles
-     * @param UserManager      $users
-     * @param ApplicationModel $applications
-     */
-    function __construct(RoleManager $roles, UserManager $users, ApplicationModel $applications)
-    {
-        $this->roles        = $roles;
-        $this->users        = $users;
-        $this->applications = $applications;
-    }
+    use DispatchesJobs;
 
     /**
      * Install the system.
@@ -102,36 +62,6 @@ class InstallerModuleInstaller
                 ]
             )
         );
-
-        /*
-        $admin = $this->roles->create(
-            [
-                'en'   => [
-                    'name' => 'Administrator'
-                ],
-                'slug' => 'admin'
-            ]
-        );
-
-        $this->roles->create(
-            [
-                'en'   => [
-                    'name' => 'User',
-                ],
-                'slug' => 'user'
-            ]
-        );
-
-        $this->users->attachRole($user, $admin);
-
-        $application = $this->applications->newInstance();
-
-        $application->enabled   = true;
-        $application->name      = array_get($parameters, 'application_name');
-        $application->domain    = array_get($parameters, 'application_domain');
-        $application->reference = array_get($parameters, 'application_reference');
-
-        $application->save();*/
 
         return true;
     }

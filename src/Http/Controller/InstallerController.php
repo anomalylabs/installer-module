@@ -9,7 +9,7 @@ use Anomaly\Streams\Platform\Addon\Module\ModuleCollection;
 use Anomaly\Streams\Platform\Addon\Module\ModuleManager;
 use Anomaly\Streams\Platform\Http\Controller\PublicController;
 use Illuminate\Contracts\Console\Kernel;
-use Illuminate\Foundation\Bus\DispatchesCommands;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class InstallerController
@@ -22,7 +22,7 @@ use Illuminate\Foundation\Bus\DispatchesCommands;
 class InstallerController extends PublicController
 {
 
-    use DispatchesCommands;
+    use DispatchesJobs;
 
     /**
      * Create a new InstallerController instance.
