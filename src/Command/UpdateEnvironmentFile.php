@@ -26,9 +26,15 @@ class UpdateEnvironmentFile implements SelfHandling
 
         foreach (file(base_path('.env'), FILE_IGNORE_NEW_LINES) as $line) {
 
-            list($key, $value) = explode('=', $line);
+            if (strstr($line, '=')) {
+                list($key, $value) = explode('=', $line);
+                $data[$key] = $value;
+            } else {
+                // if the line doesn't contain an = then,
+                // assume it is a comment and just add it
+                $data[] = $line;
+            }
 
-            $data[$key] = $value;
         }
 
         $data['INSTALLED'] = 'true';
