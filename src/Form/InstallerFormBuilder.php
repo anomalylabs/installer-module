@@ -28,7 +28,9 @@ class InstallerFormBuilder extends FormBuilder
      * @var array
      */
     protected $options = [
-        'breadcrumb' => 'anomaly.module.installer::breadcrumb.installer'
+        'layout_view' => 'anomaly.module.installer::layouts/installer',
+        'breadcrumb'  => 'anomaly.module.installer::breadcrumb.installer',
+        'handler'     => 'Anomaly\InstallerModule\Form\InstallerFormHandler@handle'
     ];
 
 }
