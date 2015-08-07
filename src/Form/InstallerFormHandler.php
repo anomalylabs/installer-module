@@ -21,6 +21,10 @@ class InstallerFormHandler
      */
     public function handle(InstallerFormBuilder $builder, InstallerModuleInstaller $moduleInstaller)
     {
+        if ($builder->hasFormErrors()) {
+            return;
+        }
+
         $moduleInstaller->install($_POST);
 
         $builder->setFormResponse(redirect('installer/install'));

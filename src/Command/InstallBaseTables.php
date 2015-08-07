@@ -22,7 +22,10 @@ class InstallBaseTables implements SelfHandling
      */
     public function handle(Kernel $kernel)
     {
-        $kernel->call('migrate', ['--force' => true, '--addon' => 'anomaly.module.installer']);
+        $kernel->call(
+            'migrate',
+            ['--force' => true, '--no-addons' => true, '--path' => 'vendor/anomaly/streams-platform/migrations']
+        );
         $kernel->call('migrate', ['--force' => true, '--no-addons' => true]);
     }
 }

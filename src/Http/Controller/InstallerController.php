@@ -157,7 +157,7 @@ class InstallerController extends PublicController
     public function extension(ExtensionCollection $extensions, ExtensionManager $manager, $extension)
     {
         set_time_limit(5000);
-        
+
         $manager->install($extensions->get($extension));
 
         return response()->json(true);
