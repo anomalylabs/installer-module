@@ -30,7 +30,7 @@ class AnomalyModuleInstallerCreateAssignmentsTables extends Migration
                 function (Blueprint $table) {
 
                     $table->increments('id');
-                    $table->integer('sort_order');
+                    $table->integer('sort_order')->nullable();
                     $table->integer('stream_id');
                     $table->integer('field_id');
                     $table->text('config');
