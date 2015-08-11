@@ -39,26 +39,14 @@ class InstallerModuleInstaller
                     'APPLICATION_NAME'      => $parameters['application_name'],
                     'APPLICATION_DOMAIN'    => $parameters['application_domain'],
                     'APPLICATION_REFERENCE' => $parameters['application_reference'],
-                    'CACHE_DRIVER'          => 'file', // @todo - add fields for this?
-                    'SESSION_DRIVER'        => 'file', // @todo - add fields for this?
                     'ADMIN_THEME'           => config('streams::themes.admin.active'),
                     'STANDARD_THEME'        => config('streams::themes.standard.active'),
                     'LOCALE'                => $parameters['application_locale'],
                     'TIMEZONE'              => $parameters['application_timezone'],
-                    'MAIL_DRIVER'           => 'mail',
-                    'SMTP_HOST'             => null,
-                    'SMTP_PORT'             => null,
-                    'MAIL_FROM_ADDRESS'     => null,
-                    'MAIL_FROM_NAME'        => null,
-                    'SMTP_USERNAME'         => null,
-                    'SMTP_PASSWORD'         => null,
-                    'MAIL_DEBUG'            => false,
                     'ADMIN_USERNAME'        => $parameters['admin_username'],
                     'ADMIN_EMAIL'           => $parameters['admin_email'],
                     'ADMIN_PASSWORD'        => $parameters['admin_password'],
-                    'SITE_ENABLED'          => true,
-                    'IP_WHITELIST'          => null,
-                    'FORCE_HTTPS'           => 'none'
+                    'SITE_ENABLED'          => true
                 ]
             )
         );
