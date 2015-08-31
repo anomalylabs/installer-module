@@ -37,7 +37,5 @@ class InstallerModuleServiceProvider extends AddonServiceProvider
     {
         $this->dispatch(new CheckPhpExtensions());
         $this->dispatch(new CheckDirectoryPermissions());
-
-        parent::register();
     }
 }
