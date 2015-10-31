@@ -1,8 +1,7 @@
 <?php namespace Anomaly\InstallerModule\Command;
 
-use Anomaly\UsersModule\Activation\ActivationManager;
 use Anomaly\UsersModule\User\Contract\UserRepositoryInterface;
-use Anomaly\UsersModule\User\UserManager;
+use Anomaly\UsersModule\User\UserActivator;
 use Illuminate\Contracts\Bus\SelfHandling;
 
 /**
@@ -16,7 +15,13 @@ use Illuminate\Contracts\Bus\SelfHandling;
 class CreateAdminUser implements SelfHandling
 {
 
-    public function handle(UserRepositoryInterface $users, ActivationManager $activations)
+    /**
+     * Handle the command.
+     *
+     * @param UserRepositoryInterface $users
+     * @param UserActivator           $activator
+     */
+    public function handle(UserRepositoryInterface $users, UserActivator $activator)
     {
         $credentials = [
             'display_name' => 'Administrator',
@@ -32,9 +37,9 @@ class CreateAdminUser implements SelfHandling
 
             $users->save($user);
         } else {
-            $user = $users->create($credentials, true);
+            $user = $users->create($credentials);
         }
 
-        $activations->force($user);
+        $activator->force($user);
     }
 }
