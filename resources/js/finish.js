@@ -21,9 +21,11 @@ var install = function () {
 
                 progress.width('100%');
 
-                label.text('Almost done...');
+                label.text('Ready.');
 
-                window.location = '/installer/finish'
+                setTimeout(function () {
+                    $('#finished').removeClass('hidden');
+                }, 1000);
             }
         },
         error: function () {

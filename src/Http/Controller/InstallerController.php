@@ -1,14 +1,19 @@
 <?php namespace Anomaly\InstallerModule\Http\Controller;
 
-use Anomaly\InstallerModule\Form\InstallerFormBuilder;
-use Anomaly\Streams\Platform\Addon\Extension\Extension;
-use Anomaly\Streams\Platform\Addon\Extension\ExtensionCollection;
-use Anomaly\Streams\Platform\Addon\Extension\ExtensionManager;
-use Anomaly\Streams\Platform\Addon\Module\Module;
-use Anomaly\Streams\Platform\Addon\Module\ModuleCollection;
-use Anomaly\Streams\Platform\Addon\Module\ModuleManager;
+use Anomaly\InstallerModule\Installer\Command\GetInstallers;
+use Anomaly\InstallerModule\Installer\Form\InstallerFormBuilder;
+use Anomaly\Streams\Platform\Application\Command\ReloadEnvironmentFile;
 use Anomaly\Streams\Platform\Http\Controller\PublicController;
-use Illuminate\Contracts\Console\Kernel;
+use Anomaly\Streams\Platform\Installer\Console\Command\ConfigureDatabase;
+use Anomaly\Streams\Platform\Installer\Console\Command\LocateApplication;
+use Anomaly\Streams\Platform\Installer\Console\Command\SetDatabasePrefix;
+use Anomaly\Streams\Platform\Installer\Event\StreamsHasInstalled;
+use Anomaly\Streams\Platform\Installer\Installer;
+use Anomaly\Streams\Platform\Installer\InstallerCollection;
+use App\Console\Kernel;
+use Illuminate\Contracts\Cache\Repository;
+use Illuminate\Contracts\Container\Container;
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
@@ -38,129 +43,75 @@ class InstallerController extends PublicController
     /**
      * Run installation.
      *
+     * @param Kernel $console
      * @return \Illuminate\View\View
      */
-    public function install(ModuleCollection $modules, ExtensionCollection $extensions)
+    public function install(Kernel $console)
     {
-        $steps = [
-            url('installer/command/ClearCache')        => trans('anomaly.module.installer::install.clear_cache'),
-            url('installer/command/InstallBaseTables') => trans('anomaly.module.installer::install.base_tables'),
-            url('installer/command/CreateApplication') => trans('anomaly.module.installer::install.application')
-        ];
+        $this->dispatch(new ReloadEnvironmentFile());
+        $this->dispatch(new ConfigureDatabase());
+        $this->dispatch(new SetDatabasePrefix());
+        $this->dispatch(new LocateApplication());
 
-        $modules->forget('anomaly.module.installer');
+        $installers = $this->dispatch(new GetInstallers());
 
-        /* @var Module $module */
-        foreach ($modules as $module) {
-            $steps[url('installer/module/' . $module->getNamespace())] = trans(
-                'anomaly.module.installer::install.module',
-                ['name' => strtolower(trans($module->getName()))]
-            );
-        }
+        return view('anomaly.module.installer::install', compact('installers'));
+    }
 
-        if (env('INSTALL_SEEDS', false)) {
-            foreach ($modules as $module) {
-                $steps[url('installer/seed/' . $module->getNamespace())] = trans(
-                    'anomaly.module.installer::install.seed',
-                    ['name' => strtolower(trans($module->getName()))]
-                );
-            }
-        }
+    /**
+     * Finish installation.
+     *
+     * @param Kernel $console
+     * @return \Illuminate\View\View
+     */
+    public function finish(Dispatcher $events)
+    {
+        $installers = new InstallerCollection();
 
-        /* @var Extension $extension */
-        foreach ($extensions as $extension) {
-            $steps[url('installer/extension/' . $extension->getNamespace())] = trans(
-                'anomaly.module.installer::install.extension',
-                ['name' => strtolower(trans($extension->getName()))]
-            );
-        }
+        $events->fire(new StreamsHasInstalled($installers));
 
-        $steps = array_merge(
-            $steps,
-            [
-                url('installer/command/UpdateEnvironmentFile') => trans(
-                    'anomaly.module.installer::install.update_environment_file'
-                ),
-                url('installer/command/CreateAdminUser')       => trans(
-                    'anomaly.module.installer::install.create_admin_user'
-                ),
-                url('installer/command/CreateAdminRole')       => trans(
-                    'anomaly.module.installer::install.create_admin_role'
-                ),
-                url('installer/command/CreateUserRole')        => trans(
-                    'anomaly.module.installer::install.create_user_role'
-                )
-            ]
-        );
-
-        return view('anomaly.module.installer::install', compact('steps'));
+        return view('anomaly.module.installer::finish', compact('installers'));
     }
 
     /**
      * Run an installation command.
      *
-     * @param $command
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param Container  $container
+     * @param            $key
+     * @return bool
      */
-    public function command($command)
+    public function run(Container $container, $key)
     {
-        set_time_limit(5000);
+        $installers = $this->dispatch(new GetInstallers());
 
-        $command = '\Anomaly\InstallerModule\Command\\' . $command;
+        /* @var Installer $installer */
+        $installer = $installers->get($key);
 
-        $this->dispatch(new $command);
+        $container->call($installer->getTask());
 
-        return response()->json(true);
+        return 'true';
     }
 
     /**
-     * Install a module.
+     * Run an installation command.
      *
-     * @param ModuleCollection $modules
-     * @param ModuleManager    $manager
-     * @param                  $module
+     * @param Container  $container
+     * @param Dispatcher $events
+     * @param            $key
+     * @return bool
      */
-    public function module(ModuleCollection $modules, ModuleManager $manager, $module)
+    public function seed(Container $container, Dispatcher $events, $key)
     {
-        set_time_limit(5000);
+        $installers = new InstallerCollection();
 
-        $manager->install($modules->get($module));
+        $events->fire(new StreamsHasInstalled($installers));
 
-        return response()->json(true);
-    }
+        /* @var Installer $installer */
+        $installer = $installers->get($key);
 
-    /**
-     * Seed a module.
-     *
-     * @param ModuleCollection $modules
-     * @param ModuleManager    $manager
-     * @param                  $module
-     */
-    public function seed(ModuleCollection $modules, Kernel $console, $module)
-    {
-        set_time_limit(5000);
+        $container->call($installer->getTask());
 
-        $module = $modules->get($module);
-
-        $console->call('db:seed', ['--force' => true, '--addon' => $module->getNamespace()]);
-
-        return response()->json(true);
-    }
-
-    /**
-     * Install an extension.
-     *
-     * @param ExtensionCollection $extensions
-     * @param ExtensionManager    $manager
-     * @param                     $extension
-     */
-    public function extension(ExtensionCollection $extensions, ExtensionManager $manager, $extension)
-    {
-        set_time_limit(5000);
-
-        $manager->install($extensions->get($extension));
-
-        return response()->json(true);
+        return 'true';
     }
 }
  

@@ -13,4 +13,10 @@ use Anomaly\Streams\Platform\Addon\Module\Module;
 class InstallerModule extends Module
 {
 
+    /**
+     * The navigation flag.
+     *
+     * @var bool
+     */
+    protected $navigation = false;
 }

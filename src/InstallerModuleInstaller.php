@@ -1,6 +1,9 @@
 <?php namespace Anomaly\InstallerModule;
 
 use Anomaly\Streams\Platform\Application\Command\GenerateEnvironmentFile;
+use Anomaly\Streams\Platform\Application\Command\WriteEnvironmentFile;
+use Anomaly\Streams\Platform\Installer\Console\Command\SetStreamsData;
+use Anomaly\Streams\Platform\Support\Collection;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
@@ -24,33 +27,26 @@ class InstallerModuleInstaller
      */
     public function install(array $parameters)
     {
-        $this->dispatch(
-            new GenerateEnvironmentFile(
-                [
-                    'INSTALLED'             => 'false',
-                    'APP_DEBUG'             => 'false',
-                    'APP_ENV'               => 'local',
-                    'APP_KEY'               => str_random(32),
-                    'DB_DRIVER'             => $parameters['database_driver'],
-                    'DB_HOST'               => $parameters['database_host'],
-                    'DB_DATABASE'           => $parameters['database_name'],
-                    'DB_USERNAME'           => $parameters['database_username'],
-                    'DB_PASSWORD'           => $parameters['database_password'],
-                    'APPLICATION_NAME'      => $parameters['application_name'],
-                    'APPLICATION_DOMAIN'    => $parameters['application_domain'],
-                    'APPLICATION_REFERENCE' => $parameters['application_reference'],
-                    'ADMIN_THEME'           => config('streams::themes.admin.active'),
-                    'STANDARD_THEME'        => config('streams::themes.standard.active'),
-                    'LOCALE'                => $parameters['application_locale'],
-                    'TIMEZONE'              => $parameters['application_timezone'],
-                    'ADMIN_USERNAME'        => $parameters['admin_username'],
-                    'ADMIN_EMAIL'           => $parameters['admin_email'],
-                    'ADMIN_PASSWORD'        => $parameters['admin_password'],
-                    'SITE_ENABLED'          => true
-                ]
-            )
-        );
+        $data = new Collection();
 
-        return true;
+        $this->dispatch(new SetStreamsData($data));
+
+        $data->put('DB_DRIVER', $parameters['database_driver']);
+        $data->put('DB_HOST', $parameters['database_host']);
+        $data->put('DB_DATABASE', $parameters['database_name']);
+        $data->put('DB_USERNAME', $parameters['database_username']);
+        $data->put('DB_PASSWORD', $parameters['database_password']);
+        $data->put('APPLICATION_NAME', $parameters['application_name']);
+        $data->put('APPLICATION_DOMAIN', $parameters['application_domain']);
+        $data->put('APPLICATION_REFERENCE', $parameters['application_reference']);
+        $data->put('ADMIN_THEME', config('streams::themes.admin.active'));
+        $data->put('STANDARD_THEME', config('streams::themes.standard.active'));
+        $data->put('LOCALE', $parameters['application_locale']);
+        $data->put('TIMEZONE', $parameters['application_timezone']);
+        $data->put('ADMIN_USERNAME', $parameters['admin_username']);
+        $data->put('ADMIN_EMAIL', $parameters['admin_email']);
+        $data->put('ADMIN_PASSWORD', $parameters['admin_password']);
+
+        $this->dispatch(new WriteEnvironmentFile($data->all()));
     }
 }

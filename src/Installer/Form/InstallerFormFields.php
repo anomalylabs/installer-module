@@ -1,4 +1,4 @@
-<?php namespace Anomaly\InstallerModule\Form;
+<?php namespace Anomaly\InstallerModule\Installer\Form;
 
 /**
  * Class InstallerFormFields
@@ -6,7 +6,7 @@
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
- * @package       Anomaly\InstallerModule\Form
+ * @package       Anomaly\InstallerModule\Installer\Form
  */
 class InstallerFormFields
 {
@@ -28,9 +28,7 @@ class InstallerFormFields
                     'instructions' => 'anomaly.module.installer::field.license.instructions',
                     'wrapper_view' => 'anomaly.module.installer::field_type/license/wrapper',
                     'type'         => 'anomaly.field_type.boolean',
-                    'rules'        => [
-                        'required',
-                    ],
+                    'required'     => true,
                     'config'       => [
                         'label'   => 'anomaly.module.installer::field.license.agree',
                         'type'    => 'checkbox',
@@ -49,13 +47,13 @@ class InstallerFormFields
                     'instructions' => 'anomaly.module.installer::field.database_driver.instructions',
                     'type'         => 'anomaly.field_type.select',
                     'value'        => 'mysql',
+                    'required'     => true,
                     'rules'        => [
-                        'required',
                         'valid_database',
                     ],
                     'validators'   => [
                         'valid_database' => [
-                            'handler' => 'Anomaly\InstallerModule\Form\Validation\ValidDatabase@validate',
+                            'handler' => 'Anomaly\InstallerModule\Installer\Form\Validation\ValidDatabase@validate',
                             'message' => 'anomaly.module.installer::message.database_error'
                         ]
                     ],
@@ -74,18 +72,14 @@ class InstallerFormFields
                     'instructions' => 'anomaly.module.installer::field.database_host.instructions',
                     'type'         => 'anomaly.field_type.text',
                     'value'        => 'localhost',
-                    'rules'        => [
-                        'required',
-                    ],
+                    'required'     => true
                 ],
                 'database_name'         => [
                     'label'        => 'anomaly.module.installer::field.database_name.label',
                     'placeholder'  => 'anomaly.module.installer::field.database_name.placeholder',
                     'instructions' => 'anomaly.module.installer::field.database_name.instructions',
                     'type'         => 'anomaly.field_type.text',
-                    'rules'        => [
-                        'required',
-                    ],
+                    'required'     => true
                 ],
                 'database_username'     => [
                     'label'        => 'anomaly.module.installer::field.database_username.label',
@@ -93,9 +87,7 @@ class InstallerFormFields
                     'instructions' => 'anomaly.module.installer::field.database_username.instructions',
                     'type'         => 'anomaly.field_type.text',
                     'value'        => 'root',
-                    'rules'        => [
-                        'required',
-                    ],
+                    'required'     => true
                 ],
                 'database_password'     => [
                     'label'        => 'anomaly.module.installer::field.database_password.label',
@@ -115,27 +107,21 @@ class InstallerFormFields
                     'instructions' => 'anomaly.module.installer::field.admin_username.instructions',
                     'type'         => 'anomaly.field_type.text',
                     'value'        => 'admin',
-                    'rules'        => [
-                        'required',
-                    ],
+                    'required'     => true
                 ],
                 'admin_email'           => [
                     'label'        => 'anomaly.module.installer::field.admin_email.label',
                     'placeholder'  => 'anomaly.module.installer::field.admin_email.placeholder',
                     'instructions' => 'anomaly.module.installer::field.admin_email.instructions',
                     'type'         => 'anomaly.field_type.email',
-                    'rules'        => [
-                        'required',
-                    ],
+                    'required'     => true
                 ],
                 'admin_password'        => [
                     'label'        => 'anomaly.module.installer::field.admin_password.label',
                     'placeholder'  => 'anomaly.module.installer::field.admin_password.placeholder',
                     'instructions' => 'anomaly.module.installer::field.admin_password.instructions',
                     'type'         => 'anomaly.field_type.text',
-                    'rules'        => [
-                        'required',
-                    ],
+                    'required'     => true,
                     'config'       => [
                         'type' => 'password',
                     ],
@@ -149,9 +135,7 @@ class InstallerFormFields
                     'instructions' => 'anomaly.module.installer::field.application_name.instructions',
                     'type'         => 'anomaly.field_type.text',
                     'value'        => 'Default',
-                    'rules'        => [
-                        'required',
-                    ],
+                    'required'     => true
                 ],
                 'application_reference' => [
                     'label'        => 'anomaly.module.installer::field.application_reference.label',
@@ -159,9 +143,7 @@ class InstallerFormFields
                     'instructions' => 'anomaly.module.installer::field.application_reference.instructions',
                     'type'         => 'anomaly.field_type.slug',
                     'value'        => 'default',
-                    'rules'        => [
-                        'required',
-                    ],
+                    'required'     => true
                 ],
                 'application_domain'    => [
                     'label'        => 'anomaly.module.installer::field.application_domain.label',
@@ -169,18 +151,14 @@ class InstallerFormFields
                     'instructions' => 'anomaly.module.installer::field.application_domain.instructions',
                     'type'         => 'anomaly.field_type.text',
                     'value'        => str_replace(['http://', 'https://'], '', app('request')->root()),
-                    'rules'        => [
-                        'required',
-                    ],
+                    'required'     => true
                 ],
                 'application_locale'    => [
                     'label'        => 'anomaly.module.installer::field.application_locale.label',
                     'instructions' => 'anomaly.module.installer::field.application_locale.instructions',
                     'type'         => 'anomaly.field_type.language',
                     'value'        => 'en',
-                    'rules'        => [
-                        'required',
-                    ],
+                    'required'     => true,
                     'config'       => [
                         'supported_locales' => true
                     ],
@@ -190,9 +168,7 @@ class InstallerFormFields
                     'instructions' => 'anomaly.module.installer::field.application_timezone.instructions',
                     'type'         => 'anomaly.field_type.select',
                     'value'        => 'UTC',
-                    'rules'        => [
-                        'required',
-                    ],
+                    'required'     => true,
                     'config'       => [
                         'options' => function () {
 

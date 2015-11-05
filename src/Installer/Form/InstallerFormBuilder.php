@@ -1,4 +1,4 @@
-<?php namespace Anomaly\InstallerModule\Form;
+<?php namespace Anomaly\InstallerModule\Installer\Form;
 
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 
@@ -8,7 +8,7 @@ use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
- * @package       Anomaly\InstallerModule\Form
+ * @package       Anomaly\InstallerModule\Installer\Form
  */
 class InstallerFormBuilder extends FormBuilder
 {
@@ -29,8 +29,7 @@ class InstallerFormBuilder extends FormBuilder
      */
     protected $options = [
         'layout_view' => 'anomaly.module.installer::layouts/installer',
-        'breadcrumb'  => 'anomaly.module.installer::breadcrumb.installer',
-        'handler'     => 'Anomaly\InstallerModule\Form\InstallerFormHandler@handle'
+        'breadcrumb'  => 'anomaly.module.installer::breadcrumb.installer'
     ];
 
 }
