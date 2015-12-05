@@ -14,13 +14,6 @@ class LicenseCheckboxesFieldType extends CheckboxesFieldType
 {
 
     /**
-     * The input view.
-     *
-     * @var string
-     */
-    protected $inputView = 'anomaly.module.installer::addon/field_type/license/input';
-
-    /**
      * The wrapper view.
      *
      * @var string
