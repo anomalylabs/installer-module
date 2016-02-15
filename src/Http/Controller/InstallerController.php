@@ -10,7 +10,6 @@ use Anomaly\Streams\Platform\Installer\Console\Command\SetDatabasePrefix;
 use Anomaly\Streams\Platform\Installer\Event\StreamsHasInstalled;
 use Anomaly\Streams\Platform\Installer\Installer;
 use Anomaly\Streams\Platform\Installer\InstallerCollection;
-use App\Console\Kernel;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Events\Dispatcher;
@@ -43,34 +42,37 @@ class InstallerController extends PublicController
     /**
      * Run installation.
      *
-     * @param Kernel $console
      * @return \Illuminate\View\View
      */
-    public function install(Kernel $console)
+    public function install()
     {
         $this->dispatch(new ReloadEnvironmentFile());
         $this->dispatch(new ConfigureDatabase());
         $this->dispatch(new SetDatabasePrefix());
         $this->dispatch(new LocateApplication());
 
+        $action = 'install';
+
         $installers = $this->dispatch(new GetInstallers());
 
-        return view('anomaly.module.installer::install', compact('installers'));
+        return view('anomaly.module.installer::process', compact('action', 'installers'));
     }
 
     /**
      * Finish installation.
      *
-     * @param Kernel $console
+     * @param Dispatcher $events
      * @return \Illuminate\View\View
      */
     public function finish(Dispatcher $events)
     {
+        $action = 'finish';
+
         $installers = new InstallerCollection();
 
         $events->fire(new StreamsHasInstalled($installers));
 
-        return view('anomaly.module.installer::finish', compact('installers'));
+        return view('anomaly.module.installer::process', compact('action', 'installers'));
     }
 
     /**

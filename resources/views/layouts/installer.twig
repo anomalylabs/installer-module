@@ -17,14 +17,19 @@
 
 <body id="installer">
 
-<header id="header">
-    {{ image(config_get('anomaly.theme.anomaly::variables.icon')) }} {{ config_get('streams::distribution.name') }}
-</header>
-
-<div id="content" class="container">
-    {% include "theme::partials/messages" %}
-    {% block content %}{% endblock %}
+<div class="logo">
+    {{ img('theme::img/logo-dark-transparent.png') }}
 </div>
+
+<main id="main">
+    <div class="container">
+
+        {% include "theme::partials/messages" %}
+
+        {% block content %}{% endblock %}
+
+    </div>
+</main>
 
 {% include "theme::partials/js" %}
 

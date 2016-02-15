@@ -1,7 +1,7 @@
 var install = function () {
 
     var step = $('body').find('[data-step]').first();
-    var progress = $('.progress-bar');
+    var progress = $('.progress');
     var label = $('#label');
 
     label.text(step.data('step'));
@@ -14,12 +14,12 @@ var install = function () {
 
             if ($('body').find('[data-step]').length) {
 
-                progress.width(step.data('progress') + '%');
+                progress.attr('value', step.data('progress'));
 
                 install();
             } else {
 
-                progress.width('100%');
+                progress.attr('value', '100');
 
                 label.text('Almost done...');
 
@@ -27,7 +27,7 @@ var install = function () {
             }
         },
         error: function () {
-            progress.addClass('progress-bar-danger');
+            progress.addClass('progress-danger');
             label.addClass('text-danger').text('There was an error. Please check your error logs.');
         }
     });

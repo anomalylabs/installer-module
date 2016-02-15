@@ -3,6 +3,7 @@
 return [
     'license'               => [
         'label'        => 'Do you agree to the terms of this license and the licenses of all contained add-ons?',
+        'required'     => 'You must agree with the provided license(s) before proceeding.',
         'instructions' => 'Please note all addons are licensed separately.',
         'agree'        => 'Yes, I agree with these terms.'
     ],
