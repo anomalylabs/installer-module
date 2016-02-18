@@ -81,7 +81,7 @@ class InstallerFormFields
                     'label'        => 'anomaly.module.installer::field.database_name.label',
                     'placeholder'  => 'anomaly.module.installer::field.database_name.placeholder',
                     'instructions' => 'anomaly.module.installer::field.database_name.instructions',
-                    'value'        => env('DB_DATABASE', snake_case(config('streams::distribution.name'))),
+                    'value'        => env('DB_DATABASE', snake_case(strtolower(config('streams::distribution.name')))),
                     'type'         => 'anomaly.field_type.text',
                     'required'     => true
                 ],
