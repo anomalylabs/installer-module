@@ -23,7 +23,7 @@ var install = function () {
 
                 label.text('Almost done...');
 
-                window.location = '/installer/finish'
+                window.location = APPLICATION_URL + '/installer/finish'
             }
         },
         error: function () {
