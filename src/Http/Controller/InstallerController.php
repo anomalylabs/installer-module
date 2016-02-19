@@ -1,6 +1,7 @@
 <?php namespace Anomaly\InstallerModule\Http\Controller;
 
 use Anomaly\InstallerModule\Installer\Command\GetInstallers;
+use Anomaly\InstallerModule\Installer\Command\GetSeeders;
 use Anomaly\InstallerModule\Installer\Form\InstallerFormBuilder;
 use Anomaly\Streams\Platform\Application\Command\ReloadEnvironmentFile;
 use Anomaly\Streams\Platform\Http\Controller\PublicController;
@@ -68,7 +69,7 @@ class InstallerController extends PublicController
     {
         $action = 'finish';
 
-        $installers = new InstallerCollection();
+        $installers = $this->dispatch(new GetSeeders());
 
         $events->fire(new StreamsHasInstalled($installers));
 
@@ -104,7 +105,7 @@ class InstallerController extends PublicController
      */
     public function seed(Container $container, Dispatcher $events, $key)
     {
-        $installers = new InstallerCollection();
+        $installers = $this->dispatch(new GetSeeders());
 
         $events->fire(new StreamsHasInstalled($installers));
 
