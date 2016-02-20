@@ -10,8 +10,9 @@ use Anomaly\Streams\Platform\Installer\Console\Command\LocateApplication;
 use Anomaly\Streams\Platform\Installer\Console\Command\SetDatabasePrefix;
 use Anomaly\Streams\Platform\Installer\Event\StreamsHasInstalled;
 use Anomaly\Streams\Platform\Installer\Installer;
-use Anomaly\Streams\Platform\Installer\InstallerCollection;
+use Illuminate\Cache\CacheManager;
 use Illuminate\Contracts\Cache\Repository;
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -43,10 +44,13 @@ class InstallerController extends PublicController
     /**
      * Run installation.
      *
+     * @param CacheManager $cache
      * @return \Illuminate\View\View
      */
-    public function install()
+    public function install(CacheManager $cache)
     {
+        $cache->store()->flush();
+
         $this->dispatch(new ReloadEnvironmentFile());
         $this->dispatch(new ConfigureDatabase());
         $this->dispatch(new SetDatabasePrefix());
@@ -62,11 +66,14 @@ class InstallerController extends PublicController
     /**
      * Finish installation.
      *
-     * @param Dispatcher $events
+     * @param Dispatcher   $events
+     * @param CacheManager $cache
      * @return \Illuminate\View\View
      */
-    public function finish(Dispatcher $events)
+    public function finish(Dispatcher $events, CacheManager $cache)
     {
+        $cache->store()->flush();
+
         $action = 'finish';
 
         $installers = $this->dispatch(new GetSeeders());
