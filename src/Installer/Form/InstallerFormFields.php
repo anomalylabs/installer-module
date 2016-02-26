@@ -159,7 +159,10 @@ class InstallerFormFields
                     'placeholder'  => 'anomaly.module.installer::field.application_domain.placeholder',
                     'instructions' => 'anomaly.module.installer::field.application_domain.instructions',
                     'type'         => 'anomaly.field_type.text',
-                    'value'        => env('LOCALE', str_replace(['http://', 'https://'], '', app('request')->root())),
+                    'value'        => env(
+                        'APPLICATION_DOMAIN',
+                        str_replace(['http://', 'https://'], '', app('request')->root())
+                    ),
                     'required'     => true
                 ],
                 'application_locale'    => [
