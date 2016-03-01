@@ -1,14 +1,14 @@
-<?php namespace Anomaly\InstallerModule\Form;
+<?php namespace Anomaly\InstallerModule\Installer\Form;
 
 use Anomaly\InstallerModule\InstallerModuleInstaller;
 
 /**
  * Class InstallerFormHandler
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
- * @package       Anomaly\InstallerModule\Form
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @package       Anomaly\InstallerModule\Installer\Form
  */
 class InstallerFormHandler
 {
@@ -21,6 +21,10 @@ class InstallerFormHandler
      */
     public function handle(InstallerFormBuilder $builder, InstallerModuleInstaller $moduleInstaller)
     {
+        if ($builder->hasFormErrors()) {
+            return;
+        }
+
         $moduleInstaller->install($_POST);
 
         $builder->setFormResponse(redirect('installer/install'));

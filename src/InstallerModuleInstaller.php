@@ -1,60 +1,23 @@
 <?php namespace Anomaly\InstallerModule;
 
-use Anomaly\InstallerModule\Command\SetupApplication;
-use Anomaly\Streams\Platform\Application\ApplicationModel;
 use Anomaly\Streams\Platform\Application\Command\GenerateEnvironmentFile;
-use Anomaly\Streams\Platform\Stream\Command\CreateStreamsTables;
-use Anomaly\UsersModule\Role\RoleManager;
-use Anomaly\UsersModule\User\UserManager;
-use Illuminate\Foundation\Bus\DispatchesCommands;
+use Anomaly\Streams\Platform\Application\Command\WriteEnvironmentFile;
+use Anomaly\Streams\Platform\Installer\Console\Command\SetStreamsData;
+use Anomaly\Streams\Platform\Support\Collection;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class InstallerModuleInstaller
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\InstallerModule
  */
 class InstallerModuleInstaller
 {
 
-    use DispatchesCommands;
-
-    /**
-     * The role manager.
-     *
-     * @var RoleManager
-     */
-    protected $roles;
-
-    /**
-     * The user manager.
-     *
-     * @var UserManager
-     */
-    protected $users;
-
-    /**
-     * The application model.
-     *
-     * @var ApplicationModel
-     */
-    protected $applications;
-
-    /**
-     * Create a new InstallerModuleInstaller instance.
-     *
-     * @param RoleManager      $roles
-     * @param UserManager      $users
-     * @param ApplicationModel $applications
-     */
-    function __construct(RoleManager $roles, UserManager $users, ApplicationModel $applications)
-    {
-        $this->roles        = $roles;
-        $this->users        = $users;
-        $this->applications = $applications;
-    }
+    use DispatchesJobs;
 
     /**
      * Install the system.
@@ -64,72 +27,26 @@ class InstallerModuleInstaller
      */
     public function install(array $parameters)
     {
-        $this->dispatch(
-            new GenerateEnvironmentFile(
-                [
-                    'INSTALLED'             => 'false',
-                    'APP_DEBUG'             => 'false',
-                    'APP_ENV'               => 'local',
-                    'APP_KEY'               => str_random(32),
-                    'DB_DRIVER'             => $parameters['database_driver'],
-                    'DB_HOST'               => $parameters['database_host'],
-                    'DB_DATABASE'           => $parameters['database_name'],
-                    'DB_USERNAME'           => $parameters['database_username'],
-                    'DB_PASSWORD'           => $parameters['database_password'],
-                    'APPLICATION_NAME'      => $parameters['application_name'],
-                    'APPLICATION_DOMAIN'    => $parameters['application_domain'],
-                    'APPLICATION_REFERENCE' => $parameters['application_reference'],
-                    'CACHE_DRIVER'          => 'file', // @todo - add fields for this?
-                    'SESSION_DRIVER'        => 'file', // @todo - add fields for this?
-                    'ADMIN_THEME'           => config('streams::themes.active.admin'),
-                    'STANDARD_THEME'        => config('streams::themes.active.standard'),
-                    'LOCALE'                => $parameters['application_locale'],
-                    'TIMEZONE'              => $parameters['application_timezone'],
-                    'MAIL_DRIVER'           => 'mail',
-                    'SMTP_HOST'             => null,
-                    'SMTP_PORT'             => null,
-                    'MAIL_FROM_ADDRESS'     => null,
-                    'MAIL_FROM_NAME'        => null,
-                    'SMTP_USERNAME'         => null,
-                    'SMTP_PASSWORD'         => null,
-                    'MAIL_DEBUG'            => false,
-                    'ADMIN_USERNAME'        => $parameters['admin_username'],
-                    'ADMIN_EMAIL'           => $parameters['admin_email'],
-                    'ADMIN_PASSWORD'        => $parameters['admin_password']
-                ]
-            )
-        );
+        $data = new Collection();
 
-        /*
-        $admin = $this->roles->create(
-            [
-                'en'   => [
-                    'name' => 'Administrator'
-                ],
-                'slug' => 'admin'
-            ]
-        );
+        $this->dispatch(new SetStreamsData($data));
 
-        $this->roles->create(
-            [
-                'en'   => [
-                    'name' => 'User',
-                ],
-                'slug' => 'user'
-            ]
-        );
+        $data->put('DB_DRIVER', $parameters['database_driver']);
+        $data->put('DB_HOST', $parameters['database_host']);
+        $data->put('DB_DATABASE', $parameters['database_name']);
+        $data->put('DB_USERNAME', $parameters['database_username']);
+        $data->put('DB_PASSWORD', $parameters['database_password']);
+        $data->put('APPLICATION_NAME', $parameters['application_name']);
+        $data->put('APPLICATION_DOMAIN', $parameters['application_domain']);
+        $data->put('APPLICATION_REFERENCE', $parameters['application_reference']);
+        $data->put('ADMIN_THEME', config('streams::themes.admin'));
+        $data->put('STANDARD_THEME', config('streams::themes.standard'));
+        $data->put('LOCALE', $parameters['application_locale']);
+        $data->put('APP_TIMEZONE', $parameters['application_timezone']);
+        $data->put('ADMIN_USERNAME', $parameters['admin_username']);
+        $data->put('ADMIN_EMAIL', $parameters['admin_email']);
+        $data->put('ADMIN_PASSWORD', $parameters['admin_password']);
 
-        $this->users->attachRole($user, $admin);
-
-        $application = $this->applications->newInstance();
-
-        $application->enabled   = true;
-        $application->name      = array_get($parameters, 'application_name');
-        $application->domain    = array_get($parameters, 'application_domain');
-        $application->reference = array_get($parameters, 'application_reference');
-
-        $application->save();*/
-
-        return true;
+        $this->dispatch(new WriteEnvironmentFile($data->all()));
     }
 }

@@ -1,12 +1,12 @@
-<?php namespace Anomaly\InstallerModule\Form\Validation;
+<?php namespace Anomaly\InstallerModule\Installer\Form\Validation;
 
 /**
  * Class ValidDatabase
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
- * @package       Anomaly\InstallerModule\Form
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @package       Anomaly\InstallerModule\Installer\Form
  */
 class ValidDatabase
 {
