@@ -2,8 +2,10 @@
 
 return [
     'license'               => [
-        'label'        => 'Acceptez-vous sans conditions les termes et la licence de tous les add-ons ?',
-        'instructions' => "Remarque : tous les add-ons n'ont pas la même licence."
+        'label'        => 'Acceptez-vous les termes de la licence et de la licence des addons ?',
+        'required'     => 'Vous devez accepter les licences pour continuer.',
+        'instructions' => 'Notez que chaque addon a une licence distincte.',
+        'agree'        => 'Oui, j\'en accepte les termes.'
     ],
     'database_driver'       => [
         'label'            => 'Type de base de données',
