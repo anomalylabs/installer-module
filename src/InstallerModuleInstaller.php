@@ -41,8 +41,9 @@ class InstallerModuleInstaller
         $data->put('APPLICATION_REFERENCE', $parameters['application_reference']);
         $data->put('ADMIN_THEME', config('streams::themes.admin'));
         $data->put('STANDARD_THEME', config('streams::themes.standard'));
-        $data->put('LOCALE', $parameters['application_locale']);
+        $data->put('DEFAULT_LOCALE', $parameters['application_locale']);
         $data->put('APP_TIMEZONE', $parameters['application_timezone']);
+        $data->put('APP_URL', url($parameters['application_domain']));
         $data->put('ADMIN_USERNAME', $parameters['admin_username']);
         $data->put('ADMIN_EMAIL', $parameters['admin_email']);
         $data->put('ADMIN_PASSWORD', $parameters['admin_password']);
