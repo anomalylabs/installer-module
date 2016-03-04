@@ -1,22 +1,22 @@
-<?php namespace Anomaly\InstallerModule\Installer\Form\Validation;
+<?php namespace Anomaly\InstallerModule\Installer\Form\Validator;
 
 /**
- * Class ValidDatabase
+ * Class DatabaseValidator
  *
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\InstallerModule\Installer\Form
+ * @package       Anomaly\InstallerModule\Installer\Form\Validator
  */
-class ValidDatabase
+class DatabaseValidator
 {
 
     /**
-     * Validate the input.
+     * Handle the validation.
      *
      * @return bool
      */
-    public function validate()
+    public function handle()
     {
         $input = app('request')->all();
 

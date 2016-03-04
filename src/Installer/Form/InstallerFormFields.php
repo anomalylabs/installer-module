@@ -1,5 +1,8 @@
 <?php namespace Anomaly\InstallerModule\Installer\Form;
 
+use Anomaly\InstallerModule\Installer\Form\Validator\DatabaseValidator;
+use Anomaly\InstallerModule\Installer\Form\Validator\DomainValidator;
+
 /**
  * Class InstallerFormFields
  *
@@ -56,7 +59,7 @@ class InstallerFormFields
                     ],
                     'validators'   => [
                         'valid_database' => [
-                            'handler' => 'Anomaly\InstallerModule\Installer\Form\Validation\ValidDatabase@validate',
+                            'handler' => DatabaseValidator::class,
                             'message' => 'anomaly.module.installer::message.database_error'
                         ]
                     ],
@@ -163,7 +166,16 @@ class InstallerFormFields
                         'APPLICATION_DOMAIN',
                         str_replace(['http://', 'https://'], '', app('request')->root())
                     ),
-                    'required'     => true
+                    'required'     => true,
+                    'rules'        => [
+                        'valid_domain'
+                    ],
+                    'validators'   => [
+                        'valid_domain' => [
+                            'handler' => DomainValidator::class,
+                            'message' => 'streams::validation.invalid'
+                        ]
+                    ]
                 ],
                 'application_locale'    => [
                     'label'        => 'anomaly.module.installer::field.application_locale.label',
