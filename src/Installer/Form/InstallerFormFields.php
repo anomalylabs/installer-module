@@ -30,9 +30,6 @@ class InstallerFormFields
                     'label'        => 'anomaly.module.installer::field.license.label',
                     'instructions' => 'anomaly.module.installer::field.license.instructions',
                     'wrapper_view' => 'anomaly.module.installer::field_type/license/wrapper',
-                    'messages'     => [
-                        'required' => 'anomaly.module.installer::field.license.required'
-                    ],
                     'type'         => 'anomaly.field_type.boolean',
                     'required'     => true,
                     'config'       => [

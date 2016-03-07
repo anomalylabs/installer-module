@@ -27,6 +27,6 @@ class DomainValidator
 
         $pattern = '/^(' . implode('|', array_keys($config->get('streams::locales.supported'))) . ')(\.)./';
 
-        return $host && !preg_match($pattern, $host, $matches);
+        return !$host || !preg_match($pattern, $host, $matches);
     }
 }
