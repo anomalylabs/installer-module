@@ -1,6 +1,6 @@
 <?php namespace Anomaly\InstallerModule;
 
-use Anomaly\Streams\Platform\Application\Command\GenerateEnvironmentFile;
+use Anomaly\Streams\Platform\Application\Command\ReadEnvironmentFile;
 use Anomaly\Streams\Platform\Application\Command\WriteEnvironmentFile;
 use Anomaly\Streams\Platform\Installer\Console\Command\SetStreamsData;
 use Anomaly\Streams\Platform\Support\Collection;
@@ -27,7 +27,7 @@ class InstallerModuleInstaller
      */
     public function install(array $parameters)
     {
-        $data = new Collection();
+        $data = new Collection($this->dispatch(new ReadEnvironmentFile()));
 
         $this->dispatch(new SetStreamsData($data));
 
@@ -43,7 +43,7 @@ class InstallerModuleInstaller
         $data->put('STANDARD_THEME', config('streams::themes.standard'));
         $data->put('DEFAULT_LOCALE', $parameters['application_locale']);
         $data->put('APP_TIMEZONE', $parameters['application_timezone']);
-        $data->put('APP_URL', url($parameters['application_domain']));
+        $data->put('APP_URL', 'http://' . $parameters['application_domain']);
         $data->put('ADMIN_USERNAME', $parameters['admin_username']);
         $data->put('ADMIN_EMAIL', $parameters['admin_email']);
         $data->put('ADMIN_PASSWORD', $parameters['admin_password']);
