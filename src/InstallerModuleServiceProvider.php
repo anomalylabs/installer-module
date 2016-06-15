@@ -25,4 +25,10 @@ class InstallerModuleServiceProvider extends AddonServiceProvider
         'installer/run/{key}'  => 'Anomaly\InstallerModule\Http\Controller\InstallerController@run',
         'installer/seed/{key}' => 'Anomaly\InstallerModule\Http\Controller\InstallerController@seed'
     ];
+
+    protected $listeners = [
+        'Anomaly\Streams\Platform\Installer\Event\StreamsHasInstalled' => [
+            'Anomaly\InstallerModule\Installer\Listener\CleanUp'
+        ]
+    ];
 }
