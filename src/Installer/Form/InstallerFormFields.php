@@ -151,7 +151,8 @@ class InstallerFormFields
                     'value'        => env('APPLICATION_REFERENCE', 'default'),
                     'required'     => true,
                     'config'       => [
-                        'slugify' => 'application_name'
+                        'slugify' => 'application_name',
+                        'max'     => 15
                     ]
                 ],
                 'application_domain'    => [
