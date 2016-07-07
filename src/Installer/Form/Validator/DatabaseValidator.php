@@ -1,5 +1,7 @@
 <?php namespace Anomaly\InstallerModule\Installer\Form\Validator;
 
+use Log;
+
 /**
  * Class DatabaseValidator
  *
@@ -39,11 +41,8 @@ class DatabaseValidator
         } catch (\Exception $e) {
 
             $error = $e->getMessage();
-
-            app('session')->flash(
-                'warning',
-                [trans('module::message.database_error', compact('error'))]
-            );
+            
+            logger($error);
 
             return false;
         }
