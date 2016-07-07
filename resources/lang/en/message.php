@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'database_error' => 'There is a database configuration error.',
+    'database_error' => 'There is a database configuration error. Please check your application log.',
     'php'            => 'PHP version 5.4 or greater required.',
     'fileinfo'       => 'Fileinfo PHP Extension is required.',
     'mcrypt'         => 'MCrypt PHP Extension is required.',
