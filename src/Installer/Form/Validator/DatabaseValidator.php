@@ -1,5 +1,10 @@
 <?php namespace Anomaly\InstallerModule\Installer\Form\Validator;
 
+use Anomaly\InstallerModule\Installer\Form\InstallerFormBuilder;
+use Illuminate\Contracts\Config\Repository;
+use Illuminate\Contracts\Container\Container;
+use Illuminate\Http\Request;
+
 /**
  * Class DatabaseValidator
  *
@@ -14,13 +19,17 @@ class DatabaseValidator
     /**
      * Handle the validation.
      *
+     * @param Repository           $config
+     * @param Request              $request
+     * @param Container            $container
+     * @param InstallerFormBuilder $builder
      * @return bool
      */
-    public function handle()
+    public function handle(Repository $config, Request $request, Container $container, InstallerFormBuilder $builder)
     {
-        $input = app('request')->all();
+        $input = $request->all();
 
-        app('config')->set(
+        $config->set(
             'database.connections.install',
             [
                 'driver'    => $input['database_driver'],
@@ -35,15 +44,16 @@ class DatabaseValidator
         );
 
         try {
-            app('db')->connection('install');
+
+            $container
+                ->make('db')
+                ->connection('install');
+
         } catch (\Exception $e) {
 
             $error = $e->getMessage();
 
-            app('session')->flash(
-                'warning',
-                [trans('module::message.database_error', compact('error'))]
-            );
+            $builder->addFormError('database_driver', trans('module::message.database_error', compact('error')));
 
             return false;
         }

@@ -57,7 +57,7 @@ class InstallerFormFields
                     'validators'   => [
                         'valid_database' => [
                             'handler' => DatabaseValidator::class,
-                            'message' => 'anomaly.module.installer::message.database_error'
+                            'message' => false
                         ]
                     ],
                     'config'       => [
