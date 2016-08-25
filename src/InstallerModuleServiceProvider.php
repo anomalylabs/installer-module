@@ -8,7 +8,6 @@ use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\InstallerModule
  */
 class InstallerModuleServiceProvider extends AddonServiceProvider
 {
@@ -23,12 +22,12 @@ class InstallerModuleServiceProvider extends AddonServiceProvider
         'installer/install'    => 'Anomaly\InstallerModule\Http\Controller\InstallerController@install',
         'installer/finish'     => 'Anomaly\InstallerModule\Http\Controller\InstallerController@finish',
         'installer/run/{key}'  => 'Anomaly\InstallerModule\Http\Controller\InstallerController@run',
-        'installer/seed/{key}' => 'Anomaly\InstallerModule\Http\Controller\InstallerController@seed'
+        'installer/seed/{key}' => 'Anomaly\InstallerModule\Http\Controller\InstallerController@seed',
     ];
 
     protected $listeners = [
         'Anomaly\Streams\Platform\Installer\Event\StreamsHasInstalled' => [
-            'Anomaly\InstallerModule\Installer\Listener\CleanUp'
-        ]
+            'Anomaly\InstallerModule\Installer\Listener\CleanUp',
+        ],
     ];
 }

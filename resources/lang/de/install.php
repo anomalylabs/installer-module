@@ -11,5 +11,5 @@ return [
     'update_environment_file' => '.env Datei aktualisieren',
     'create_admin_user'       => 'Administrator Benutzer wird erstellt',
     'create_admin_role'       => 'Administrator Rolle wird erstellt',
-    'create_user_role'        => 'Benutzer Rolle wird erstellt'
+    'create_user_role'        => 'Benutzer Rolle wird erstellt',
 ];

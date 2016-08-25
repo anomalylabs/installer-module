@@ -11,5 +11,5 @@ return [
     'update_environment_file' => '更新 .env 檔',
     'create_admin_user'       => '正在建立 admin 用戶',
     'create_admin_role'       => '正在建立 admin 角色',
-    'create_user_role'        => '正在建立 user 角色'
+    'create_user_role'        => '正在建立 user 角色',
 ];

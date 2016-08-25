@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'install' => 'Installer'
+    'install' => 'Installer',
 ];

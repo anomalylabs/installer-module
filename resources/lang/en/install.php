@@ -12,5 +12,5 @@ return [
     'create_admin_user'       => 'Creating admin user',
     'create_admin_role'       => 'Creating admin role',
     'create_user_role'        => 'Creating user role',
-    'cleaning_up'             => 'Cleaning up'
+    'cleaning_up'             => 'Cleaning up',
 ];

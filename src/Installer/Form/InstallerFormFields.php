@@ -9,7 +9,6 @@ use Anomaly\InstallerModule\Installer\Form\Validator\DomainValidator;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\InstallerModule\Installer\Form
  */
 class InstallerFormFields
 {
@@ -23,7 +22,7 @@ class InstallerFormFields
     {
         $builder->setFields(
             [
-                /**
+                /*
                  * License Fields
                  */
                 'license'               => [
@@ -39,10 +38,10 @@ class InstallerFormFields
                             return (new \Michelf\Markdown())->transform(
                                 file_get_contents(app('streams.path') . '/LICENSE.md')
                             );
-                        }
+                        },
                     ],
                 ],
-                /**
+                /*
                  * Database Fields
                  */
                 'database_driver'       => [
@@ -57,8 +56,8 @@ class InstallerFormFields
                     'validators'   => [
                         'valid_database' => [
                             'handler' => DatabaseValidator::class,
-                            'message' => false
-                        ]
+                            'message' => false,
+                        ],
                     ],
                     'config'       => [
                         'options' => [
@@ -66,7 +65,7 @@ class InstallerFormFields
                             'postgres' => 'Postgres',
                             'sqlite'   => 'SQLite',
                             'sqlsrv'   => 'SQL Server',
-                        ]
+                        ],
                     ],
                 ],
                 'database_host'         => [
@@ -75,7 +74,7 @@ class InstallerFormFields
                     'instructions' => 'anomaly.module.installer::field.database_host.instructions',
                     'type'         => 'anomaly.field_type.text',
                     'value'        => 'localhost',
-                    'required'     => true
+                    'required'     => true,
                 ],
                 'database_name'         => [
                     'label'        => 'anomaly.module.installer::field.database_name.label',
@@ -83,7 +82,7 @@ class InstallerFormFields
                     'instructions' => 'anomaly.module.installer::field.database_name.instructions',
                     'value'        => env('DB_DATABASE', snake_case(strtolower(config('streams::distribution.name')))),
                     'type'         => 'anomaly.field_type.text',
-                    'required'     => true
+                    'required'     => true,
                 ],
                 'database_username'     => [
                     'label'        => 'anomaly.module.installer::field.database_username.label',
@@ -91,7 +90,7 @@ class InstallerFormFields
                     'instructions' => 'anomaly.module.installer::field.database_username.instructions',
                     'value'        => env('DB_USERNAME', 'root'),
                     'type'         => 'anomaly.field_type.text',
-                    'required'     => true
+                    'required'     => true,
                 ],
                 'database_password'     => [
                     'label'        => 'anomaly.module.installer::field.database_password.label',
@@ -103,7 +102,7 @@ class InstallerFormFields
                         'type' => 'password',
                     ],
                 ],
-                /**
+                /*
                  * Administrator Fields
                  */
                 'admin_username'        => [
@@ -112,7 +111,7 @@ class InstallerFormFields
                     'instructions' => 'anomaly.module.installer::field.admin_username.instructions',
                     'value'        => env('ADMIN_USERNAME', 'admin'),
                     'type'         => 'anomaly.field_type.text',
-                    'required'     => true
+                    'required'     => true,
                 ],
                 'admin_email'           => [
                     'label'        => 'anomaly.module.installer::field.admin_email.label',
@@ -120,7 +119,7 @@ class InstallerFormFields
                     'instructions' => 'anomaly.module.installer::field.admin_email.instructions',
                     'type'         => 'anomaly.field_type.email',
                     'value'        => env('ADMIN_EMAIL'),
-                    'required'     => true
+                    'required'     => true,
                 ],
                 'admin_password'        => [
                     'label'        => 'anomaly.module.installer::field.admin_password.label',
@@ -132,7 +131,7 @@ class InstallerFormFields
                         'type' => 'password',
                     ],
                 ],
-                /**
+                /*
                  * Application Fields
                  */
                 'application_name'      => [
@@ -141,7 +140,7 @@ class InstallerFormFields
                     'instructions' => 'anomaly.module.installer::field.application_name.instructions',
                     'type'         => 'anomaly.field_type.text',
                     'value'        => env('APPLICATION_NAME', 'Default'),
-                    'required'     => true
+                    'required'     => true,
                 ],
                 'application_reference' => [
                     'label'        => 'anomaly.module.installer::field.application_reference.label',
@@ -152,8 +151,8 @@ class InstallerFormFields
                     'required'     => true,
                     'config'       => [
                         'slugify' => 'application_name',
-                        'max'     => 15
-                    ]
+                        'max'     => 15,
+                    ],
                 ],
                 'application_domain'    => [
                     'label'        => 'anomaly.module.installer::field.application_domain.label',
@@ -166,14 +165,14 @@ class InstallerFormFields
                     ),
                     'required'     => true,
                     'rules'        => [
-                        'valid_domain'
+                        'valid_domain',
                     ],
                     'validators'   => [
                         'valid_domain' => [
                             'handler' => DomainValidator::class,
-                            'message' => 'streams::validation.invalid'
-                        ]
-                    ]
+                            'message' => 'streams::validation.invalid',
+                        ],
+                    ],
                 ],
                 'application_locale'    => [
                     'label'        => 'anomaly.module.installer::field.application_locale.label',
@@ -182,7 +181,7 @@ class InstallerFormFields
                     'value'        => env('LOCALE', 'en'),
                     'required'     => true,
                     'config'       => [
-                        'supported_locales' => true
+                        'supported_locales' => true,
                     ],
                 ],
                 'application_timezone'  => [
@@ -202,7 +201,7 @@ class InstallerFormFields
                             }
 
                             return $options;
-                        }
+                        },
                     ],
                 ],
             ]

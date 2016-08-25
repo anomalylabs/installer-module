@@ -12,7 +12,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\InstallerModule
  */
 class InstallerModuleInstaller
 {
@@ -22,7 +21,7 @@ class InstallerModuleInstaller
     /**
      * Install the system.
      *
-     * @param array $parameters
+     * @param  array $parameters
      * @return bool
      */
     public function install(array $parameters)

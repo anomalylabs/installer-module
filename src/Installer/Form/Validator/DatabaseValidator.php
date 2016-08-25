@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\InstallerModule\Installer\Form\Validator
  */
 class DatabaseValidator
 {
@@ -19,10 +18,10 @@ class DatabaseValidator
     /**
      * Handle the validation.
      *
-     * @param Repository           $config
-     * @param Request              $request
-     * @param Container            $container
-     * @param InstallerFormBuilder $builder
+     * @param  Repository           $config
+     * @param  Request              $request
+     * @param  Container            $container
+     * @param  InstallerFormBuilder $builder
      * @return bool
      */
     public function handle(Repository $config, Request $request, Container $container, InstallerFormBuilder $builder)
@@ -39,7 +38,7 @@ class DatabaseValidator
                 'password'  => $input['database_password'],
                 'charset'   => 'utf8',
                 'collation' => 'utf8_unicode_ci',
-                'prefix'    => ''
+                'prefix'    => '',
             ]
         );
 

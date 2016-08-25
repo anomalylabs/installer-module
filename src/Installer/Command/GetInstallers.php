@@ -7,7 +7,6 @@ use Anomaly\Streams\Platform\Installer\Console\Command\LoadModuleInstallers;
 use Anomaly\Streams\Platform\Installer\Installer;
 use Anomaly\Streams\Platform\Installer\InstallerCollection;
 use App\Console\Kernel;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
@@ -17,9 +16,8 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\InstallerModule\Installer\Command
  */
-class GetInstallers implements SelfHandling
+class GetInstallers
 {
 
     use DispatchesJobs;

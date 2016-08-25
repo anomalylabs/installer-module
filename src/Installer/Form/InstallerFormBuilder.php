@@ -8,7 +8,6 @@ use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\InstallerModule\Installer\Form
  */
 class InstallerFormBuilder extends FormBuilder
 {
@@ -21,8 +20,8 @@ class InstallerFormBuilder extends FormBuilder
     protected $sections = [
         'license'       => [
             'fields' => [
-                'license'
-            ]
+                'license',
+            ],
         ],
         'database'      => [
             'fields' => [
@@ -30,15 +29,15 @@ class InstallerFormBuilder extends FormBuilder
                 'database_host',
                 'database_name',
                 'database_username',
-                'database_password'
-            ]
+                'database_password',
+            ],
         ],
         'administrator' => [
             'fields' => [
                 'admin_username',
                 'admin_email',
-                'admin_password'
-            ]
+                'admin_password',
+            ],
         ],
         'application'   => [
             'fields' => [
@@ -46,9 +45,9 @@ class InstallerFormBuilder extends FormBuilder
                 'application_reference',
                 'application_domain',
                 'application_locale',
-                'application_timezone'
-            ]
-        ]
+                'application_timezone',
+            ],
+        ],
     ];
 
     /**
@@ -57,7 +56,7 @@ class InstallerFormBuilder extends FormBuilder
      * @var array
      */
     protected $actions = [
-        'install'
+        'install',
     ];
 
     /**
@@ -67,7 +66,7 @@ class InstallerFormBuilder extends FormBuilder
      */
     protected $options = [
         'layout_view' => 'anomaly.module.installer::layouts/installer',
-        'breadcrumb'  => 'anomaly.module.installer::breadcrumb.install'
+        'breadcrumb'  => 'anomaly.module.installer::breadcrumb.install',
     ];
 
 }

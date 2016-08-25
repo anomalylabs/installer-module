@@ -3,7 +3,7 @@
 return [
     'license'               => [
         'label'        => 'Sind Sie mit den Bedingungen dieser Lizenz und den Bedingungen der Lizenzen aller enthaltenen Addons einverstanden?',
-        'instructions' => 'Bitte beachten Sie, dass alle Addons eine separate Lizenz haben.'
+        'instructions' => 'Bitte beachten Sie, dass alle Addons eine separate Lizenz haben.',
     ],
     'database_driver'       => [
         'label'            => 'Treiber',

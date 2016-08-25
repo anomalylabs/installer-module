@@ -8,7 +8,6 @@ use Illuminate\Contracts\Config\Repository;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\InstallerModule\Installer\Form\Validator
  */
 class DomainValidator
 {
@@ -16,8 +15,8 @@ class DomainValidator
     /**
      * Handle the validation.
      *
-     * @param Repository $config
-     * @param            $value
+     * @param  Repository $config
+     * @param             $value
      * @return bool
      */
     public function handle(Repository $config, $value)

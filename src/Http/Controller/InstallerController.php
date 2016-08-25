@@ -23,7 +23,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\InstallerModule\Http\Controller
  */
 class InstallerController extends PublicController
 {
@@ -33,7 +32,7 @@ class InstallerController extends PublicController
     /**
      * Create a new InstallerController instance.
      *
-     * @param InstallerFormBuilder $form
+     * @param  InstallerFormBuilder                                             $form
      * @return \Illuminate\View\View|\Symfony\Component\HttpFoundation\Response
      */
     public function index(InstallerFormBuilder $form)
@@ -44,7 +43,7 @@ class InstallerController extends PublicController
     /**
      * Run installation.
      *
-     * @param CacheManager $cache
+     * @param  CacheManager          $cache
      * @return \Illuminate\View\View
      */
     public function install(CacheManager $cache)
@@ -66,8 +65,8 @@ class InstallerController extends PublicController
     /**
      * Finish installation.
      *
-     * @param Dispatcher   $events
-     * @param CacheManager $cache
+     * @param  Dispatcher            $events
+     * @param  CacheManager          $cache
      * @return \Illuminate\View\View
      */
     public function finish(Dispatcher $events, CacheManager $cache)
@@ -86,7 +85,7 @@ class InstallerController extends PublicController
     /**
      * Run an installation command.
      *
-     * @param Container  $container
+     * @param  Container $container
      * @param            $key
      * @return bool
      */
@@ -105,9 +104,9 @@ class InstallerController extends PublicController
     /**
      * Run an installation command.
      *
-     * @param Container  $container
-     * @param Dispatcher $events
-     * @param            $key
+     * @param  Container  $container
+     * @param  Dispatcher $events
+     * @param             $key
      * @return bool
      */
     public function seed(Container $container, Dispatcher $events, $key)

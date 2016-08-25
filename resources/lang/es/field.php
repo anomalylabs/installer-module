@@ -3,7 +3,7 @@
 return [
     'license'               => [
         'label'        => '¿Está de acuerdo con los términos de esta licencia y de las licencias de todos los complementos?',
-        'instructions' => 'Por favor, tenga en cuenta que todos los complementos se pueden licenciar por separado.'
+        'instructions' => 'Por favor, tenga en cuenta que todos los complementos se pueden licenciar por separado.',
     ],
     'database_driver'       => [
         'label'            => 'Driver',

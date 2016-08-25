@@ -3,7 +3,7 @@
 return [
     'license'               => [
         'label'        => '請問您同意並接受關於這個以及其他附加模組的使用條款？',
-        'instructions' => '請留意所有的附加模組都有獨立的使用條款(addons)。'
+        'instructions' => '請留意所有的附加模組都有獨立的使用條款(addons)。',
     ],
     'database_driver'       => [
         'label'            => 'Driver',

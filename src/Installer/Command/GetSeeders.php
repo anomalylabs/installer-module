@@ -4,7 +4,6 @@ use Anomaly\Streams\Platform\Installer\Console\Command\LoadExtensionSeeders;
 use Anomaly\Streams\Platform\Installer\Console\Command\LoadModuleSeeders;
 use Anomaly\Streams\Platform\Installer\Installer;
 use Anomaly\Streams\Platform\Installer\InstallerCollection;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -15,9 +14,8 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\InstallerModule\Installer\Command
  */
-class GetSeeders implements SelfHandling
+class GetSeeders
 {
 
     use DispatchesJobs;
