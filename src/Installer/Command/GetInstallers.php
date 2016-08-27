@@ -10,16 +10,8 @@ use App\Console\Kernel;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
-/**
- * Class GetInstallers
- *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
- */
 class GetInstallers
 {
-
     use DispatchesJobs;
 
     /**
@@ -33,7 +25,7 @@ class GetInstallers
 
         $this->dispatch(new LoadCoreInstallers($installers));
         $this->dispatch(new LoadApplicationInstallers($installers));
-
+        
         $this->dispatch(new LoadModuleInstallers($installers));
         $this->dispatch(new LoadExtensionInstallers($installers));
 
@@ -50,7 +42,7 @@ class GetInstallers
             new Installer(
                 'streams::installer.running_migrations',
                 function (Kernel $console) {
-                    $console->call('migrate', ['--force' => true, '--no-addons' => true]);
+                    $console->call('migrate', ['--force' => true]);
                 }
             )
         );
