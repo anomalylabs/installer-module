@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'installer' => '安裝程式'
+    'installer' => '安裝程式',
 ];
