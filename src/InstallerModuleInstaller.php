@@ -30,7 +30,7 @@ class InstallerModuleInstaller
 
         $this->dispatch(new SetStreamsData($data));
 
-        $data->put('DB_DRIVER', $parameters['database_driver']);
+        $data->put('DB_CONNECTION', $parameters['database_driver']);
         $data->put('DB_HOST', $parameters['database_host']);
         $data->put('DB_DATABASE', $parameters['database_name']);
         $data->put('DB_USERNAME', $parameters['database_username']);
