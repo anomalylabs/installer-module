@@ -34,7 +34,7 @@ class InstallerModuleInstaller
         $data->put('DB_HOST', $parameters['database_host']);
         $data->put('DB_DATABASE', $parameters['database_name']);
         $data->put('DB_USERNAME', $parameters['database_username']);
-        $data->put('DB_PASSWORD', $parameters['database_password']);
+        $data->put('DB_PASSWORD', '"' . $parameters['database_password'] . '"');
         $data->put('APPLICATION_NAME', '"' . $parameters['application_name'] . '"');
         $data->put('APPLICATION_DOMAIN', $parameters['application_domain']);
         $data->put('APPLICATION_REFERENCE', $parameters['application_reference']);
