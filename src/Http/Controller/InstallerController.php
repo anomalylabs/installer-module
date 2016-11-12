@@ -11,8 +11,6 @@ use Anomaly\Streams\Platform\Installer\Console\Command\SetDatabasePrefix;
 use Anomaly\Streams\Platform\Installer\Event\StreamsHasInstalled;
 use Anomaly\Streams\Platform\Installer\Installer;
 use Illuminate\Cache\CacheManager;
-use Illuminate\Contracts\Cache\Repository;
-use Illuminate\Contracts\Cache\Store;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -32,7 +30,7 @@ class InstallerController extends PublicController
     /**
      * Create a new InstallerController instance.
      *
-     * @param  InstallerFormBuilder                                             $form
+     * @param  InstallerFormBuilder $form
      * @return \Illuminate\View\View|\Symfony\Component\HttpFoundation\Response
      */
     public function index(InstallerFormBuilder $form)
@@ -43,7 +41,7 @@ class InstallerController extends PublicController
     /**
      * Run installation.
      *
-     * @param  CacheManager          $cache
+     * @param  CacheManager $cache
      * @return \Illuminate\View\View
      */
     public function install(CacheManager $cache)
@@ -65,8 +63,8 @@ class InstallerController extends PublicController
     /**
      * Finish installation.
      *
-     * @param  Dispatcher            $events
-     * @param  CacheManager          $cache
+     * @param  Dispatcher   $events
+     * @param  CacheManager $cache
      * @return \Illuminate\View\View
      */
     public function finish(Dispatcher $events, CacheManager $cache)
@@ -123,4 +121,3 @@ class InstallerController extends PublicController
         return 'true';
     }
 }
- 

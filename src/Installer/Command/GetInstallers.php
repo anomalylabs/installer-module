@@ -1,17 +1,24 @@
 <?php namespace Anomaly\InstallerModule\Installer\Command;
 
+use Anomaly\Streams\Platform\Console\Kernel;
 use Anomaly\Streams\Platform\Installer\Console\Command\LoadApplicationInstallers;
 use Anomaly\Streams\Platform\Installer\Console\Command\LoadCoreInstallers;
 use Anomaly\Streams\Platform\Installer\Console\Command\LoadExtensionInstallers;
 use Anomaly\Streams\Platform\Installer\Console\Command\LoadModuleInstallers;
 use Anomaly\Streams\Platform\Installer\Installer;
 use Anomaly\Streams\Platform\Installer\InstallerCollection;
-use App\Console\Kernel;
-use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
+/**
+ * Class GetInstallers
+ *
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
+ */
 class GetInstallers
 {
+
     use DispatchesJobs;
 
     /**
@@ -25,7 +32,7 @@ class GetInstallers
 
         $this->dispatch(new LoadCoreInstallers($installers));
         $this->dispatch(new LoadApplicationInstallers($installers));
-        
+
         $this->dispatch(new LoadModuleInstallers($installers));
         $this->dispatch(new LoadExtensionInstallers($installers));
 
