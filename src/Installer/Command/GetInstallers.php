@@ -1,7 +1,10 @@
 <?php namespace Anomaly\InstallerModule\Installer\Command;
 
+use Anomaly\Streams\Platform\Application\Command\ReloadEnvironmentFile;
 use Anomaly\Streams\Platform\Console\Kernel;
+use Anomaly\Streams\Platform\Installer\Console\Command\CreateEntrySearchIndexes;
 use Anomaly\Streams\Platform\Installer\Console\Command\LoadApplicationInstallers;
+use Anomaly\Streams\Platform\Installer\Console\Command\LoadBaseMigrations;
 use Anomaly\Streams\Platform\Installer\Console\Command\LoadCoreInstallers;
 use Anomaly\Streams\Platform\Installer\Console\Command\LoadExtensionInstallers;
 use Anomaly\Streams\Platform\Installer\Console\Command\LoadModuleInstallers;
@@ -38,21 +41,18 @@ class GetInstallers
 
         $installers->add(
             new Installer(
-                'Updating environment file.',
+                'streams::installer.reloading_application',
                 function (Kernel $console) {
+
                     $console->call('env:set', ['line' => 'INSTALLED=true']);
+
+                    $this->dispatch(new ReloadEnvironmentFile());
+                    $this->dispatch(new CreateEntrySearchIndexes());
                 }
             )
         );
 
-        $installers->add(
-            new Installer(
-                'streams::installer.running_migrations',
-                function (Kernel $console) {
-                    $console->call('migrate', ['--force' => true]);
-                }
-            )
-        );
+        $this->dispatch(new LoadBaseMigrations($installers));
 
         return $installers;
     }
