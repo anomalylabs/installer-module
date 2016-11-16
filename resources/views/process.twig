@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    {{ asset_add('scripts.js', 'anomaly.module.installer::js/' ~ action ~'.js') }}
+    {{ asset_add('scripts.js', 'anomaly.module.installer::js/install.js') }}
 
     <div id="progress" class="row">
         <div class="col-lg-12 col-lg-offset-6">
@@ -21,10 +21,10 @@
 
     {% for key, installer in installers %}
         <div
-                data-action="{{ url('installer/' ~ (action == 'install' ? 'run' : 'seed') ~ '/' ~ key) }}"
+                data-action="{{ url('installer/run/' ~ key) }}"
                 data-step="{{ trans(installer.getMessage()) }}"
                 data-progress="{{ ((loop.index-1)/(installers.count())*100)|round(0, 'floor') }}"
-                ></div>
+        ></div>
     {% endfor %}
 
 {% endblock %}

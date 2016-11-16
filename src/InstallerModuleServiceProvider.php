@@ -18,16 +18,9 @@ class InstallerModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $routes = [
-        'installer'            => 'Anomaly\InstallerModule\Http\Controller\InstallerController@index',
-        'installer/install'    => 'Anomaly\InstallerModule\Http\Controller\InstallerController@install',
-        'installer/finish'     => 'Anomaly\InstallerModule\Http\Controller\InstallerController@finish',
-        'installer/run/{key}'  => 'Anomaly\InstallerModule\Http\Controller\InstallerController@run',
-        'installer/seed/{key}' => 'Anomaly\InstallerModule\Http\Controller\InstallerController@seed',
-    ];
-
-    protected $listeners = [
-        'Anomaly\Streams\Platform\Installer\Event\StreamsHasInstalled' => [
-            'Anomaly\InstallerModule\Installer\Listener\CleanUp',
-        ],
+        'installer'           => 'Anomaly\InstallerModule\Http\Controller\InstallerController@index',
+        'installer/start'     => 'Anomaly\InstallerModule\Http\Controller\InstallerController@start',
+        'installer/install'   => 'Anomaly\InstallerModule\Http\Controller\InstallerController@install',
+        'installer/run/{key}' => 'Anomaly\InstallerModule\Http\Controller\InstallerController@run',
     ];
 }

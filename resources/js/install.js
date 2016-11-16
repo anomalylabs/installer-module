@@ -20,10 +20,13 @@ var install = function () {
             } else {
 
                 progress.attr('value', '100');
+                progress.addClass('progress-success');
 
-                label.text('Almost done...');
+                label.text('Ready.');
 
-                window.location = APPLICATION_URL + '/installer/finish'
+                setTimeout(function () {
+                    $('.finished').removeClass('hidden');
+                }, 1000);
             }
         },
         error: function () {
