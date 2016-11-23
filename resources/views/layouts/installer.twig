@@ -15,10 +15,12 @@
     {% include "theme::partials/metadata" %}
 </head>
 
-<body id="installer">
+<body id="installer" class="variant-{{ random(8) }}" data-variants="8">
 
 <div class="logo">
-    {{ img('theme::img/logo-dark-transparent.png') }}
+    <a href="/admin" class="variant-logo" style="width: 37px;">
+        {{ img('theme::img/icon-canvas.svg').data|raw }}
+    </a>
 </div>
 
 <main id="main">

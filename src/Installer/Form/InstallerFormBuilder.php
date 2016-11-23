@@ -58,15 +58,4 @@ class InstallerFormBuilder extends FormBuilder
     protected $actions = [
         'install',
     ];
-
-    /**
-     * The form options.
-     *
-     * @var array
-     */
-    protected $options = [
-        'layout_view' => 'anomaly.module.installer::layouts/installer',
-        'breadcrumb'  => 'anomaly.module.installer::breadcrumb.install',
-    ];
-
 }

@@ -14,12 +14,12 @@ var install = function () {
 
             if ($('body').find('[data-step]').length) {
 
-                progress.attr('value', step.data('progress'));
+                progress.attr('value', step.data('progress')).text(step.data('progress') + '%');
 
                 install();
             } else {
 
-                progress.attr('value', '100');
+                progress.attr('value', '100').text('100%');
                 progress.addClass('progress-success');
 
                 label.text('Ready.');
