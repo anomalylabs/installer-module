@@ -78,7 +78,6 @@ class DatabaseValidator
 
             return false;
         }
-        dd('true');
 
         return true;
     }
