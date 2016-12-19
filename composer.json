@@ -18,7 +18,7 @@
             "role": "Owner"
         }
     ],
-    "required": {
+    "require": {
         "anomaly/streams-platform": "~1.1",
         "anomaly/checkboxes-field_type": "~2.1"
     },
