@@ -6,7 +6,6 @@ use Anomaly\InstallerModule\InstallerModuleInstaller;
 use Anomaly\Streams\Platform\Application\Command\ReloadEnvironmentFile;
 use Anomaly\Streams\Platform\Http\Controller\PublicController;
 use Anomaly\Streams\Platform\Installer\Console\Command\ConfigureDatabase;
-use Anomaly\Streams\Platform\Installer\Console\Command\LocateApplication;
 use Anomaly\Streams\Platform\Installer\Console\Command\SetDatabasePrefix;
 use Anomaly\Streams\Platform\Installer\Installer;
 use Illuminate\Cache\CacheManager;
@@ -62,7 +61,6 @@ class InstallerController extends PublicController
         $this->dispatch(new ReloadEnvironmentFile());
         $this->dispatch(new ConfigureDatabase());
         $this->dispatch(new SetDatabasePrefix());
-        $this->dispatch(new LocateApplication());
 
         $installers = $this->dispatch(new GetInstallers());
 
