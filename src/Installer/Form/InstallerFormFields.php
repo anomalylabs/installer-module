@@ -1,7 +1,8 @@
 <?php namespace Anomaly\InstallerModule\Installer\Form;
 
-use Anomaly\InstallerModule\Installer\Form\Validator\DatabaseValidator;
-use Anomaly\InstallerModule\Installer\Form\Validator\DomainValidator;
+use Anomaly\InstallerModule\Installer\Form\Validator\ValidateConnection;
+use Anomaly\InstallerModule\Installer\Form\Validator\ValidateDatabase;
+use Anomaly\InstallerModule\Installer\Form\Validator\ValidateDomain;
 
 /**
  * Class InstallerFormFields
@@ -51,20 +52,25 @@ class InstallerFormFields
                     'value'        => env('DB_DRIVER', 'mysql'),
                     'required'     => true,
                     'rules'        => [
+                        'valid_connection',
                         'valid_database',
                     ],
                     'validators'   => [
-                        'valid_database' => [
-                            'handler' => DatabaseValidator::class,
+                        'valid_connection' => [
+                            'handler' => ValidateConnection::class,
+                            'message' => false,
+                        ],
+                        'valid_database'   => [
+                            'handler' => ValidateDatabase::class,
                             'message' => false,
                         ],
                     ],
                     'config'       => [
                         'options' => [
-                            'mysql'    => 'MySQL',
-                            'pgsql' => 'Postgres',
-                            'sqlite'   => 'SQLite',
-                            'sqlsrv'   => 'SQL Server',
+                            'mysql'  => 'MySQL',
+                            'pgsql'  => 'Postgres',
+                            'sqlite' => 'SQLite',
+                            'sqlsrv' => 'SQL Server',
                         ],
                     ],
                 ],
@@ -169,7 +175,7 @@ class InstallerFormFields
                     ],
                     'validators'   => [
                         'valid_domain' => [
-                            'handler' => DomainValidator::class,
+                            'handler' => ValidateDomain::class,
                             'message' => 'streams::validation.invalid',
                         ],
                     ],

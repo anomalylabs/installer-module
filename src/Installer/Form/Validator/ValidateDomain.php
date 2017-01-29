@@ -3,13 +3,13 @@
 use Illuminate\Contracts\Config\Repository;
 
 /**
- * Class DomainValidator
+ * Class ValidateDomain
  *
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
  */
-class DomainValidator
+class ValidateDomain
 {
 
     /**
