@@ -69,7 +69,6 @@ class InstallerFormFields
                         'options' => [
                             'mysql'  => 'MySQL',
                             'pgsql'  => 'Postgres',
-                            'sqlite' => 'SQLite',
                             'sqlsrv' => 'SQL Server',
                         ],
                     ],
