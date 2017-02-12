@@ -3,7 +3,6 @@
 use Anomaly\Streams\Platform\Application\ApplicationRepository;
 use Anomaly\Streams\Platform\Application\Command\ReloadEnvironmentFile;
 use Anomaly\Streams\Platform\Console\Kernel;
-use Anomaly\Streams\Platform\Installer\Console\Command\CreateEntrySearchIndexes;
 use Anomaly\Streams\Platform\Installer\Console\Command\LoadApplicationInstallers;
 use Anomaly\Streams\Platform\Installer\Console\Command\LoadBaseMigrations;
 use Anomaly\Streams\Platform\Installer\Console\Command\LoadCoreInstallers;
@@ -50,7 +49,6 @@ class GetInstallers
                     $console->call('env:set', ['line' => 'INSTALLED=true']);
 
                     $this->dispatch(new ReloadEnvironmentFile());
-                    $this->dispatch(new CreateEntrySearchIndexes());
                 }
             )
         );
