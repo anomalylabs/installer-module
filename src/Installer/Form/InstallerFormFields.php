@@ -49,7 +49,7 @@ class InstallerFormFields
                     'label'        => 'anomaly.module.installer::field.database_driver.label',
                     'instructions' => 'anomaly.module.installer::field.database_driver.instructions',
                     'type'         => 'anomaly.field_type.select',
-                    'value'        => env('DB_DRIVER', 'mysql'),
+                    'value'        => env('DB_CONNECTION', 'mysql'),
                     'required'     => true,
                     'rules'        => [
                         'valid_connection',
