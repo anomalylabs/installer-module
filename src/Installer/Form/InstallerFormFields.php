@@ -186,6 +186,7 @@ class InstallerFormFields
                     'value'        => env('LOCALE', 'en'),
                     'required'     => true,
                     'config'       => [
+                        'mode'              => 'search',
                         'supported_locales' => true,
                     ],
                 ],
@@ -196,6 +197,7 @@ class InstallerFormFields
                     'value'        => env('APP_TIMEZONE', 'UTC'),
                     'required'     => true,
                     'config'       => [
+                        'mode'    => 'search',
                         'options' => function () {
 
                             $options = [];
