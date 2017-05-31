@@ -18,6 +18,10 @@
             "role": "Owner"
         }
     ],
+    "require": {
+        "anomaly/streams-platform": "~1.1",
+        "anomaly/checkboxes-field_type": "~2.1"
+    },
     "support": {
         "email": "support@anomaly.is"
     },
