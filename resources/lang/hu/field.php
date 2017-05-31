@@ -19,7 +19,7 @@ return [
     ],
     'database_name'         => [
         'label'        => 'Adatbázis',
-        'placeholder'  => 'acesolution',
+        'placeholder'  => 'pyrocms',
         'instructions' => 'Mi az adatbázisod neve?',
     ],
     'database_username'     => [
@@ -39,7 +39,7 @@ return [
     ],
     'admin_email'           => [
         'label'        => 'Email',
-        'placeholder'  => 'pelda@acesolution.hu',
+        'placeholder'  => 'pelda@pyrocms.com',
         'instructions' => 'Mi legyen az adminisztrátor email címe?',
     ],
     'admin_password'        => [
@@ -49,12 +49,12 @@ return [
     ],
     'application_name'      => [
         'label'        => 'Alkalmazás Neve',
-        'placeholder'  => 'AceSolution',
+        'placeholder'  => 'PyroCms',
         'instructions' => 'Mi legyen az alkalmazás neve?',
     ],
     'application_reference' => [
         'label'        => 'Alkalmazás Hivatkozása',
-        'placeholder'  => 'acesolution',
+        'placeholder'  => 'pyrocms',
         'instructions' => 'Mi legyen az alkalmazás azonosítója?',
     ],
     'application_domain'    => [
