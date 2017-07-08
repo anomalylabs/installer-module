@@ -155,16 +155,11 @@ class InstallerController extends PublicController
      */
     public function delete(Filesystem $files)
     {
-        $json = json_decode(
-            file_get_contents(
-                base_path('composer.json')
-            )
-        );
+        $json = file_get_contents(base_path('composer.json'));
 
-        unset($json->{'require'}->{'anomaly/installer-module'});
-        unset($json->{'require-dev'}->{'anomaly/installer-module'});
+        $pattern = '/,\s*("anomaly\/installer-module").*"/';
 
-        $files->put(base_path('composer.json'), json_encode($json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+        $files->put(base_path('composer.json'), preg_replace($pattern, '', $json));
 
         $files->deleteDirectory(base_path('core/anomaly/installer-module'));
 
