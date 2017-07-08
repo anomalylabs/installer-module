@@ -59,7 +59,7 @@ class CheckIfInstallerExists
      * @return mixed
      */
     public function handle(Request $request, Closure $next)
-    {$this->messages->error('anomaly.module.installer::message.delete_installer');
+    {
         if (
             $request->path() == 'admin' &&
             !$this->session->get(__CLASS__ . 'warned') &&
