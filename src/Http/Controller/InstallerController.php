@@ -11,6 +11,7 @@ use Anomaly\Streams\Platform\Installer\Installer;
 use Anomaly\Streams\Platform\Installer\InstallerCollection;
 use Illuminate\Cache\CacheManager;
 use Illuminate\Contracts\Container\Container;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
@@ -144,5 +145,29 @@ class InstallerController extends PublicController
         $container->call($installer->getTask());
 
         return 'true';
+    }
+
+    /**
+     * Delete the installer module.
+     *
+     * @param Filesystem $files
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete(Filesystem $files)
+    {
+        $json = json_decode(
+            file_get_contents(
+                base_path('composer.json')
+            )
+        );
+
+        unset($json->{'require'}->{'anomaly/installer-module'});
+        unset($json->{'require-dev'}->{'anomaly/installer-module'});
+
+        $files->put(base_path('composer.json'), json_encode($json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+
+        $files->deleteDirectory(base_path('core/anomaly/installer-module'));
+
+        return $this->redirect->back();
     }
 }
