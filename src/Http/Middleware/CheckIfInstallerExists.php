@@ -65,7 +65,7 @@ class CheckIfInstallerExists
             !$this->session->get(__CLASS__ . 'warned') &&
             !$this->config->get('app.debug')
         ) {
-            $this->session->set(__CLASS__ . 'warned', true);
+            $this->session->put(__CLASS__ . 'warned', true);
             $this->messages->error('anomaly.module.installer::message.delete_installer');
         }
 
