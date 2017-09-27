@@ -36,7 +36,7 @@ class InstallerFormFields
                         'label'   => 'anomaly.module.installer::field.license.agree',
                         'mode'    => 'checkbox',
                         'license' => function () {
-                            return (new \Michelf\Markdown())->transform(
+                            return (new \Parsedown())->parse(
                                 file_get_contents(app('streams.path') . '/LICENSE.md')
                             );
                         },
