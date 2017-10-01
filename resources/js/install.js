@@ -1,41 +1,47 @@
-var install = function () {
++(function ($) {
+    var install = function () {
+        var $steps = $('body').find('[data-step]');
+        var $step = $steps.first();
+        var $progress = $('.progress');
+        var $label = $('#label');
 
-    var step = $('body').find('[data-step]').first();
-    var progress = $('.progress');
-    var label = $('#label');
+        $label.text($step.data('step'));
 
-    label.text(step.data('step'));
+        $.ajax({
+            url: $step.data('action'),
 
-    $.ajax({
-        url: step.data('action'),
-        success: function () {
+            success: function () {
+                $step.remove();
 
-            step.remove();
+                if ($('body').find('[data-step]').length) {
+                    $progress
+                        .attr('value', $step.data('progress'))
+                        .text($step.data('progress') + '%');
 
-            if ($('body').find('[data-step]').length) {
+                    install();
+                } else {
+                    $progress.attr('value', '100').text('100%');
+                    $progress.addClass('progress-success');
 
-                progress.attr('value', step.data('progress')).text(step.data('progress') + '%');
+                    $label.text('Ready.');
 
-                install();
-            } else {
+                    setTimeout(function () {
+                        $('.finished').removeClass('hidden');
+                    }, 1000);
+                }
+            },
 
-                progress.attr('value', '100').text('100%');
-                progress.addClass('progress-success');
+            error: function () {
+                $progress.addClass('progress-danger');
 
-                label.text('Ready.');
+                $label
+                    .addClass('text-danger')
+                    .text('There was an error. Please check your error logs.');
+            },
+        });
+    };
 
-                setTimeout(function () {
-                    $('.finished').removeClass('hidden');
-                }, 1000);
-            }
-        },
-        error: function () {
-            progress.addClass('progress-danger');
-            label.addClass('text-danger').text('There was an error. Please check your error logs.');
-        }
+    $(document).ready(function () {
+        install();
     });
-};
-
-$(document).ready(function () {
-    install();
-});
+})($);
