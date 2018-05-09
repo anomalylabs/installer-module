@@ -18,13 +18,13 @@ class InstallerFormHandler
      * @param InstallerFormBuilder     $builder
      * @param InstallerModuleInstaller $moduleInstaller
      */
-    public function handle(InstallerFormBuilder $builder, InstallerModuleInstaller $moduleInstaller)
+    public function handle(Request $request, InstallerFormBuilder $builder, InstallerModuleInstaller $moduleInstaller)
     {
         if ($builder->hasFormErrors()) {
             return;
         }
 
-        $moduleInstaller->install($_POST);
+        $moduleInstaller->install($request->post());
 
         $builder->setFormResponse(redirect('installer/install'));
     }
