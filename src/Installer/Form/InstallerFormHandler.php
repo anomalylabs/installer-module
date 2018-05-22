@@ -1,6 +1,7 @@
 <?php namespace Anomaly\InstallerModule\Installer\Form;
 
 use Anomaly\InstallerModule\InstallerModuleInstaller;
+use Illuminate\Http\Request;
 
 /**
  * Class InstallerFormHandler
