@@ -183,7 +183,7 @@ class InstallerFormFields
                     'label'        => 'anomaly.module.installer::field.application_locale.label',
                     'instructions' => 'anomaly.module.installer::field.application_locale.instructions',
                     'type'         => 'anomaly.field_type.language',
-                    'value'        => env('LOCALE', 'en'),
+                    'value'        => env('DEFAULT_LOCALE', 'en'),
                     'required'     => true,
                     'config'       => [
                         'mode'              => 'search',
