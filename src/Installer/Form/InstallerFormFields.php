@@ -198,17 +198,7 @@ class InstallerFormFields
                     'required'     => true,
                     'config'       => [
                         'mode'    => 'search',
-                        'options' => function () {
-
-                            $options = [];
-
-                            foreach (timezone_identifiers_list() as $timezone) {
-
-                                $options[$timezone] = $timezone;
-                            }
-
-                            return $options;
-                        },
+                        'options' => join("\n", timezone_identifiers_list()),
                     ],
                 ],
             ]
