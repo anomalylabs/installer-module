@@ -17,6 +17,11 @@ return [
         'placeholder'  => 'localhost',
         'instructions' => 'What is the hostname of your database?',
     ],
+    'database_port'         => [
+        'label'        => 'Port',
+        'placeholder'  => '3306',
+        'instructions' => 'What is the port number of your database?',
+    ],
     'database_name'         => [
         'label'        => 'Database',
         'placeholder'  => 'streams',

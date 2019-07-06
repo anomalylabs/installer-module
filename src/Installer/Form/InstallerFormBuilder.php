@@ -27,6 +27,7 @@ class InstallerFormBuilder extends FormBuilder
             'fields' => [
                 'database_driver',
                 'database_host',
+                'database_port',
                 'database_name',
                 'database_username',
                 'database_password',

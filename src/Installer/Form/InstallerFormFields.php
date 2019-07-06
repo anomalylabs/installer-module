@@ -81,6 +81,14 @@ class InstallerFormFields
                     'value'        => env('DB_HOST', 'localhost'),
                     'required'     => true,
                 ],
+                'database_port'         => [
+                    'label'        => 'anomaly.module.installer::field.database_port.label',
+                    'placeholder'  => 'anomaly.module.installer::field.database_port.placeholder',
+                    'instructions' => 'anomaly.module.installer::field.database_port.instructions',
+                    'type'         => 'anomaly.field_type.text',
+                    'value'        => env('DB_PORT', '3306'),
+                    'required'     => true,
+                ],
                 'database_name'         => [
                     'label'        => 'anomaly.module.installer::field.database_name.label',
                     'placeholder'  => 'anomaly.module.installer::field.database_name.placeholder',
