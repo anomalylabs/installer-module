@@ -32,6 +32,7 @@ class InstallerModuleInstaller
 
         $data->put('DB_CONNECTION', $parameters['database_driver']);
         $data->put('DB_HOST', $parameters['database_host']);
+        $data->put('DB_PORT', $parameters['database_port']);
         $data->put('DB_DATABASE', $parameters['database_name']);
         $data->put('DB_USERNAME', $parameters['database_username']);
         $data->put('DB_PASSWORD', '"' . $parameters['database_password'] . '"');
