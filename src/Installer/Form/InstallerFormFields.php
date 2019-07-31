@@ -21,6 +21,10 @@ class InstallerFormFields
      */
     public function handle(InstallerFormBuilder $builder)
     {
+        $parts    = explode('.', request()->getHost());
+        $lengths  = array_map('strlen', $parts);
+        $database = $parts[array_search(max($lengths), $lengths)];
+
         $builder->setFields(
             [
                 /*
@@ -93,7 +97,7 @@ class InstallerFormFields
                     'label'        => 'anomaly.module.installer::field.database_name.label',
                     'placeholder'  => 'anomaly.module.installer::field.database_name.placeholder',
                     'instructions' => 'anomaly.module.installer::field.database_name.instructions',
-                    'value'        => env('DB_DATABASE', snake_case(strtolower(config('streams::distribution.name')))),
+                    'value'        => env('DB_DATABASE', $database),
                     'type'         => 'anomaly.field_type.text',
                     'required'     => true,
                 ],
