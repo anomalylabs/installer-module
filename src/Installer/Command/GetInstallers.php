@@ -41,7 +41,7 @@ class GetInstallers
         $this->dispatch(new LoadModuleInstallers($installers));
         $this->dispatch(new LoadExtensionInstallers($installers));
 
-        $installers->add(
+        $installers->push(
             new Installer(
                 'streams::installer.reloading_application',
                 function (Kernel $console) {
@@ -57,7 +57,7 @@ class GetInstallers
         $this->dispatch(new LoadModuleSeeders($installers));
         $this->dispatch(new LoadExtensionSeeders($installers));
 
-        $installers->add(
+        $installers->push(
             new Installer(
                 'streams::installer.running_seeds',
                 function (ApplicationRepository $applications) {
@@ -73,7 +73,7 @@ class GetInstallers
             )
         );
 
-        $installers->add(
+        $installers->push(
             new Installer(
                 'streams::installer.running_seeds',
                 function (Kernel $console) {

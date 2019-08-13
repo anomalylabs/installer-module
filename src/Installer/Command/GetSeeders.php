@@ -32,7 +32,7 @@ class GetSeeders
         $this->dispatch(new LoadModuleSeeders($installers));
         $this->dispatch(new LoadExtensionSeeders($installers));
 
-        $installers->add(
+        $installers->push(
             new Installer(
                 'streams::installer.running_seeds',
                 function (ApplicationRepository $applications) {
@@ -48,7 +48,7 @@ class GetSeeders
             )
         );
 
-        $installers->add(
+        $installers->push(
             new Installer(
                 'streams::installer.running_seeds',
                 function (Kernel $console) {

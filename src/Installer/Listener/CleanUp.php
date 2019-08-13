@@ -27,7 +27,7 @@ class CleanUp
     {
         $installers = $event->getInstallers();
 
-        $installers->add(
+        $installers->push(
             new Installer(
                 'anomaly.module.installer::install.cleaning_up',
                 function () {
