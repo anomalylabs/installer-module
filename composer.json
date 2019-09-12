@@ -28,7 +28,7 @@
         "email": "support@pyrocms.com"
     },
     "require": {
-        "anomaly/streams-platform": "2.0.x-dev"
+        "anomaly/streams-platform": "^2.0"
     },
     "autoload": {
         "psr-4": {
