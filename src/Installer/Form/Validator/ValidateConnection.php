@@ -26,7 +26,6 @@ class ValidateConnection
         try {
             app('db')->connection('install');
         } catch (\Exception $exception) {
-
             $builder->addFormError(
                 'database_driver',
                 trans(

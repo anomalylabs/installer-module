@@ -13,7 +13,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 class InstallerFormOptions
 {
 
-    use DispatchesJobs;
+
 
     /**
      * Handle the command.
@@ -24,7 +24,7 @@ class InstallerFormOptions
     {
         $builder->setOptions(
             [
-                'layout_view' => $this->dispatch(new GetLayoutName('installer', 'anomaly.module.installer::layouts/installer')),
+                'layout_view' => dispatch_now(new GetLayoutName('installer', 'anomaly.module.installer::layouts/installer')),
                 'breadcrumb'  => 'anomaly.module.installer::breadcrumb.install',
             ]
         );

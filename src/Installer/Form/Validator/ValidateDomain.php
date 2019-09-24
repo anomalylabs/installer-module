@@ -1,6 +1,6 @@
 <?php namespace Anomaly\InstallerModule\Installer\Form\Validator;
 
-use Illuminate\Contracts\Config\Repository;
+
 
 /**
  * Class ValidateDomain
@@ -24,7 +24,7 @@ class ValidateDomain
         $url  = parse_url($value);
         $host = array_get($url, 'host');
 
-        $pattern = '/^(' . implode('|', array_keys($config->get('streams::locales.supported'))) . ')(\.)./';
+        $pattern = '/^(' . implode('|', array_keys(config('streams::locales.supported'))) . ')(\.)./';
 
         return !$host || !preg_match($pattern, $host, $matches);
     }

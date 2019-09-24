@@ -2,9 +2,7 @@
 
 use Anomaly\Streams\Platform\Message\MessageBag;
 use Closure;
-use Illuminate\Contracts\Config\Repository;
 use Illuminate\Http\Request;
-use Illuminate\Session\Store;
 
 /**
  * Class CheckIfInstallerExists
@@ -17,20 +15,6 @@ class CheckIfInstallerExists
 {
 
     /**
-     * The config repository.
-     *
-     * @var Repository
-     */
-    protected $config;
-
-    /**
-     * The session store.
-     *
-     * @var Store
-     */
-    protected $session;
-
-    /**
      * The message bag.
      *
      * @var MessageBag
@@ -40,14 +24,10 @@ class CheckIfInstallerExists
     /**
      * Create a new CheckIfInstallerExists instance.
      *
-     * @param Repository $config
-     * @param Store      $session
      * @param MessageBag $messages
      */
-    public function __construct(Repository $config, Store $session, MessageBag $messages)
+    public function __construct(MessageBag $messages)
     {
-        $this->config   = $config;
-        $this->session  = $session;
         $this->messages = $messages;
     }
 
@@ -62,10 +42,10 @@ class CheckIfInstallerExists
     {
         if (
             $request->path() == 'admin' &&
-            !$this->session->get(__CLASS__ . 'warned') &&
-            !$this->config->get('app.debug')
+            !session(__CLASS__ . 'warned') &&
+            !config('app.debug')
         ) {
-            $this->session->put(__CLASS__ . 'warned', true);
+            session([__CLASS__ . 'warned' => true]);
             $this->messages->error('anomaly.module.installer::message.delete_installer');
         }
 

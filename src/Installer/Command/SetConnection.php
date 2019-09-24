@@ -1,6 +1,6 @@
 <?php namespace Anomaly\InstallerModule\Installer\Command;
 
-use Illuminate\Contracts\Config\Repository;
+
 use Illuminate\Http\Request;
 
 /**

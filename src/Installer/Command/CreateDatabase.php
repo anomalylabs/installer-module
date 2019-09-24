@@ -1,6 +1,6 @@
 <?php namespace Anomaly\InstallerModule\Installer\Command;
 
-use Illuminate\Contracts\Config\Repository;
+
 use PDO;
 
 /**
@@ -21,13 +21,12 @@ class CreateDatabase
      */
     public function handle(Repository $config)
     {
-        $database = $config->get('database.connections.install');
+        $database = config('database.connections.install');
 
         /**
          * Try creating a MySQL database.
          */
         if ($database['driver'] == 'mysql') {
-
             $connection = new PDO(
                 "mysql:host=" . $database['host'],
                 $database['username'],

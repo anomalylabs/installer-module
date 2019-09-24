@@ -30,4 +30,3 @@ class InstallerFormHandler
         $builder->setFormResponse(redirect('installer/install'));
     }
 }
- 

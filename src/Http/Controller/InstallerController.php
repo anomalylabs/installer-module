@@ -53,7 +53,6 @@ class InstallerController extends PublicController
          * Then redirect to the first installer.
          */
         if (request('action') == 'install') {
-
             $installer->install(request()->all());
 
             dispatch_now(new ReloadEnvironmentFile());
@@ -80,7 +79,6 @@ class InstallerController extends PublicController
         $installer = $installers->get($key);
 
         if ($verbose) {
-
             ob_start();
 
             echo "{$count}/{$total} - " . trans($installer->getMessage()) . "<br><br>";

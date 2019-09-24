@@ -16,7 +16,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 class ValidateDatabase
 {
 
-    use DispatchesJobs;
+
 
     /**
      * Handle the validation.
@@ -27,7 +27,7 @@ class ValidateDatabase
     public function handle(InstallerFormBuilder $builder)
     {
         /* @var Connection $connection */
-        if (!$connection = $this->dispatch(new GetConnection())) {
+        if (!$connection = dispatch_now(new GetConnection())) {
             return false;
         }
 
@@ -46,9 +46,8 @@ class ValidateDatabase
              * the database exists.
              */
             try {
-                $this->dispatch(new CreateDatabase());
+                dispatch_now(new CreateDatabase());
             } catch (\Exception $e) {
-
                 $builder->addFormError(
                     'database_driver',
                     trans(

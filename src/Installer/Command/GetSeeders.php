@@ -18,7 +18,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 class GetSeeders
 {
 
-    use DispatchesJobs;
+
 
     /**
      * Handle the command.
@@ -29,8 +29,8 @@ class GetSeeders
     {
         $installers = new InstallerCollection();
 
-        $this->dispatch(new LoadModuleSeeders($installers));
-        $this->dispatch(new LoadExtensionSeeders($installers));
+        dispatch_now(new LoadModuleSeeders($installers));
+        dispatch_now(new LoadExtensionSeeders($installers));
 
         $installers->push(
             new Installer(

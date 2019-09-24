@@ -16,7 +16,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 class CleanUp
 {
 
-    use DispatchesJobs;
+
 
     /**
      * Handle the command.
@@ -31,13 +31,12 @@ class CleanUp
             new Installer(
                 'anomaly.module.installer::install.cleaning_up',
                 function () {
-
-                    $data = $this->dispatch(new ReadEnvironmentFile());
+                    $data = dispatch_now(new ReadEnvironmentFile());
 
                     array_pull($data, 'ADMIN_EMAIL');
                     array_pull($data, 'ADMIN_PASSWORD');
 
-                    $this->dispatch(new WriteEnvironmentFile($data));
+                    dispatch_now(new WriteEnvironmentFile($data));
                 }
             )
         );

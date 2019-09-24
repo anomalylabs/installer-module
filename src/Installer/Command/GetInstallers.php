@@ -24,7 +24,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 class GetInstallers
 {
 
-    use DispatchesJobs;
+
 
     /**
      * Handle the command.
@@ -35,27 +35,26 @@ class GetInstallers
     {
         $installers = new InstallerCollection();
 
-        $this->dispatch(new LoadCoreInstallers($installers));
-        $this->dispatch(new LoadApplicationInstallers($installers));
+        dispatch_now(new LoadCoreInstallers($installers));
+        dispatch_now(new LoadApplicationInstallers($installers));
 
-        $this->dispatch(new LoadModuleInstallers($installers));
-        $this->dispatch(new LoadExtensionInstallers($installers));
+        dispatch_now(new LoadModuleInstallers($installers));
+        dispatch_now(new LoadExtensionInstallers($installers));
 
         $installers->push(
             new Installer(
                 'streams::installer.reloading_application',
                 function (Kernel $console) {
-
                     $console->call('env:set', ['line' => 'INSTALLED=true']);
 
-                    $this->dispatch(new ReloadEnvironmentFile());
+                    dispatch_now(new ReloadEnvironmentFile());
                 }
             )
         );
 
-        $this->dispatch(new LoadBaseMigrations($installers));
-        $this->dispatch(new LoadModuleSeeders($installers));
-        $this->dispatch(new LoadExtensionSeeders($installers));
+        dispatch_now(new LoadBaseMigrations($installers));
+        dispatch_now(new LoadModuleSeeders($installers));
+        dispatch_now(new LoadExtensionSeeders($installers));
 
         $installers->push(
             new Installer(

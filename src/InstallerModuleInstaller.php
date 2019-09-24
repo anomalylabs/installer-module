@@ -4,7 +4,6 @@ use Anomaly\Streams\Platform\Application\Command\ReadEnvironmentFile;
 use Anomaly\Streams\Platform\Application\Command\WriteEnvironmentFile;
 use Anomaly\Streams\Platform\Installer\Console\Command\SetStreamsData;
 use Anomaly\Streams\Platform\Support\Collection;
-use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class InstallerModuleInstaller
@@ -16,7 +15,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 class InstallerModuleInstaller
 {
 
-    use DispatchesJobs;
 
     /**
      * Install the system.
@@ -26,9 +24,9 @@ class InstallerModuleInstaller
      */
     public function install(array $parameters)
     {
-        $data = new Collection($this->dispatch(new ReadEnvironmentFile()));
+        $data = new Collection(dispatch_now(new ReadEnvironmentFile()));
 
-        $this->dispatch(new SetStreamsData($data));
+        dispatch_now(new SetStreamsData($data));
 
         $data->put('DB_CONNECTION', $parameters['database_driver']);
         $data->put('DB_HOST', $parameters['database_host']);
@@ -46,6 +44,6 @@ class InstallerModuleInstaller
         $data->put('ADMIN_EMAIL', $parameters['admin_email']);
         $data->put('ADMIN_PASSWORD', $parameters['admin_password']);
 
-        $this->dispatch(new WriteEnvironmentFile($data->all()));
+        dispatch_now(new WriteEnvironmentFile($data->all()));
     }
 }
