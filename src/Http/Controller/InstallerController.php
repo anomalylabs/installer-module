@@ -69,7 +69,7 @@ class InstallerController extends PublicController
                 ->keys()
                 ->first();
 
-            return $this->redirect->to('installer/process/' . $installer . "?verbose=" . $verbose);
+            return redirect('installer/process/' . $installer . "?verbose=" . $verbose);
         }
 
         /**
@@ -97,7 +97,7 @@ class InstallerController extends PublicController
         $container->call($installer->getTask());
 
         if (!$next && $verbose) {
-            return $this->redirect->to('admin/login');
+            return redirect('admin/login');
         }
 
         if (!$next && !$verbose) {
@@ -106,7 +106,7 @@ class InstallerController extends PublicController
             exit;
         }
 
-        return $this->redirect->to('installer/process/' . $next . "?verbose=" . $verbose);
+        return redirect('installer/process/' . $next . "?verbose=" . $verbose);
     }
 
     /**
