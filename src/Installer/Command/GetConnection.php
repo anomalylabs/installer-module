@@ -1,6 +1,5 @@
 <?php namespace Anomaly\InstallerModule\Installer\Command;
 
-use Illuminate\Contracts\Container\Container;
 use Illuminate\Database\Connection;
 
 /**
@@ -16,15 +15,12 @@ class GetConnection
     /**
      * Handle the command.
      *
-     * @param Container $container
      * @return bool|Connection
      */
-    public function handle(Container $container)
+    public function handle()
     {
         try {
-            return $container
-                ->make('db')
-                ->connection('install');
+            return app('db')->connection('install');
         } catch (\Exception $e) {
             return false;
         }

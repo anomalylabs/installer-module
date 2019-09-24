@@ -10,9 +10,7 @@ use Anomaly\Streams\Platform\Installer\Console\Command\SetDatabasePrefix;
 use Anomaly\Streams\Platform\Installer\Installer;
 use Anomaly\Streams\Platform\Installer\InstallerCollection;
 use Illuminate\Cache\CacheManager;
-use Illuminate\Contracts\Container\Container;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class InstallerController
@@ -23,8 +21,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  */
 class InstallerController extends PublicController
 {
-
-    use DispatchesJobs;
 
     /**
      * Create a new InstallerController instance.
@@ -41,29 +37,28 @@ class InstallerController extends PublicController
      * Process the installers from a web request.
      *
      * @param InstallerModuleInstaller $installer
-     * @param Container                $container
-     * @param null                     $key
-     * @return \Illuminate\Http\RedirectResponse
+     * @param null $key
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function process(InstallerModuleInstaller $installer, Container $container, $key = null)
+    public function process(InstallerModuleInstaller $installer, $key = null)
     {
         /* @var InstallerCollection $installers */
-        $installers = $this->dispatch(new GetInstallers());
+        $installers = dispatch_now(new GetInstallers());
 
         // Output progress?
-        $verbose = $this->request->get('verbose');
+        $verbose = request('verbose');
 
         /**
          * Start by writing the .env file.
          * Then redirect to the first installer.
          */
-        if ($this->request->get('action') == 'install') {
+        if (request('action') == 'install') {
 
-            $installer->install($this->request->all());
+            $installer->install(request()->all());
 
-            $this->dispatch(new ReloadEnvironmentFile());
-            $this->dispatch(new ConfigureDatabase());
-            $this->dispatch(new SetDatabasePrefix());
+            dispatch_now(new ReloadEnvironmentFile());
+            dispatch_now(new ConfigureDatabase());
+            dispatch_now(new SetDatabasePrefix());
 
             $installer = $installers
                 ->keys()
@@ -94,7 +89,7 @@ class InstallerController extends PublicController
             flush();
         }
 
-        $container->call($installer->getTask());
+        app()->call($installer->getTask());
 
         if (!$next && $verbose) {
             return redirect('admin/login');
@@ -117,32 +112,31 @@ class InstallerController extends PublicController
      */
     public function install(CacheManager $cache)
     {
-        $cache->store()->flush();
+        $cache->store()->clear();
 
-        $this->dispatch(new ReloadEnvironmentFile());
-        $this->dispatch(new ConfigureDatabase());
-        $this->dispatch(new SetDatabasePrefix());
+        dispatch_now(new ReloadEnvironmentFile());
+        dispatch_now(new ConfigureDatabase());
+        dispatch_now(new SetDatabasePrefix());
 
-        $installers = $this->dispatch(new GetInstallers());
+        $installers = dispatch_now(new GetInstallers());
 
-        return $this->view->make('anomaly.module.installer::process', compact('installers'));
+        return view('anomaly.module.installer::process', compact('installers'));
     }
 
     /**
      * Run an installation command.
      *
-     * @param  Container $container
-     * @param            $key
-     * @return bool
+     * @param $key
+     * @return string
      */
-    public function run(Container $container, $key)
+    public function run($key)
     {
-        $installers = $this->dispatch(new GetInstallers());
+        $installers = dispatch_now(new GetInstallers());
 
         /* @var Installer $installer */
         $installer = $installers->get($key);
 
-        $container->call($installer->getTask());
+        app()->call($installer->getTask());
 
         return 'true';
     }
@@ -163,6 +157,6 @@ class InstallerController extends PublicController
 
         $files->deleteDirectory(base_path('core/anomaly/installer-module'));
 
-        return $this->redirect->back();
+        return back();
     }
 }
