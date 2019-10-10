@@ -1,4 +1,6 @@
-<?php namespace Anomaly\InstallerModule;
+<?php
+
+namespace Anomaly\InstallerModule;
 
 use Anomaly\InstallerModule\Http\Middleware\CheckIfInstallerExists;
 use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
@@ -18,7 +20,7 @@ class InstallerModuleServiceProvider extends AddonServiceProvider
      *
      * @var array
      */
-    protected $middleware = [
+    public $middleware = [
         CheckIfInstallerExists::class,
     ];
 
@@ -27,7 +29,7 @@ class InstallerModuleServiceProvider extends AddonServiceProvider
      *
      * @var array
      */
-    protected $routes = [
+    public $routes = [
         'installer'                => 'Anomaly\InstallerModule\Http\Controller\InstallerController@index',
         'installer/delete'         => 'Anomaly\InstallerModule\Http\Controller\InstallerController@delete',
         'installer/install'        => 'Anomaly\InstallerModule\Http\Controller\InstallerController@install',
