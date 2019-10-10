@@ -10,8 +10,7 @@
     ],
     "homepage": "http://pyrocms.com/",
     "license": "MIT",
-    "authors": [
-        {
+    "authors": [{
             "name": "PyroCMS, Inc.",
             "email": "support@pyrocms.com",
             "homepage": "http://pyrocms.com/",
@@ -33,6 +32,13 @@
     "autoload": {
         "psr-4": {
             "Anomaly\\InstallerModule\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Anomaly\\InstallerModule\\InstallerModuleServiceProvider"
+            ]
         }
     }
 }
