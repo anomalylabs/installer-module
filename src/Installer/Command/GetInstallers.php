@@ -1,8 +1,10 @@
-<?php namespace Anomaly\InstallerModule\Installer\Command;
+<?php
+
+namespace Anomaly\InstallerModule\Installer\Command;
 
 use Anomaly\Streams\Platform\Application\ApplicationRepository;
 use Anomaly\Streams\Platform\Application\Command\ReloadEnvironmentFile;
-use Anomaly\Streams\Platform\Console\Kernel;
+use \Illuminate\Contracts\Console\Kernel;
 use Anomaly\Streams\Platform\Installer\Console\Command\LoadApplicationInstallers;
 use Anomaly\Streams\Platform\Installer\Console\Command\LoadBaseMigrations;
 use Anomaly\Streams\Platform\Installer\Console\Command\LoadCoreInstallers;
@@ -12,7 +14,6 @@ use Anomaly\Streams\Platform\Installer\Console\Command\LoadModuleInstallers;
 use Anomaly\Streams\Platform\Installer\Console\Command\LoadModuleSeeders;
 use Anomaly\Streams\Platform\Installer\Installer;
 use Anomaly\Streams\Platform\Installer\InstallerCollection;
-use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class GetInstallers
