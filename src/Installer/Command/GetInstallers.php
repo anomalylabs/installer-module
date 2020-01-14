@@ -82,6 +82,15 @@ class GetInstallers
             )
         );
 
+        $installers->push(
+            new Installer(
+                'streams::installer.build',
+                function (Kernel $console) {
+                    $console->call('build');
+                }
+            )
+        );
+
         return $installers;
     }
 }
