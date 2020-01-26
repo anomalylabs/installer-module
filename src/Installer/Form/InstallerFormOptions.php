@@ -1,7 +1,6 @@
-<?php namespace Anomaly\InstallerModule\Installer\Form;
+<?php
 
-use Anomaly\Streams\Platform\View\Command\GetLayoutName;
-use Illuminate\Foundation\Bus\DispatchesJobs;
+namespace Anomaly\InstallerModule\Installer\Form;
 
 /**
  * Class InstallerFormOptions
@@ -13,8 +12,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 class InstallerFormOptions
 {
 
-
-
     /**
      * Handle the command.
      *
@@ -24,7 +21,7 @@ class InstallerFormOptions
     {
         $builder->setOptions(
             [
-                'layout_view' => dispatch_now(new GetLayoutName('installer', 'anomaly.module.installer::layouts/installer')),
+                'layout_view' => 'anomaly.module.installer::layouts/installer',
                 'breadcrumb'  => 'anomaly.module.installer::breadcrumb.install',
             ]
         );
