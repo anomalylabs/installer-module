@@ -1,9 +1,13 @@
-<?php namespace Anomaly\InstallerModule;
+<?php
+
+namespace Anomaly\InstallerModule;
 
 use Anomaly\Streams\Platform\Application\Command\ReadEnvironmentFile;
 use Anomaly\Streams\Platform\Application\Command\WriteEnvironmentFile;
 use Anomaly\Streams\Platform\Installer\Console\Command\SetStreamsData;
 use Anomaly\Streams\Platform\Support\Collection;
+use Anomaly\Streams\Platform\Support\Env;
+use Illuminate\Support\Facades\Crypt;
 
 /**
  * Class InstallerModuleInstaller
@@ -24,26 +28,34 @@ class InstallerModuleInstaller
      */
     public function install(array $parameters)
     {
-        $data = new Collection(dispatch_now(new ReadEnvironmentFile()));
 
-        dispatch_now(new SetStreamsData($data));
+        /**
+         * If the .env file has not been generated yet then
+         * generate it now and also generate an app key.
+         */
+        if (Env::generate()) {
+            Env::load();
+        }
 
-        $data->put('DB_CONNECTION', $parameters['database_driver']);
-        $data->put('DB_HOST', $parameters['database_host']);
-        $data->put('DB_PORT', $parameters['database_port']);
-        $data->put('DB_DATABASE', $parameters['database_name']);
-        $data->put('DB_USERNAME', $parameters['database_username']);
-        $data->put('DB_PASSWORD', '"' . $parameters['database_password'] . '"');
-        $data->put('APPLICATION_NAME', '"' . $parameters['application_name'] . '"');
-        $data->put('APPLICATION_DOMAIN', $parameters['application_domain']);
-        $data->put('APPLICATION_REFERENCE', $parameters['application_reference']);
-        $data->put('DEFAULT_LOCALE', $parameters['application_locale']);
-        $data->put('APP_TIMEZONE', $parameters['application_timezone']);
-        $data->put('APP_URL', 'http://' . $parameters['application_domain']);
-        $data->put('ADMIN_USERNAME', $parameters['admin_username']);
-        $data->put('ADMIN_EMAIL', $parameters['admin_email']);
-        $data->put('ADMIN_PASSWORD', $parameters['admin_password']);
+        /**
+         * Use the .env data as a basis
+         * for the rest of the process.
+         */
+        $data = new Collection(Env::variables());
 
-        dispatch_now(new WriteEnvironmentFile($data->all()));
+        Env::write('DEFAULT_LOCALE', $parameters['application_locale']);
+        Env::write('DB_CONNECTION', $parameters['database_driver']);
+        Env::write('DB_HOST', $parameters['database_host']);
+        Env::write('DB_PORT', $parameters['database_port']);
+        Env::write('DB_DATABASE', $parameters['database_name']);
+        Env::write('DB_USERNAME', $parameters['database_username']);
+        Env::write('DB_PASSWORD', '"' . $parameters['database_password'] . '"');
+        Env::write('APP_REFERENCE', $parameters['application_reference']);
+        Env::write('APP_NAME', '"' . $parameters['application_name'] . '"');
+        Env::write('APP_TIMEZONE', $parameters['application_timezone']);
+        Env::write('APP_URL', $parameters['application_domain']);
+        Env::write('ADMIN_USERNAME', $parameters['admin_username']);
+        Env::write('ADMIN_EMAIL', $parameters['admin_email']);
+        Env::write('ADMIN_PASSWORD', $parameters['admin_password']);
     }
 }
