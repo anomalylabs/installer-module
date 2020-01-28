@@ -7,7 +7,6 @@ use Anomaly\Streams\Platform\Application\Command\ReloadEnvironmentFile;
 use \Illuminate\Contracts\Console\Kernel;
 use Anomaly\Streams\Platform\Installer\Console\Command\LoadApplicationInstallers;
 use Anomaly\Streams\Platform\Installer\Console\Command\LoadBaseMigrations;
-use Anomaly\Streams\Platform\Installer\Console\Command\LoadCoreInstallers;
 use Anomaly\Streams\Platform\Installer\Console\Command\LoadExtensionInstallers;
 use Anomaly\Streams\Platform\Installer\Console\Command\LoadExtensionSeeders;
 use Anomaly\Streams\Platform\Installer\Console\Command\LoadModuleInstallers;
@@ -36,7 +35,6 @@ class GetInstallers
     {
         $installers = new InstallerCollection();
 
-        dispatch_now(new LoadCoreInstallers($installers));
         dispatch_now(new LoadApplicationInstallers($installers));
 
         dispatch_now(new LoadModuleInstallers($installers));
