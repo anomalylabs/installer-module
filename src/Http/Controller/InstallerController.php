@@ -1,4 +1,6 @@
-<?php namespace Anomaly\InstallerModule\Http\Controller;
+<?php
+
+namespace Anomaly\InstallerModule\Http\Controller;
 
 use Anomaly\InstallerModule\Installer\Command\GetInstallers;
 use Anomaly\InstallerModule\Installer\Form\InstallerFormBuilder;
@@ -6,9 +8,6 @@ use Anomaly\InstallerModule\InstallerModuleInstaller;
 use Anomaly\Streams\Platform\Application\Command\ReloadEnvironmentFile;
 use Anomaly\Streams\Platform\Http\Controller\PublicController;
 use Anomaly\Streams\Platform\Installer\Console\Command\ConfigureDatabase;
-use Anomaly\Streams\Platform\Installer\Console\Command\SetDatabasePrefix;
-use Anomaly\Streams\Platform\Installer\Installer;
-use Anomaly\Streams\Platform\Installer\InstallerCollection;
 use Illuminate\Cache\CacheManager;
 use Illuminate\Filesystem\Filesystem;
 
@@ -55,9 +54,8 @@ class InstallerController extends PublicController
         if (request('action') == 'install') {
             $installer->install(request()->all());
 
-            dispatch_now(new ReloadEnvironmentFile());
+            //dispatch_now(new ReloadEnvironmentFile());
             dispatch_now(new ConfigureDatabase());
-            dispatch_now(new SetDatabasePrefix());
 
             $installer = $installers
                 ->keys()
@@ -112,9 +110,8 @@ class InstallerController extends PublicController
     {
         $cache->store()->clear();
 
-        dispatch_now(new ReloadEnvironmentFile());
+        //dispatch_now(new ReloadEnvironmentFile());
         dispatch_now(new ConfigureDatabase());
-        dispatch_now(new SetDatabasePrefix());
 
         $installers = dispatch_now(new GetInstallers());
 
