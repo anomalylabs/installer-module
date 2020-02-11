@@ -3,6 +3,7 @@
 namespace Anomaly\InstallerModule;
 
 use Anomaly\InstallerModule\Http\Middleware\CheckIfInstallerExists;
+use Anomaly\InstallerModule\Installer\Console\Install;
 use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
 
 /**
@@ -14,6 +15,15 @@ use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
  */
 class InstallerModuleServiceProvider extends AddonServiceProvider
 {
+
+    /**
+     * The addon commands.
+     *
+     * @var array
+     */
+    public $commands = [
+        Install::class,
+    ];
 
     /**
      * The addon middleware.
