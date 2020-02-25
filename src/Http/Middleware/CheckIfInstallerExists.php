@@ -1,6 +1,6 @@
 <?php namespace Anomaly\InstallerModule\Http\Middleware;
 
-use Anomaly\Streams\Platform\Message\MessageBag;
+use Anomaly\Streams\Platform\Message\MessageManager;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -17,16 +17,16 @@ class CheckIfInstallerExists
     /**
      * The message bag.
      *
-     * @var MessageBag
+     * @var MessageManager
      */
     protected $messages;
 
     /**
      * Create a new CheckIfInstallerExists instance.
      *
-     * @param MessageBag $messages
+     * @param MessageManager $messages
      */
-    public function __construct(MessageBag $messages)
+    public function __construct(MessageManager $messages)
     {
         $this->messages = $messages;
     }
