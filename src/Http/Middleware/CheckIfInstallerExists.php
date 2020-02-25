@@ -1,7 +1,7 @@
 <?php namespace Anomaly\InstallerModule\Http\Middleware;
 
-use Anomaly\Streams\Platform\Message\MessageManager;
 use Closure;
+use Anomaly\Streams\Platform\Message\MessageManager;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Http\Request;
 use Illuminate\Session\Store;
