@@ -1,4 +1,6 @@
-<?php namespace Anomaly\InstallerModule;
+<?php
+
+namespace Anomaly\InstallerModule;
 
 use Anomaly\Streams\Platform\Addon\Module\Module;
 
