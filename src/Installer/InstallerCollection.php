@@ -2,7 +2,7 @@
 
 namespace Anomaly\InstallerModule\Installer;
 
-use Anomaly\Streams\Platform\Support\Collection;
+use Illuminate\Support\Collection;
 
 /**
  * Class InstallerCollection
