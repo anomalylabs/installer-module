@@ -4,7 +4,7 @@ namespace Anomaly\InstallerModule\Installer\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\Kernel;
-use Anomaly\Streams\Platform\Support\Env;
+use Anomaly\InstallerModule\Support\Env;
 use Symfony\Component\Console\Input\InputOption;
 use Anomaly\InstallerModule\Installer\Installer;
 use Anomaly\InstallerModule\Installer\InstallerCollection;
