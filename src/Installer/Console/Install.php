@@ -62,7 +62,8 @@ class Install extends Command
             new Installer(
                 'anomaly.module.installer::install.reloading_application',
                 function () {
-                    $this->call('env:set', ['line' => 'INSTALLED=true']);
+
+                    Env::write('INSTALLED', 'true');
 
                     Env::load();
                 }
