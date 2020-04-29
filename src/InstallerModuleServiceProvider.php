@@ -31,7 +31,9 @@ class InstallerModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     public $middleware = [
-        CheckIfInstallerExists::class,
+        'admin' => [
+            CheckIfInstallerExists::class,
+        ]
     ];
 
     /**
