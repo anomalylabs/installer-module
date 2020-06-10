@@ -2,6 +2,7 @@
 
 namespace Anomaly\InstallerModule\Support;
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
 use Illuminate\Foundation\Bootstrap\LoadConfiguration;
@@ -92,7 +93,7 @@ class Env
         $variables = self::variables($suffix);
         $variable = strtoupper($variable);
 
-        if (str_contains($value, ' ')) {
+        if (Str::contains($value, ' ')) {
             $value = "\"{$value}\"";
         }
 
