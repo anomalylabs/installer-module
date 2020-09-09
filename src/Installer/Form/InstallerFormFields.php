@@ -41,7 +41,7 @@ class InstallerFormFields
                         'mode'    => 'checkbox',
                         'license' => function () {
                             return (new \Parsedown())->parse(
-                                file_get_contents(app('streams.path') . '/LICENSE.md')
+                                file_get_contents(base_path('LICENSE.md'))
                             );
                         },
                     ],
