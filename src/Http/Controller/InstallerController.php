@@ -161,7 +161,7 @@ class InstallerController extends PublicController
 
         $files->put(base_path('composer.json'), preg_replace($pattern, '', $json));
 
-        $files->deleteDirectory(base_path('core/anomaly/installer-module'));
+        $files->deleteDirectory(base_path('vendor/anomaly/installer-module'));
 
         return $this->redirect->back();
     }
