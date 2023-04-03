@@ -27,7 +27,7 @@ class ValidateDatabase
     public function handle(InstallerFormBuilder $builder)
     {
         /* @var Connection $connection */
-        if (!$connection = $this->dispatch(new GetConnection())) {
+        if (!$connection = $this->dispatchSync(new GetConnection())) {
             return false;
         }
 
@@ -46,7 +46,7 @@ class ValidateDatabase
              * the database exists.
              */
             try {
-                $this->dispatch(new CreateDatabase());
+                $this->dispatchSync(new CreateDatabase());
             } catch (\Exception $e) {
 
                 $builder->addFormError(

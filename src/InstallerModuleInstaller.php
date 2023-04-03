@@ -26,9 +26,9 @@ class InstallerModuleInstaller
      */
     public function install(array $parameters)
     {
-        $data = new Collection($this->dispatch(new ReadEnvironmentFile()));
+        $data = new Collection($this->dispatchSync(new ReadEnvironmentFile()));
 
-        $this->dispatch(new SetStreamsData($data));
+        $this->dispatchSync(new SetStreamsData($data));
 
         $data->put('DB_CONNECTION', $parameters['database_driver']);
         $data->put('DB_HOST', $parameters['database_host']);
@@ -46,6 +46,6 @@ class InstallerModuleInstaller
         $data->put('ADMIN_EMAIL', $parameters['admin_email']);
         $data->put('ADMIN_PASSWORD', $parameters['admin_password']);
 
-        $this->dispatch(new WriteEnvironmentFile($data->all()));
+        $this->dispatchSync(new WriteEnvironmentFile($data->all()));
     }
 }

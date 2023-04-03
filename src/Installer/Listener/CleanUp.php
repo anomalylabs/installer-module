@@ -32,12 +32,12 @@ class CleanUp
                 'anomaly.module.installer::install.cleaning_up',
                 function () {
 
-                    $data = $this->dispatch(new ReadEnvironmentFile());
+                    $data = $this->dispatchSync(new ReadEnvironmentFile());
 
                     array_pull($data, 'ADMIN_EMAIL');
                     array_pull($data, 'ADMIN_PASSWORD');
 
-                    $this->dispatch(new WriteEnvironmentFile($data));
+                    $this->dispatchSync(new WriteEnvironmentFile($data));
                 }
             )
         );

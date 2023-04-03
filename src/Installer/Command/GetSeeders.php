@@ -29,8 +29,8 @@ class GetSeeders
     {
         $installers = new InstallerCollection();
 
-        $this->dispatch(new LoadModuleSeeders($installers));
-        $this->dispatch(new LoadExtensionSeeders($installers));
+        $this->dispatchSync(new LoadModuleSeeders($installers));
+        $this->dispatchSync(new LoadExtensionSeeders($installers));
 
         $installers->push(
             new Installer(

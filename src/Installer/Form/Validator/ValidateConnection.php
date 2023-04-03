@@ -26,7 +26,7 @@ class ValidateConnection
      */
     public function handle(Container $container, InstallerFormBuilder $builder)
     {
-        $this->dispatch(new SetConnection());
+        $this->dispatchSync(new SetConnection());
 
         try {
 

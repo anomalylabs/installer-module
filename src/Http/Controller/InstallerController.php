@@ -48,7 +48,7 @@ class InstallerController extends PublicController
     public function process(InstallerModuleInstaller $installer, Container $container, $key = null)
     {
         /* @var InstallerCollection $installers */
-        $installers = $this->dispatch(new GetInstallers());
+        $installers = $this->dispatchSync(new GetInstallers());
 
         // Output progress?
         $verbose = $this->request->get('verbose');
@@ -61,9 +61,9 @@ class InstallerController extends PublicController
 
             $installer->install($this->request->all());
 
-            $this->dispatch(new ReloadEnvironmentFile());
-            $this->dispatch(new ConfigureDatabase());
-            $this->dispatch(new SetDatabasePrefix());
+            $this->dispatchSync(new ReloadEnvironmentFile());
+            $this->dispatchSync(new ConfigureDatabase());
+            $this->dispatchSync(new SetDatabasePrefix());
 
             $installer = $installers
                 ->keys()
@@ -119,11 +119,11 @@ class InstallerController extends PublicController
     {
         $cache->store()->flush();
 
-        $this->dispatch(new ReloadEnvironmentFile());
-        $this->dispatch(new ConfigureDatabase());
-        $this->dispatch(new SetDatabasePrefix());
+        $this->dispatchSync(new ReloadEnvironmentFile());
+        $this->dispatchSync(new ConfigureDatabase());
+        $this->dispatchSync(new SetDatabasePrefix());
 
-        $installers = $this->dispatch(new GetInstallers());
+        $installers = $this->dispatchSync(new GetInstallers());
 
         return $this->view->make('anomaly.module.installer::process', compact('installers'));
     }
@@ -137,7 +137,7 @@ class InstallerController extends PublicController
      */
     public function run(Container $container, $key)
     {
-        $installers = $this->dispatch(new GetInstallers());
+        $installers = $this->dispatchSync(new GetInstallers());
 
         /* @var Installer $installer */
         $installer = $installers->get($key);

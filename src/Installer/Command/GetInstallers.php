@@ -35,11 +35,11 @@ class GetInstallers
     {
         $installers = new InstallerCollection();
 
-        dispatch_now(new LoadCoreInstallers($installers));
-        dispatch_now(new LoadApplicationInstallers($installers));
+        dispatch_sync(new LoadCoreInstallers($installers));
+        dispatch_sync(new LoadApplicationInstallers($installers));
 
-        dispatch_now(new LoadModuleInstallers($installers));
-        dispatch_now(new LoadExtensionInstallers($installers));
+        dispatch_sync(new LoadModuleInstallers($installers));
+        dispatch_sync(new LoadExtensionInstallers($installers));
 
         $installers->push(
             new Installer(
@@ -48,15 +48,15 @@ class GetInstallers
 
                     $console->call('env:set', ['line' => 'INSTALLED=true']);
 
-                    dispatch_now(new ReloadEnvironmentFile());
-                    dispatch_now(new AutoloadEntryModels());
+                    dispatch_sync(new ReloadEnvironmentFile());
+                    dispatch_sync(new AutoloadEntryModels());
                 }
             )
         );
 
-        dispatch_now(new LoadBaseMigrations($installers));
-        dispatch_now(new LoadModuleSeeders($installers));
-        dispatch_now(new LoadExtensionSeeders($installers));
+        dispatch_sync(new LoadBaseMigrations($installers));
+        dispatch_sync(new LoadModuleSeeders($installers));
+        dispatch_sync(new LoadExtensionSeeders($installers));
 
         $installers->push(
             new Installer(
