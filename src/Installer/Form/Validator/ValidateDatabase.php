@@ -37,8 +37,7 @@ class ValidateDatabase
              * Check if the database exists.
              */
             $connection
-                ->getDoctrineSchemaManager()
-                ->listTableNames();
+                ->getSchemaBuilder()->getTables();
         } catch (\Exception $e) {
 
             /**
