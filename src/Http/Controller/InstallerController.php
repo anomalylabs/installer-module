@@ -2,6 +2,7 @@
 
 use Anomaly\InstallerModule\Installer\Command\GetInstallers;
 use Anomaly\InstallerModule\Installer\Form\InstallerFormBuilder;
+use Anomaly\InstallerModule\Http\Middleware\CheckIfInstallerExists;
 use Anomaly\InstallerModule\InstallerModuleInstaller;
 use Anomaly\Streams\Platform\Application\Command\ReloadEnvironmentFile;
 use Anomaly\Streams\Platform\Http\Controller\PublicController;
@@ -95,6 +96,10 @@ class InstallerController extends PublicController
         }
 
         $container->call($installer->getTask());
+
+        if (!$next) {
+            $this->request->session()->forget(CheckIfInstallerExists::STARTED);
+        }
 
         if (!$next && $verbose) {
             return $this->redirect->to('admin/login');

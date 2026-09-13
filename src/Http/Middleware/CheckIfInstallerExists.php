@@ -17,6 +17,21 @@ class CheckIfInstallerExists
 {
 
     /**
+     * The session key marking an installation in progress.
+     *
+     * @var string
+     */
+    const STARTED = 'anomaly.module.installer::started';
+
+    /**
+     * The number of seconds an unfinished
+     * installation may be resumed for.
+     *
+     * @var integer
+     */
+    const RESUME_WINDOW = 3600;
+
+    /**
      * The config repository.
      *
      * @var Repository
@@ -60,6 +75,17 @@ class CheckIfInstallerExists
      */
     public function handle(Request $request, Closure $next)
     {
+        if ($request->segment(1) == 'installer') {
+
+            if (!$this->config->get('streams::system.installed')) {
+                $this->session->put(self::STARTED, time());
+            } elseif (!$this->resuming()) {
+                abort(404);
+            }
+
+            return $next($request);
+        }
+
         if (
             $request->path() == 'admin' &&
             !$this->session->get(__CLASS__ . 'warned') &&
@@ -70,5 +96,21 @@ class CheckIfInstallerExists
         }
 
         return $next($request);
+    }
+
+    /**
+     * An installation writes INSTALLED=true partway through its
+     * own sequence and then keeps running, so a run started
+     * before that point is allowed to finish.
+     *
+     * @return bool
+     */
+    protected function resuming()
+    {
+        if (!$started = $this->session->get(self::STARTED)) {
+            return false;
+        }
+
+        return time() - $started < self::RESUME_WINDOW;
     }
 }
