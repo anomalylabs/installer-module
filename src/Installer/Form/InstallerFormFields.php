@@ -53,7 +53,7 @@ class InstallerFormFields
                     'label'        => 'anomaly.module.installer::field.database_driver.label',
                     'instructions' => 'anomaly.module.installer::field.database_driver.instructions',
                     'type'         => 'anomaly.field_type.select',
-                    'value'        => env('DB_CONNECTION', 'mysql'),
+                    'value'        => config('anomaly.module.installer::installer.database_driver'),
                     'required'     => true,
                     'rules'        => [
                         'valid_connection',
@@ -82,7 +82,7 @@ class InstallerFormFields
                     'placeholder'  => 'anomaly.module.installer::field.database_host.placeholder',
                     'instructions' => 'anomaly.module.installer::field.database_host.instructions',
                     'type'         => 'anomaly.field_type.text',
-                    'value'        => env('DB_HOST', 'localhost'),
+                    'value'        => config('anomaly.module.installer::installer.database_host'),
                     'required'     => true,
                 ],
                 'database_port'         => [
@@ -90,14 +90,14 @@ class InstallerFormFields
                     'placeholder'  => 'anomaly.module.installer::field.database_port.placeholder',
                     'instructions' => 'anomaly.module.installer::field.database_port.instructions',
                     'type'         => 'anomaly.field_type.text',
-                    'value'        => env('DB_PORT', '3306'),
+                    'value'        => config('anomaly.module.installer::installer.database_port'),
                     'required'     => true,
                 ],
                 'database_name'         => [
                     'label'        => 'anomaly.module.installer::field.database_name.label',
                     'placeholder'  => 'anomaly.module.installer::field.database_name.placeholder',
                     'instructions' => 'anomaly.module.installer::field.database_name.instructions',
-                    'value'        => env('DB_DATABASE', $database),
+                    'value'        => config('anomaly.module.installer::installer.database_name') ?: $database,
                     'type'         => 'anomaly.field_type.text',
                     'required'     => true,
                 ],
@@ -105,7 +105,7 @@ class InstallerFormFields
                     'label'        => 'anomaly.module.installer::field.database_username.label',
                     'placeholder'  => 'anomaly.module.installer::field.database_username.placeholder',
                     'instructions' => 'anomaly.module.installer::field.database_username.instructions',
-                    'value'        => env('DB_USERNAME', 'root'),
+                    'value'        => config('anomaly.module.installer::installer.database_username'),
                     'type'         => 'anomaly.field_type.text',
                     'required'     => true,
                 ],
@@ -114,7 +114,7 @@ class InstallerFormFields
                     'placeholder'  => 'anomaly.module.installer::field.database_password.placeholder',
                     'instructions' => 'anomaly.module.installer::field.database_password.instructions',
                     'type'         => 'anomaly.field_type.text',
-                    'value'        => env('DB_PASSWORD'),
+                    'value'        => config('anomaly.module.installer::installer.database_password'),
                     'config'       => [
                         'type' => 'password',
                     ],
@@ -126,7 +126,7 @@ class InstallerFormFields
                     'label'        => 'anomaly.module.installer::field.admin_username.label',
                     'placeholder'  => 'anomaly.module.installer::field.admin_username.placeholder',
                     'instructions' => 'anomaly.module.installer::field.admin_username.instructions',
-                    'value'        => env('ADMIN_USERNAME', 'admin'),
+                    'value'        => config('anomaly.module.installer::installer.admin_username'),
                     'type'         => 'anomaly.field_type.text',
                     'required'     => true,
                 ],
@@ -135,7 +135,7 @@ class InstallerFormFields
                     'placeholder'  => 'anomaly.module.installer::field.admin_email.placeholder',
                     'instructions' => 'anomaly.module.installer::field.admin_email.instructions',
                     'type'         => 'anomaly.field_type.email',
-                    'value'        => env('ADMIN_EMAIL'),
+                    'value'        => config('anomaly.module.installer::installer.admin_email'),
                     'required'     => true,
                 ],
                 'admin_password'        => [
@@ -156,7 +156,7 @@ class InstallerFormFields
                     'placeholder'  => 'anomaly.module.installer::field.application_name.placeholder',
                     'instructions' => 'anomaly.module.installer::field.application_name.instructions',
                     'type'         => 'anomaly.field_type.text',
-                    'value'        => env('APPLICATION_NAME', 'Default'),
+                    'value'        => config('anomaly.module.installer::installer.application_name'),
                     'required'     => true,
                 ],
                 'application_reference' => [
@@ -164,7 +164,7 @@ class InstallerFormFields
                     'placeholder'  => 'anomaly.module.installer::field.application_reference.placeholder',
                     'instructions' => 'anomaly.module.installer::field.application_reference.instructions',
                     'type'         => 'anomaly.field_type.slug',
-                    'value'        => env('APPLICATION_REFERENCE', 'default'),
+                    'value'        => config('anomaly.module.installer::installer.application_reference'),
                     'required'     => true,
                     'config'       => [
                         'slugify' => 'application_name',
@@ -176,9 +176,10 @@ class InstallerFormFields
                     'placeholder'  => 'anomaly.module.installer::field.application_domain.placeholder',
                     'instructions' => 'anomaly.module.installer::field.application_domain.instructions',
                     'type'         => 'anomaly.field_type.text',
-                    'value'        => env(
-                        'APPLICATION_DOMAIN',
-                        str_replace(['http://', 'https://'], '', app('request')->root())
+                    'value'        => config('anomaly.module.installer::installer.application_domain') ?: str_replace(
+                        ['http://', 'https://'],
+                        '',
+                        app('request')->root()
                     ),
                     'required'     => true,
                     'rules'        => [
@@ -195,7 +196,7 @@ class InstallerFormFields
                     'label'        => 'anomaly.module.installer::field.application_locale.label',
                     'instructions' => 'anomaly.module.installer::field.application_locale.instructions',
                     'type'         => 'anomaly.field_type.language',
-                    'value'        => env('DEFAULT_LOCALE', 'en'),
+                    'value'        => config('anomaly.module.installer::installer.application_locale'),
                     'required'     => true,
                     'config'       => [
                         'mode'              => 'search',
@@ -206,7 +207,7 @@ class InstallerFormFields
                     'label'        => 'anomaly.module.installer::field.application_timezone.label',
                     'instructions' => 'anomaly.module.installer::field.application_timezone.instructions',
                     'type'         => 'anomaly.field_type.select',
-                    'value'        => env('APP_TIMEZONE', 'UTC'),
+                    'value'        => config('anomaly.module.installer::installer.application_timezone'),
                     'required'     => true,
                     'config'       => [
                         'mode'    => 'search',

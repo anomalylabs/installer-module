@@ -64,9 +64,9 @@ class GetInstallers
                 function (ApplicationRepository $applications) {
                     $applications->create(
                         [
-                            'name'      => env('APPLICATION_NAME'),
-                            'reference' => env('APPLICATION_REFERENCE'),
-                            'domain'    => env('APPLICATION_DOMAIN'),
+                            'name'      => config('anomaly.module.installer::installer.application_name'),
+                            'reference' => config('anomaly.module.installer::installer.application_reference'),
+                            'domain'    => config('anomaly.module.installer::installer.application_domain'),
                             'enabled'   => true,
                         ]
                     );
